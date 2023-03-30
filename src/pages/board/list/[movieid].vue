@@ -60,7 +60,6 @@ onMounted(async () => {
 
 <template>
   <div class="text-5 ml-3 px-auto text-left">
-
     <button @click="inqueryPost">
       {{ movie_id }} 게시판
     </button>
