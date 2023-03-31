@@ -9,6 +9,18 @@ const toggleLocales = () => {
 </script>
 
 <template>
+  <div class="bg-black text-white w-full mx-auto px-2 py-2 text-left">
+    <h1>Footer</h1>
+    <p>
+      Reeltalks 개인정보 취급 방침
+    </p>
+    <p>
+      ~~~~
+    </p>
+    <p>
+      CopyRight 2023. Reeltalks team. All right reserved.
+    </p>
+  </div>
   <nav text-xl mt-6>
     <RouterLink class="icon-btn mx-2" to="/" :title="t('button.home')">
       <div i-carbon-campsite />
