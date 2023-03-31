@@ -1,11 +1,13 @@
 <script setup lang="ts">
-const user = useUserStore()
-const name = $ref(user.savedName)
+import { useCategoryId } from '~/store/category'
+
+const category = useCategoryId()
+const genre = $ref(category.savedGenre)
 
 const router = useRouter()
 const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
+  if (genre)
+    router.push(`/movielist/${encodeURIComponent(genre)}`)
 }
 
 const { t } = useI18n()
@@ -37,7 +39,7 @@ const { t } = useI18n()
 
     <input
       id="input"
-      v-model="name"
+      v-model="genre"
       :placeholder="t('intro.whats-your-name')"
       :aria-label="t('intro.whats-your-name')"
       type="text"
@@ -55,7 +57,7 @@ const { t } = useI18n()
     <div>
       <button
         btn m-3 text-sm
-        :disabled="!name"
+        :disabled="!genre"
         @click="go"
       >
         {{ t('button.go') }}

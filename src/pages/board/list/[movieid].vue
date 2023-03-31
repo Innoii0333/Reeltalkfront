@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div>/영화 이름/ 게시판</div>
+  <div>{{ [movieid] }} 게시판</div>
   <div>
     표시갯수
     검색
