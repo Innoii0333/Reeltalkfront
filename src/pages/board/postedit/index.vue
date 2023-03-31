@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div>Hello Reeltalks</div>
+  <div>Toast UI editor</div>
 </template>
 
 <style lang="scss"></style>

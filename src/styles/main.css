@@ -27,3 +27,13 @@ html.dark {
   width: 100%;
   height: 2px;
 }
+.rtred {
+  color:#B5141C;
+}
+
+.rtblue{
+  color:#151AA3;
+}
+.rtgray{
+  color:#C0C0C0;
+}
