@@ -1,5 +1,4 @@
 <script setup>
-const result = ref('10자 이내의 한글 영문 숫자만 사용가능합니다')
 </script>
 
 <template>
@@ -15,13 +14,13 @@ const result = ref('10자 이내의 한글 영문 숫자만 사용가능합니�
       닉네임을 입력해주세요 :
       <input v-model="nickAdd" type="text" class="50px border border-black ml-2"><br>
       <span>{{ result }}</span>
-      <p>
-        <button class="border border-black px-2 py-0">
+      <p class="w-128 text-right mx-auto">
+        <el-button color="#151AA3" class="text-white">
           가입
-        </button>
-        <button class="border border-black px-2 py-0">
+        </el-button>
+        <el-button color="#c0c0c0" @click="goBack">
           취소
-        </button>
+        </el-button>
       </p>
     </div>
   </div>
