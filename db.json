@@ -1,0 +1,42 @@
+{
+    "post": [
+        {
+            "movieid": "11",
+            "postno": "1",
+            "title": "오 첫글이다",
+           "username": "111",
+            "userid":"user111",
+            "content":"ㅈㄱㄴ",
+            "createAt": "2023-03-31",
+            "viewCount": "1234141",
+            "commentCount":"0",
+            "updateAt":"2023-03-31"
+          },
+          {
+            "movieid": "11",
+            "postno": "2",
+            "title": "오 첫글이다",
+           "username": "333",
+            "userid":"user333",
+            "content":"ㅈㄱㄴ",
+            "createAt": "2023-03-31",
+            "starrate":"5.0",
+            "viewCount": "1234141",
+            "commentCount":"0",
+            "updateAt":"2023-03-31"
+          },
+          {
+            "movieid": "11",
+            "postno": "3",
+            "title": "밑에 뭐임",
+           "username": "222",
+            "userid":"user222",
+            "content":"ㅈㄱㄴ",
+            "createAt": "2023-03-31",
+            "starrate":"0.5",
+            "viewCount": "1234141",
+            "commentCount":"0",
+            "updateAt":"2023-03-31"
+          }
+    ]
+}

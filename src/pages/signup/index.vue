@@ -1,4 +1,5 @@
 <script setup>
+const result = ref('한글 영문 숫자를 조합해 10자 이내로 입력해주세요')
 </script>
 
 <template>
