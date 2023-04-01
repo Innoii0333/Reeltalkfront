@@ -2,7 +2,7 @@
 https://github.com/socketbear/vue-dev-guide
 ## description
 
-아아아아아아아아아아아아아아
+- Reeltalks Frontend 개발 페이지
 
 ### Development
 
