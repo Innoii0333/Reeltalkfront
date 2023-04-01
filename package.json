@@ -4,7 +4,6 @@
   "packageManager": "pnpm@7.8.0",
   "scripts": {
     "build": "vite-ssg build",
-    "build:config": "vue-tsc --config vite.config.ts",
     "dev": "npm-run-all -p dev:server",
     "dev:server": "vite --port 3333 --open",
     "lint": "eslint .",
@@ -28,14 +27,9 @@
     "axios": "^1.3.4",
 
     "element-plus": "^2.2.17",
-    "express": "^4.18.2",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.17",
-    "socket.io": "^4.6.1",
-    "socket.io-client": "^4.6.1",
-    "vite-plugin-node": "^3.0.2",
     "vue": "^3.2.37",
-    "vue-chartjs": "^5.2.0",
     "vue-demi": "^0.13.6",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.3",
