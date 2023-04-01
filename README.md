@@ -6,7 +6,7 @@ https://github.com/socketbear/vue-dev-guide
 
 ### Development
 
-Just run and visit http://localhost:8078
+Just run and visit http://localhost:3333
 
 ```bash
 pnpm dev

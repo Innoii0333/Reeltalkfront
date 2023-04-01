@@ -5,7 +5,7 @@
   "scripts": {
     "build": "vite-ssg build",
     "dev": "npm-run-all -p mock dev:server",
-    "dev:server": "vite --port 8078 --open",
+    "dev:server": "vite --port 3333 --open",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview-https": "serve dist",
