@@ -9,7 +9,7 @@ const toggleLocales = () => {
 </script>
 
 <template>
-  <div class="bg-black text-white w-full mx-auto px-2 py-2 text-left">
+  <div class="bg-black text-white mx-auto my-5 px-2 py-2 text-left">
     <h1>Footer</h1>
     <p>
       Reeltalks 개인정보 취급 방침

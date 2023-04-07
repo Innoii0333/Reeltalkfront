@@ -44,15 +44,19 @@ const inqueryPost = async () => {
   const data = res.json()
   tableData.value = data.map(post => post)
 }
+const route = useRoute()
+const movie_id = route.params.movieId
+const movie_name = ref('')
 </script>
 
 <template>
-  <div>
-    moviename
+  <div class="text-5 ml-3 px-auto text-left">
+    {{movie_id}}
     <button @click="inqueryPost">
       게시판
     </button>
   </div>
+  <hr class="border-rtblue my-2">
   <div>
     표시갯수 10/20/30
     검색
