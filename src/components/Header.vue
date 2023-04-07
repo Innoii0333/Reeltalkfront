@@ -2,7 +2,6 @@
 
 </script>
 
-<!-- css -->
 <template>
   <div class="background">
     <header>
