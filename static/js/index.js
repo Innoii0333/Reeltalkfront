@@ -42,7 +42,7 @@ socket.on('update', (data) => {
   message.innerHTML = `${data.name}: ${data.message}` // 메시지에 시간 추가
   chat.appendChild(message)
 
-  if (data.type === 'connect') {
+  if (data.type === 'connect' || data.type === 'disconnect') {
     // 서버에 새로운 유저가 왔을 때에만 timestamp를 추가하고 스타일 변경
     const date = new Date()
     const timestamp = date.toLocaleTimeString()
