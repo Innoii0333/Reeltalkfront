@@ -22,7 +22,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const options = chartConfig.options
 const data = ref<ChartData<'bar'>>({
-  datasets: []
+  datasets: [],
 })
 
 onMounted(() => {
