@@ -1,4 +1,5 @@
 import path from 'path'
+import { createRequire } from 'node:module'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
@@ -15,6 +16,10 @@ import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
 // Elements Plus auto import 사용을 위해 추가
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// CKEditor 사용을 위한 추가
+import ckeditor5 from '@ckeditor/vite-plugin-ckeditor5'
+
+const require = createRequire(import.meta.url)
 
 export default defineConfig({
   resolve: {
@@ -25,8 +30,8 @@ export default defineConfig({
 
   server: {
     proxy: {
-      '/api/v1': {
-        target: 'http://localhost:3001',
+      '/api': {
+        target: '172.23.224.1:8078', // 'ec2-3-34-5-243.ap-northeast-2.compute.amazonaws.com:8078',
         changeOrigin: true,
         // path rewrite가 필요할 경우 사용
         // rewrite: (path) => path.replace(/^\/api/, ''),
@@ -39,7 +44,6 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
       reactivityTransform: true,
     }),
-
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
       dirs: [
@@ -81,7 +85,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
       directoryAsNamespace: true,
     }),
-
+    ckeditor5({ theme: require.resolve('@ckeditor/ckeditor5-editor-decoupled') }),
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
