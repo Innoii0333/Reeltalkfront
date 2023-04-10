@@ -53,7 +53,6 @@ const movetoPost = (row) => {
 const titleSearchClick = (titleSearch) => {
 
 }
-
 onMounted(async () => {
   inqueryPost()
 })
@@ -61,6 +60,7 @@ onMounted(async () => {
 
 <template>
   <div class="text-5 ml-3 px-auto text-left">
+
     <button @click="inqueryPost">
       {{ movie_id }} 게시판
     </button>
@@ -83,6 +83,7 @@ onMounted(async () => {
       </tr>
     </table>
   </div>
+
   <div>
     <span class="inline-block w-110 text-left text-3.5">페이지 당 게시글 수 : 10/20/30</span>
     <span class="inline-block w-120 text-right">

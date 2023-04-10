@@ -20,6 +20,7 @@ routes.push(
     }),
   },
 )
+
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,

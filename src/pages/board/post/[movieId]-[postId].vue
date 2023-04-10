@@ -35,6 +35,7 @@ const deletePost = () => {
   <div>
     <div class="text-5 ml-3 px-auto text-left">
       moviename
+
       {{ movie_id }}
     </div>
     <hr class="border-rtblue my-2 border-2">
@@ -49,6 +50,7 @@ const deletePost = () => {
           </th>
         </tr>
         <tr class="text-10px align-top h-5">
+
           <td class="w-30">
             닉네임은최대10자로
           </td>
