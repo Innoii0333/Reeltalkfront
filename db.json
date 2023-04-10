@@ -37,6 +37,45 @@
             "viewCount": "1234141",
             "commentCount":"0",
             "updateAt":"2023-03-31"
-          }
+          },
+          {
+            "movieid": "11",
+            "postno": "4",
+            "title": "영화가 좋았어요",
+            "username": "444",
+            "userid": "user444",
+            "content": "정말 재미있게 봤습니다!",
+            "createAt": "2023-04-01",
+            "starrate": "4.5",
+            "viewCount": "23523",
+            "commentCount": "2",
+            "updateAt": "2023-04-02"
+        },
+        {
+            "movieid": "11",
+            "postno": "5",
+            "title": "감독이 실망스러웠어요",
+            "username": "555",
+            "userid": "user555",
+            "content": "예고편을 보고 기대했는데, 내용이 별로였어요.",
+            "createAt": "2023-04-03",
+            "starrate": "2.0",
+            "viewCount": "1321",
+            "commentCount": "1",
+            "updateAt": "2023-04-04"
+        },
+        {
+            "movieid": "11",
+            "postno": "6",
+            "title": "모든 면에서 완벽한 영화",
+            "username": "666",
+            "userid": "user666",
+            "content": "스토리, 연출, 배우들의 연기, 모든 면에서 완벽했습니다!",
+            "createAt": "2023-04-05",
+            "starrate": "5.0",
+            "viewCount": "654321",
+            "commentCount": "3",
+            "updateAt": "2023-04-06"
+        }
     ]
 }

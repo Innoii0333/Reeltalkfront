@@ -35,20 +35,20 @@ const deletePost = () => {
   <div>
     <div class="text-5 ml-3 px-auto text-left">
       moviename
-      {{ movie_id }},{{ post_id }}
+      {{ movie_id }}
     </div>
-    <hr class="border-rtblue my-2">
+    <hr class="border-rtblue my-2 border-2">
     <div>
-      <table class="px-auto">
+      <table class="px-auto border-collapse">
         <tr class="text-16px h-12 py-auto">
           <th class="w-30">
-            postid
+            {{ post_id }}
           </th>
           <th class="text-left w-auto" colspan="4">
             제목
           </th>
         </tr>
-        <tr class="text-10px align-top h-13">
+        <tr class="text-10px align-top h-5">
           <td class="w-30">
             닉네임은최대10자로
           </td>
@@ -71,6 +71,7 @@ const deletePost = () => {
           </td>
         </tr>
       </table>
+      <hr class="border-rtblue my-2">
       <div class="text-left">
         <p> 내용</p>
         <p> 내용</p>
