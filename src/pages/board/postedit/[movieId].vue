@@ -7,7 +7,7 @@ const post_title = ref('제목을 입력하세요')
 const post_id = route.query.postId
 const title = ref('movietitle')
 const star_rate = ref(0)
-const user_id = ref('null')
+const user_id = ref('')
 const content = ref('')
 const movie_id = route.params.movieId
 const goBack = () => {
