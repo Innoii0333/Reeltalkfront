@@ -115,8 +115,8 @@ onMounted(async () => {
       <input v-model="keyword" type="text" class="border-rtgray px-1 my-1 w-50" @keyup.enter="titleSearch(keyword)">
       <button>
         <img
-          src="/src/components/img/finder.png" alt="검색" width="23" style="margin-top: -2.4px;"
-          outline="solid 2px #c0c0c0" inline-block @click="titleSearch(keyword)"
+          src="/src/components/img/finder.png" alt="검색" width="24" style="margin-top: -2.8px;"
+          outline="solid 1.5px #c0c0c0" inline-block @click="titleSearch(keyword)"
         > </button>
     </span>
   </div>
@@ -172,4 +172,9 @@ onMounted(async () => {
 </template>
 
 <style lang="scss">
+input.border-rtgray{
+  outline-style: solid;
+  outline-width: 1.5px;
+  outline-color:#c0c0c0;
+}
 </style>
