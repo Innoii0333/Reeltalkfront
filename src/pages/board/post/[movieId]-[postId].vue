@@ -50,7 +50,6 @@ const deletePost = () => {
           </th>
         </tr>
         <tr class="text-10px align-top h-5">
-
           <td class="w-30">
             닉네임은최대10자로
           </td>
