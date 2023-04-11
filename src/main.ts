@@ -10,6 +10,17 @@ import './styles/main.css'
 import 'uno.css'
 
 const routes = setupLayouts(generatedRoutes)
+routes.push(
+  {
+    path: '/board/post/:movieId/:postId',
+    name: 'postindex',
+    component: () => import('./pages/board/post/[movieId]-[postId].vue'),
+    props: route => ({
+      movieId: route.params.movieId,
+      postId: route.params.postId,
+    }),
+  },
+)
 
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(

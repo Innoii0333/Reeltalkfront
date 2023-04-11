@@ -13,6 +13,7 @@ app.use('/css', express.static('./static/css'))
 app.use('/js', express.static('./static/js'))
 
 // /opentalk 경로로 요청이 들어왔을 때는 router 미들웨어 사용
+
 app.use('/opentalk', router)
 
 router.get('/', (request, response) => {
