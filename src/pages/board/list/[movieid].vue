@@ -59,12 +59,15 @@ const goToPage = (pageNumber) => {
   else
     currentPage.value = pageNumber
 }
-function prevPage() {
+const prevPage = () => {
   currentPage.value--
 }
 
-function nextPage() {
+const nextPage = () => {
   currentPage.value++
+}
+const goPostEdit = () => {
+  router.push(`../postedit/${movie_id}`)
 }
 
 onMounted(async () => {
@@ -137,6 +140,12 @@ onMounted(async () => {
       <el-table-column prop="viewCount" label="조회수" :min-width="50" :max-width="80" :show-overflow-tooltip="true" />
     </el-table>
     <hr class="border-rtblue my-2 border-1">
+    <!-- 게시물 생성 버튼 -->
+    <div class="mr-auto text-right">
+      <el-button color="#151AA3" class="text-white" @click="goPostEdit">
+        글쓰기
+      </el-button>
+    </div>
     <!-- 페이징 요소 2:pagenation -->
     <div class="pagination">
       <button class="mr-2" :disabled="currentPage === 1" @click="goToPage(1)">
