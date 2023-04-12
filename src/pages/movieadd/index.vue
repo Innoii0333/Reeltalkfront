@@ -1,21 +1,24 @@
 <script setup>
 import axios from 'axios'
-
 const router = useRouter()
 const searchInfo = ref(null)
 const movieInfo = ref(null)
 const keyword = ref('검색')
 const isActive = ref(false)
-
 const goBack = () => {
   router.back()
 }
 const getMovie = async (keyword) => {
   try {
-    // const res = await axios.get(`/api/movieadd?title=${keyword}`)
-    const res = await axios.get('http://localhost:3000/kmdbResult')
-    searchInfo.value = res.data[0].Result
+    const res = await axios.get(
+      // `/api/movieadd?title=${keyword}`
+      `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&listCount=100&ServiceKey=0M1CRMOD0W2RFMSLVG1G&title=${keyword}`,
+    )
+    // const res = await axios.get('http://localhost:3000/kmdbResult')
+    searchInfo.value = res.data.Data[0].Result
     for (const titles of searchInfo.value) {
+      const poster = titles.posters
+      titles.posters = poster.replace(/\|.*/, '')
       const title = titles.title
       titles.title = title.replace(/\s!HS\s/g, '').replace(/\s!HE\s/g, '').trim()
     }
@@ -29,16 +32,6 @@ const getMovie = async (keyword) => {
 const handleCardActive = (index) => {
   isActive.value = (isActive.value === index) ? false : index
   movieInfo.value = searchInfo.value[index]
-  console.log(index)
-  console.log(movieInfo.value.DOCID)
-  console.log(movieInfo.value.title)
-  console.log(movieInfo.value.genre)
-  console.log(movieInfo.value.repRlsDate)
-  console.log(movieInfo.value.actors.actor[0].actorNm)
-  console.log(movieInfo.value.plots.plot[0].plotText)
-  console.log(movieInfo.value.directors.director[0].directorNm)
-  console.log(movieInfo.value.rating)
-  console.log(movieInfo.value.posters)
 }
 const submitMovie = async () => {
   const formData = new FormData()
@@ -48,7 +41,7 @@ const submitMovie = async () => {
   formData.append('category_id', movieInfo.value.genre)
   formData.append('release_date', movieInfo.value.repRlsDate)
   formData.append('plot', movieInfo.value.plots.plot[0].plotText)
-  for (let idx = 0; idx < min(4, movieInfo.value.actors.actor.length()); idx++) {
+  for (let idx = 0; idx < Math.min(4, movieInfo.value.actors.actor.length); idx++) {
     if (idx !== 0)
       actor += '/'
     actor += movieInfo.value.actors.actor[idx].actorNm
@@ -84,7 +77,7 @@ const submitMovie = async () => {
       <button>
         <img
           src="/src/components/img/finder.png" alt="검색" width="24" style="margin-top: -2.8px;"
-          outline="solid 1.5px #c0c0c0" inline-block @click="getMovie(keyword)"
+          outline="solid 1.5px #C0C0C0" inline-block @click="getMovie(keyword)"
         >
       </button>
     </span>
@@ -103,7 +96,7 @@ const submitMovie = async () => {
               :src="searchInfo[index].posters" alt="알트"
               class="card-image"
             >
-            <div class="text-left">
+            <div class="text-left text-sm">
               <p> {{ searchInfo[index].title }} </p>
               <p> {{ searchInfo[index].repRlsDate }} </p>
             </div>
@@ -113,10 +106,10 @@ const submitMovie = async () => {
     </div>
     <hr class="w-2xl border-black border-1.5 my-2 mx-auto">
     <div class="w-2xl text-right mx-auto">
-      <el-button color="#c0c0c0" @click="goBack">
+      <el-button color="#C0C0C0" @click="goBack">
         뒤로가기
       </el-button>
-      <el-button color="#151AA3" class="text-white">
+      <el-button color="#151AA3" class="text-white" @click="submitMovie">
         등록하기
       </el-button>
     </div>
@@ -134,4 +127,3 @@ input.border-rtgray{
   outline-color:#c0c0c0;
 }
 </style>
-

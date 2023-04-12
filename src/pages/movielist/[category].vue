@@ -33,21 +33,21 @@ const titleSearch = (keyword) => {
     v-for 카드 리스트 나열
   </p>
   <div>
-    <el-row>
+    <el-row :gutter="20">
       <el-col
-        v-for="(o, index) in 2"
-        :key="o"
-        :span="8"
-        :offset="index > 0 ? 2 : 0"
+        v-for="(o, index) in searchInfo"
+        :key="index"
+        class="mb-8"
+        :span="6"
       >
-        <el-card :body-style="{ padding: '0px' }">
+        <el-card :body-style="{ padding: '3px', border: isActive === index ? '2px solid #151AA3' : 'none' }" @click="handleCardActive(index)">
           <img
-            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-            class="image"
+            :src="searchInfo[index].poster_url" alt="알트"
+            class="card-image"
           >
-          <div class="text-left">
-            <p>moviename</p>
-            <p>date</p>
+          <div class="text-left text-sm">
+            <p> {{ searchInfo[index].title }} </p>
+            <p> {{ searchInfo[index].release_date }} </p>
           </div>
         </el-card>
       </el-col>

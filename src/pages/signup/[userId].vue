@@ -6,7 +6,7 @@ const route = useRoute()
 const nameResult = ref('한글 영문 숫자를 조합해 10자 이내로 입력해주세요')
 const user_name = ref('')
 const signUpFormCheck = ref(false)
-const user_id = route.params.value
+const user_id = route.params.userId
 
 const goBack = () => {
   router.back()
