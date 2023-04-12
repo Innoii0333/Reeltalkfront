@@ -29,6 +29,7 @@ const getMovie = async (keyword) => {
 const handleCardActive = (index) => {
   isActive.value = (isActive.value === index) ? false : index
   movieInfo.value = searchInfo.value[index]
+  console.log(index)
   console.log(movieInfo.value.DOCID)
   console.log(movieInfo.value.title)
   console.log(movieInfo.value.genre)
@@ -89,9 +90,6 @@ const submitMovie = async () => {
     </span>
   </div>
   <div>
-    <p>
-      v-for 이용한 카드형식 리스트 출력
-    </p>
     <div class="w-2xl mx-auto my-3">
       <el-row :gutter="20">
         <el-col
@@ -102,12 +100,12 @@ const submitMovie = async () => {
         >
           <el-card :body-style="{ padding: '3px', border: isActive === index ? '2px solid #151AA3' : 'none' }" @click="handleCardActive(index)">
             <img
-              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+              :src="searchInfo[index].posters" alt="알트"
               class="card-image"
             >
             <div class="text-left">
-              <p>moviename</p>
-              <p>date</p>
+              <p> {{ searchInfo[index].title }} </p>
+              <p> {{ searchInfo[index].repRlsDate }} </p>
             </div>
           </el-card>
         </el-col>

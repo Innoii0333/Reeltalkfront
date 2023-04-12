@@ -31,7 +31,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: '172.23.224.1:8078', // 'ec2-3-34-5-243.ap-northeast-2.compute.amazonaws.com:8078',
+        target: 'http://localhost:8078', // 'ec2-3-34-5-243.ap-northeast-2.compute.amazonaws.com:8078',
         changeOrigin: true,
         // path rewrite가 필요할 경우 사용
         // rewrite: (path) => path.replace(/^\/api/, ''),
