@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: 'Vue Dev Guide',
+  title: 'Reeltalks',
   meta: [
     { name: 'description', content: 'Vue3, Typescript 기반 개발 가이드' },
     {

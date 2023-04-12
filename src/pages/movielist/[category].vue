@@ -1,4 +1,14 @@
 <script setup>
+const titleSearch = (keyword) => {
+  if (keyword.value === '') { filteredMovies.value = tableData.value }
+
+  else {
+    const lowerCaseKeyword = keyword.toLowerCase()
+    filteredPosts.value = tableData.value.filter(post =>
+      post.postTitle.toLowerCase().includes(lowerCaseKeyword),
+    )
+  }
+}
 </script>
 
 <template>
@@ -6,7 +16,15 @@
     Category
   </div>
   <div class="text-right">
-    검색
+    <!-- 검색 옵션 -->
+    <span class="inline-block w-120 text-right">
+      <input v-model="keyword" type="text" class="border-rtgray px-1 my-1 w-50" @keyup.enter="titleSearch(keyword)">
+      <button>
+        <img
+          src="/src/components/img/finder.png" alt="검색" width="24" style="margin-top: -2.8px;"
+          outline="solid 1.5px #c0c0c0" inline-block @click="titleSearch(keyword)"
+        > </button>
+    </span>
   </div>
 
   <hr class="border-rtblue my-2">

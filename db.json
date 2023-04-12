@@ -321,5 +321,809 @@
       "updateAt": "2023-04-03",
       "depth": "1"
     }
+  ], 
+  "kmdbResult": [
+    {
+      "TotalCount": 9,
+      "CollName": "kmdb_new2",
+      "Count": 9,
+      "Result": [
+        {
+          "titleOrg": "Harry Potter and the Order of the Phoenix",
+          "nation": "영국,미국",
+          "kmdbUrl": "https://www.kmdb.or.kr/db/kor/detail/movie/F/20511",
+          "directors": {
+            "director": [
+              {
+                "directorId": "00066352",
+                "directorNm": "데이빗 예이츠",
+                "directorEnNm": "David Yates"
+              }
+            ]
+          },
+          "rating": "전체관람가",
+          "movieSeq": "20511",
+          "runtime": "137",
+          "movieId": "F",
+          "prodYear": "2007",
+          "title": "  !HS 해리 !HE   !HS 포터 !HE 와 불사조 기사단",
+          "titleEng": "Harry Potter and the Order of the Phoenix",
+          "plots": {
+            "plot": [
+              {
+                "plotText": "길고도 지루한 여름 날 호그와트 마법학교 다섯 번째 해를 기다리고 있는 해리포터(다니엘 래드클리프). 이모부 더즐리 식구들과 참고 사는 것도 지겨운데다 친구 론(루퍼트 그린트)과 헤르미온느(엠마 왓슨)에게서는 편지 한 통 오지 않는다. 그러던 중 예상치 못했던 편지 한 장이 도착한다. 그것은 해리가 학교 밖인 리틀 위닝에서 얄미운 사촌 두들리, 즉 머글 앞에서 디멘터들의 공격을 막는 마법을 사용했기 때문에 호그와트 마법학교에서 퇴학 당하게 되었다는 소식이었다. 앞이 캄캄한 해리. 갑자기 어둠의 마법사 오러들이 나타나 해리를 불사조 기사단의 비밀 장소로 데리고 간다. 시리우스(게리 올드만)를 위시한 불사조 기사단을 만난 해리는 과거, 부모님들의 활약상을 알게 되어 힘을 얻고, 자신을 퇴학시키기 위해 마법부 장관 코넬리우스 퍼지(로버트 하디)가 법정에 세우지만 덤블도어 교장(마이클 갬볼 경)의 중재 덕분에 무죄 판결까지 받는다.하지만 예언자 일보는 볼드모트(랄프 파인즈)가 돌아왔다는 해리의 말이 새빨간 거짓말이라며 비난하고 학생들 역시 해리를 의심하며 따돌린다. 게다가 자신이 가장 힘들어 할 때 도움을 주던 덤블도어 교장까지도 이유 없이 해리를 멀리하고\u2026.한 편, 덤블도어도 못마땅한데 해리의 퇴학마저 무산이 되자 마법부 장관은 \u2018어둠의 마법방어술\u2019 과목에 돌로레스 엄브릿지(이멜다 스털톤)를 교수로 임명한다. 하지만 엄브짓지의 마법방어술 수업은 학생들이 어둠의 힘으로부터 스스로를 지켜내기는커녕 오히려 곤경에 빠지게 한다. 이에 헤르미온느와 론은 해리의 능력을 믿고 자칭 \u2018덤블도어의 군대\u2019라고 명명한 비밀단체를 조직한다. 해리는 어둠의 마법에 맞서 스스로를 지켜낼 수 있는 방법을 학생들에게 가르쳐주며 앞으로 닥칠 격전에 대비시킨다. 그러나 밤마다 불길한 사건을 예견하는 악몽에 시달리는 해리. 이제 볼드모트와의 대결이 머지 않았음을 느끼게 된다.시리우스가 공격 당하는 악몽을 꾼 해리는 덤블도어 군대와 함께 마법부 미스터리 부서 예언의 방으로 향한다. 그리고 이어 나타난 죽음을 먹는 자들\u2026.",
+                "plotLang": "한국어"
+              }
+            ]
+          },
+          "DOCID": "F20511",
+          "actors": {
+            "actor": [
+              {
+                "actorId": "00048945",
+                "actorNm": "다니엘 래드클리프",
+                "actorEnNm": "Daniel Radcliffe"
+              },
+              {
+                "actorId": "00069882",
+                "actorNm": "엠마 왓슨",
+                "actorEnNm": "Emma Watson"
+              },
+              {
+                "actorId": "00114057",
+                "actorNm": "루퍼트 그린트",
+                "actorEnNm": "Rupert Grint"
+              },
+              {
+                "actorId": "00086862",
+                "actorNm": "제이슨 아이삭스",
+                "actorEnNm": "Jason Isaacs"
+              },
+              {
+                "actorId": "00070829",
+                "actorNm": "이반나 린치",
+                "actorEnNm": "Evanna Lynch"
+              },
+              {
+                "actorId": "00084510",
+                "actorNm": "이멜다 스턴톤",
+                "actorEnNm": "Imelda Staunton"
+              },
+              {
+                "actorId": "00048773",
+                "actorNm": "랄프 파인즈",
+                "actorEnNm": "Ralph Fiennes"
+              },
+              {
+                "actorId": "00049831",
+                "actorNm": "헬레나 본햄 카터",
+                "actorEnNm": "Helena Bonham Carter"
+              },
+              {
+                "actorId": "00120514",
+                "actorNm": "톰 펠튼",
+                "actorEnNm": "Tom Felton"
+              },
+              {
+                "actorId": "00049303",
+                "actorNm": "게리 올드만",
+                "actorEnNm": "Gary Oldman"
+              },
+              {
+                "actorId": "00073440",
+                "actorNm": "조지 해리스",
+                "actorEnNm": "George Harris"
+              },
+              {
+                "actorId": "00048941",
+                "actorNm": "데이빗 듈리스",
+                "actorEnNm": "David Thewlis"
+              },
+              {
+                "actorId": "00065472",
+                "actorNm": "데이비드 브래들리",
+                "actorEnNm": "David Bradley"
+              },
+              {
+                "actorId": "00093365",
+                "actorNm": "케이티 렁",
+                "actorEnNm": "Katie Leung"
+              },
+              {
+                "actorId": "00048503",
+                "actorNm": "알란 릭맨",
+                "actorEnNm": "Alan Rickman"
+              },
+              {
+                "actorId": "00219492",
+                "actorNm": "매튜 루이스",
+                "actorEnNm": "Matthew Lewis"
+              }
+            ]
+          },
+          "titleEtc": "해리포터와불사조기사단^해리 포터와 불사조 기사단^Harry Potter and the Order of the Phoenix^해리포터와 불사조기사단, 해리 포터와 불사조기사단, 해리포터와 불사조 기사단, 해리 포터와불사조 기사단^Harry Potter and the Order of the Phoenix^Harry Potter and the Order of t...",
+          "genre": "액션,어드벤처,가족,판타지",
+          "company": "Heyday Film ,Warner Bros."
+        },
+        {
+          "titleOrg": "Harry Potter And The Prisoner Of Azkaban",
+          "nation": "미국",
+          "kmdbUrl": "https://www.kmdb.or.kr/db/kor/detail/movie/F/09267",
+          "directors": {
+            "director": [
+              {
+                "directorId": "00053834",
+                "directorNm": "알폰소 쿠아론",
+                "directorEnNm": "Alfonso Cuaron"
+              }
+            ]
+          },
+          "rating": "전체관람가",
+          "movieSeq": "09267",
+          "runtime": "141",
+          "movieId": "F",
+          "prodYear": "2004",
+          "title": "  !HS 해리 !HE   !HS 포터 !HE 와 아즈카반의 죄수",
+          "titleEng": "Harry Potter And The Prisoner Of Azkaban",
+          "plots": {
+            "plot": [
+              {
+                "plotText": "13세가 된 해리 포터(다니엘 래드클리프)는 또 한번의 여름 방학을 이모 가족인 더즐리 일가와 우울하게 보내야 했다. 물론 마법을 쓰는 건 일체 금지. 하지만, 버논 이모부의 누이인 마지 아줌마(팸 페리스)가 더즐리 가를 방문하면서 상황은 변한다. 위압적인 마지는 해리에겐 늘 공포의 대상. 마지 아줌마 때문에 스트레스를 받던 해리는 급기야 '실수로' 그녀를 거대한 괴물 풍선으로 만들어 하늘 높이 띄워 보내버리고 만다.이모와 이모부에게 벌을 받을 것도 두렵고, 일반 세상에선 마법 사용이 금지돼 있는 것을 어겼기 때문에 호그와트 마법학교와 마법부의 징계가 걱정된 해리는 밤의 어둠 속으로 도망치지만, 순식간에 근사한 보라색 3층 버스에 태워져 한 술집으로 인도되어 간다. 그 술집의 이름은 '구멍난 냄비'란 뜻의 리키 콜드런. 그곳엔 마법부 장관인 코넬리우스 퍼지가 기다리고 있었다. 장관은 해리를 벌주는 대신 호그와트 학교로 돌아가기 전에 주점에서 하룻밤을 보낼 것을 강권한다. 아즈카반의 감옥을 탈출한 시리우스 블랙이라는 위험한 마법사가 해리를 찾고 있다는 것. 전설에 의하면 시리우스 블랙은 어둠의 마왕인 볼드모트 경을 해리의 부모가 있는 곳으로 이끌어 결국 부모님을 죽이도록 만든 당사자. 그렇다면 해리 역시 시리우스 블랙의 표적이 될 가능성도 있다는 얘기. 설상가상으로 호그와트 마법학교엔 '디멘터'라는 불청객들이 머물게 된다. 디멘터는 아즈카반의 무시무시한 간수들을 일컫는 말. 블랙으로부터 학생들을 보호한다는 명분으로 호그와트에 머물게 된 그들은 상대의 영혼을 빨아들이는 힘을 갖고 있었다. 불행히도, 그들의 그런 능력은 다른 학생들보다 해리에게 더 큰 영향력을 발휘하고 그들의 존재는 아직 어린 해리를 공포에 몰아넣어 무기력하게 만든다. 하지만 새로 부임한 어둠의 마법 방어술 교수 루핀(데이빗 튤리스)이 해리에게 디멘터들의 마법을 막아낼 수 있는 '패트로누스' 마법을 가르쳐주면서 상황은 반전된다.한편 호그와트에서의 3학년 수업은 해리에게 짜릿한 체험도 많이 안겨준다. '벅빅' (반은 독수리, 반은 말 모양의 일명 '히포크리프'란 생물)과 같은 흥미로운 짐승과의 만남, 사이빌 트릴로니 교수(엠마 톰슨)나 '그림'으로 알려진 죽음의 징조와의 섬뜩한 대면 등등. 그외에도 해리에겐 또 다른 문제가 찾아온다. 헤르미온느(엠마 왓슨)가 갑자기 사라졌다 나타났다 하는 이상한 돌출 행동을 보이기 시작한 것. 친구 론(루퍼트 그린트)과, 새 학기 들어 '신비한 동물 돌보기' 과목 교수로 발령 난 거인 해그리드 (로비 콜트레인)의 도움으로 해리는 그 수수께끼를 풀어나간다. 시리우스 블랙과 해리의 불가피한 대결은 점점 다가오고, 루핀 교수와 블랙의 모호한 관계는 해리를 혼란에 빠뜨린다. 스네이프 교수(알란 릭만)가 그토록 밝히고자 하는 어두운 비밀은 또 과연 무엇인가? 해리는 자신의 모든 용기와 마법의 힘과 친구들의 도움을 총동원, 이러한 의문점들을 풀고 자신과 시리우스 블랙 사이에 얽혀있는 비밀을 파헤쳐 가는데...",
+                "plotLang": "한국어"
+              }
+            ]
+          },
+          "DOCID": "F09267",
+          "actors": {
+            "actor": [
+              {
+                "actorId": "00048945",
+                "actorNm": "다니엘 래드클리프",
+                "actorEnNm": "Daniel Radcliffe"
+              },
+              {
+                "actorId": "00049303",
+                "actorNm": "게리 올드만",
+                "actorEnNm": "Gary Oldman"
+              },
+              {
+                "actorId": "00114057",
+                "actorNm": "루퍼트 그린트",
+                "actorEnNm": "Rupert Grint"
+              },
+              {
+                "actorId": "00069882",
+                "actorNm": "엠마 왓슨",
+                "actorEnNm": "Emma Watson"
+              },
+              {
+                "actorId": "00112230",
+                "actorNm": "로비 콜트레인",
+                "actorEnNm": "Robbie Coltrane"
+              },
+              {
+                "actorId": "00102413",
+                "actorNm": "마이클 갬본",
+                "actorEnNm": "Michael Gambon"
+              },
+              {
+                "actorId": "00048503",
+                "actorNm": "알란 릭맨",
+                "actorEnNm": "Alan Rickman"
+              },
+              {
+                "actorId": "00048581",
+                "actorNm": "엠마 톰슨",
+                "actorEnNm": "Emma Thompson"
+              },
+              {
+                "actorId": "00120184",
+                "actorNm": "티모시 스펄",
+                "actorEnNm": "Timothy Spall"
+              },
+              {
+                "actorId": "00048941",
+                "actorNm": "데이빗 듈리스",
+                "actorEnNm": "David Thewlis"
+              },
+              {
+                "actorId": "00100281",
+                "actorNm": "마크 윌리엄스",
+                "actorEnNm": "Mark Williams"
+              },
+              {
+                "actorId": "00098441",
+                "actorNm": "매기 스미스",
+                "actorEnNm": "Maggie Smith"
+              },
+              {
+                "actorId": "00106446",
+                "actorNm": "올리버 펠프스",
+                "actorEnNm": "Oliver Phelps"
+              },
+              {
+                "actorId": "00086220",
+                "actorNm": "제임스 펠프스",
+                "actorEnNm": "James Phelps"
+              },
+              {
+                "actorId": "00092399",
+                "actorNm": "줄리 월터스",
+                "actorEnNm": "Julie Walters"
+              },
+              {
+                "actorId": "00219492",
+                "actorNm": "매튜 루이스",
+                "actorEnNm": "Matthew Lewis"
+              }
+            ]
+          },
+          "titleEtc": "해리포터와아즈카반의죄수^해리 포터와 아즈카반의 죄수^Harry Potter And The Prisoner Of Azkaban^해리포터와 아즈카반의죄수, 해리포터와 아즈카반의 죄수, 해리 포터와 아즈카반의죄수, 해리포터와아즈카반의 죄수^Harry Potter And The Prisoner Of Azkaban^Harry Potter And The Prisone...",
+          "genre": "드라마,어드벤처,가족,판타지",
+          "company": "Warner Bros.,1492 Pictures,Heyday Films"
+        },
+        {
+          "titleOrg": "Harry Potter And The Deathly Hallows: Part 2",
+          "nation": "미국,영국",
+          "kmdbUrl": "https://www.kmdb.or.kr/db/kor/detail/movie/F/27942",
+          "directors": {
+            "director": [
+              {
+                "directorId": "00066352",
+                "directorNm": "데이빗 예이츠",
+                "directorEnNm": "David Yates"
+              }
+            ]
+          },
+          "rating": "전체관람가",
+          "movieSeq": "27942",
+          "runtime": "131",
+          "movieId": "F",
+          "prodYear": "2011",
+          "title": "  !HS 해리 !HE   !HS 포터 !HE 와 죽음의 성물2",
+          "titleEng": "Harry Potter And The Deathly Hallows: Part 2",
+          "plots": {
+            "plot": [
+              {
+                "plotText": "모든 것을 끝낼 최후의 전투! 판타지의 아름다운 역사가 드디어 마침표를 찍는다!덤블도어 교장이 남긴 \u2018죽음의 성물\u2019의 단서를 쫓던 해리 포터는 볼드모트가 그토록 찾아 다닌 절대적인 힘을 가진 지팡이의 비밀을 통해 드디어 마지막 퍼즐을 완성한다. 볼드모트의 영혼이 담긴 다섯 번째 \u2018호크룩스\u2019를 찾기 위해 마법학교 호그와트로 돌아온 해리와 친구들은 그들을 잡으려는 보안마법에 걸려 위기를 맞지만 덤블도어의 동생인 에버포스의 도움으로 벗어난다. 그리고 그에게서 덤블도어와 어둠의 마법사 그린델왈드에 관한 놀라운 과거에 대해 알게 된다. 한편, 볼드모트는 해리에 의해 호크룩스들이 파괴되었음을 느끼고 호그와트로 향한다. 해리를 주축으로 한 불사조 기사단과 죽음을 먹는 자들 간의 마법전투가 벌어지고 여기에 거대거미 아크로맨투라와 거인족 등 마법 생물들이 볼드모트 편으로 가세하면서 호그와트는 거대한 전쟁터로 변한다. 전쟁의 틈에서 해리는 덤블도어를 죽인 스네이프의 엄청난 비밀과 볼드모트를 죽일 마지막 호크룩스에 대한 단서를 알게 되는데...",
+                "plotLang": "한국어"
+              }
+            ]
+          },
+          "DOCID": "F27942",
+          "actors": {
+            "actor": [
+              {
+                "actorId": "00048945",
+                "actorNm": "다니엘 래드클리프",
+                "actorEnNm": "Daniel Radcliffe"
+              },
+              {
+                "actorId": "00069882",
+                "actorNm": "엠마 왓슨",
+                "actorEnNm": "Emma Watson"
+              },
+              {
+                "actorId": "00114057",
+                "actorNm": "루퍼트 그린트",
+                "actorEnNm": "Rupert Grint"
+              },
+              {
+                "actorId": "00152829",
+                "actorNm": "보니 라이트",
+                "actorEnNm": "BONNIE WRIGHT"
+              },
+              {
+                "actorId": "00048773",
+                "actorNm": "랄프 파인즈",
+                "actorEnNm": "Ralph Fiennes"
+              },
+              {
+                "actorId": "00120514",
+                "actorNm": "톰 펠튼",
+                "actorEnNm": "Tom Felton"
+              },
+              {
+                "actorId": "00049831",
+                "actorNm": "헬레나 본햄 카터",
+                "actorEnNm": "Helena Bonham Carter"
+              },
+              {
+                "actorId": "00048503",
+                "actorNm": "알란 릭맨",
+                "actorEnNm": "Alan Rickman"
+              },
+              {
+                "actorId": "00219492",
+                "actorNm": "매튜 루이스",
+                "actorEnNm": "Matthew Lewis"
+              }
+            ]
+          },
+          "titleEtc": "해리포터와죽음의성물2^해리 포터와 죽음의 성물2^Harry Potter And The Deathly Hallows: Part 2^해리포터와죽음의성물2부^Harry Potter And The Deathly Hallows: Part 2^Harry Potter And The Deathly Hallows: Part 2",
+          "genre": "어드벤처,미스터리,판타지",
+          "company": ""
+        },
+        {
+          "titleOrg": "Harry Potter And The Deathly Hallows: Part I",
+          "nation": "영국,미국",
+          "kmdbUrl": "https://www.kmdb.or.kr/db/kor/detail/movie/F/27289",
+          "directors": {
+            "director": [
+              {
+                "directorId": "00066352",
+                "directorNm": "데이빗 예이츠",
+                "directorEnNm": "David Yates"
+              }
+            ]
+          },
+          "rating": "전체관람가",
+          "movieSeq": "27289",
+          "runtime": "146",
+          "movieId": "F",
+          "prodYear": "2010",
+          "title": "  !HS 해리 !HE   !HS 포터 !HE 와 죽음의 성물 - 1부",
+          "titleEng": "Harry Potter And The Deathly Hallows: Part I",
+          "plots": {
+            "plot": [
+              {
+                "plotText": "덤블도어 교장의 죽음 이후, 마법부는 죽음을 먹는 자들에게 점령당하고 호그와트는 위기에 빠진다. 이에 해리와 론, 헤르미온느는 볼드모트를 물리칠 수 있는 유일한 단서이자 그의 영혼이 담긴 \u2018성물\u2019 호크룩스를 찾기 위한 위험한 여정에 나선다. 그러나 영혼이 연결되어 있는 볼드모트와 해리. 볼드모트를 파괴하면 해리의 목숨 또한 위태로워질지 모른다! 죽느냐 죽이느냐, 이제 그 마지막 대결은 극한을 향해 치닫는데\u2026",
+                "plotLang": "한국어"
+              }
+            ]
+          },
+          "DOCID": "F27289",
+          "actors": {
+            "actor": [
+              {
+                "actorId": "00048945",
+                "actorNm": "다니엘 래드클리프",
+                "actorEnNm": "Daniel Radcliffe"
+              },
+              {
+                "actorId": "00069882",
+                "actorNm": "엠마 왓슨",
+                "actorEnNm": "Emma Watson"
+              },
+              {
+                "actorId": "00048773",
+                "actorNm": "랄프 파인즈",
+                "actorEnNm": "Ralph Fiennes"
+              },
+              {
+                "actorId": "00049831",
+                "actorNm": "헬레나 본햄 카터",
+                "actorEnNm": "Helena Bonham Carter"
+              },
+              {
+                "actorId": "00048503",
+                "actorNm": "알란 릭맨",
+                "actorEnNm": "Alan Rickman"
+              },
+              {
+                "actorId": "00120514",
+                "actorNm": "톰 펠튼",
+                "actorEnNm": "Tom Felton"
+              },
+              {
+                "actorId": "00114057",
+                "actorNm": "루퍼트 그린트",
+                "actorEnNm": "Rupert Grint"
+              },
+              {
+                "actorId": "00086862",
+                "actorNm": "제이슨 아이삭스",
+                "actorEnNm": "Jason Isaacs"
+              },
+              {
+                "actorId": "00152829",
+                "actorNm": "보니 라이트",
+                "actorEnNm": "BONNIE WRIGHT"
+              },
+              {
+                "actorId": "00102413",
+                "actorNm": "마이클 갬본",
+                "actorEnNm": "Michael Gambon"
+              },
+              {
+                "actorId": "00058453",
+                "actorNm": "빌 나이",
+                "actorEnNm": "Bill Nighy"
+              },
+              {
+                "actorId": "00111194",
+                "actorNm": "리스 이판",
+                "actorEnNm": "Rhys Ifans"
+              },
+              {
+                "actorId": "00219492",
+                "actorNm": "매튜 루이스",
+                "actorEnNm": "Matthew Lewis"
+              }
+            ]
+          },
+          "titleEtc": "해리포터와죽음의성물-1부^해리 포터와 죽음의 성물 - 1부^Harry Potter And The Deathly Hallows: Part I^해리포터와죽음의성물, 해리포터와죽음의성도들^Harry Potter And The Deathly Hallows: Part I^Harry Potter And The Deathly Hallows: Part I^The Deat...",
+          "genre": "어드벤처,미스터리,판타지",
+          "company": "HEYDAY FILMS"
+        },
+        {
+          "titleOrg": "Harry Potter And The Goblet Of Fire",
+          "nation": "미국",
+          "kmdbUrl": "https://www.kmdb.or.kr/db/kor/detail/movie/F/11759",
+          "directors": {
+            "director": [
+              {
+                "directorId": "00103670",
+                "directorNm": "마이크 뉴웰",
+                "directorEnNm": "Mike Newell"
+              }
+            ]
+          },
+          "rating": "12세관람가",
+          "movieSeq": "11759",
+          "runtime": "156",
+          "movieId": "F",
+          "prodYear": "2005",
+          "title": "  !HS 해리 !HE   !HS 포터 !HE 와 불의 잔",
+          "titleEng": "Harry Potter And The Goblet Of Fire",
+          "plots": {
+            "plot": [
+              {
+                "plotText": "요즘 들어 매일 꾸는 악몽 때문에 이마의 상처에 더욱 통증을 느끼는 해리(다니엘 래드클리프)는 친구 론(루퍼트 그린트)과 헤르미온느(엠마 왓슨)와 함께 퀴디치 월드컵에 참가해 악몽에서 벗어날 수 있게 돼 마냥 기쁘다. 그러나 퀴디치 캠프장 근방 하늘에 불길한 기운이 나타난다. 바로 마왕 볼드모트의 상징인 '어둠의 표식'이 나타난 것. 볼드모트가 13년 전에 자취를 감춘 뒤, 감히 모습을 드러내지 못했던 그의 추종자 데스 이터(DEATH EATER)들이 그 표식을 불러낸 것이다. 두려움으로 가득 찬 해리는 안전한 호그와트 마법학교로 돌아가고 싶어한다. 덤블도어 교장(마이클 갬본 경)이라면 자신을 지켜줄 수 있을 것이기에.... 그러나 올해는 예년과 상황이 좀 다르다. 덤블도어 교장은 유럽의 세 개 명문 마법학교의 결속을 다지기 위해 그간 중단됐던 호그와트에서 '트리위저드 대회'를 개최키로 했음을 발표한다. 트리위저드 대회는 마법사들 세계에서 가장 흥미진진하고 위험한 마법경연대회. 마법의 최고 명문 3개 학교에서 선발된 챔피언 한 명씩 출전해, 트리위저드 컵을 놓고 목숨을 건 경합을 벌이는 것이다. 호그와트 학생들은 대회 참가를 위해 방문한 우아한 프랑스의 보바통 마법아카데미 여학생들과 강인한 분위기의 불가리아 덤스트랭 학교 남학생들이 연회장을 가득 메우자, 경탄을 금치 못한다. 장내가 정리되고 마법부 직원인 바티 크라우치(로저 로이드 팩)와 덤블도어 교장의 주재 하에 마법의 '불의 잔'이 각 학교 출전자를 선발하는 의식이 열린다. 현란한 불꽃의 축제 속에 불의 잔은 마침내 세 학생의 이름을 호명한다. 덤스트랭 학교의 퀴디치 경기 슈퍼스타인 빅터 크룸(스타니슬라브 이아네브스키)과 보바통 마법아카데미의 플뢰르 델라쿠르(클레멘스 포에시), 그리고 호그와트의 팔방미인이자 최고 인기남 케드릭 디고리(로버트 패틴슨)이 그들. 그러나 세 명의 이름이 다 호명된 후, 뜻밖에도 불의 잔은 또 한 명의 이름을 내뱉는다. 그 이름은 바로 '해리포터'! 그러나 해리는 시합 출전자의 나이 제한인 17세보다 세 살이나 어린 14세. 게다가 불의 잔 속에 자신의 이름을 넣은 적이 없다며 출전 의사가 없음을 밝히지만 불의 잔의 단호한 뜻에 따라, 어쩔 수 없이 출전하게 된다. 이 일로 인해 해리포터에겐 의혹과 시기의 시선이 집중되고, 추문 폭로기사 전문기자 리타 스키터(미란다 리쳐드슨)는 해리에 대한 모함성 기사를 써서 이를 더욱 부채질한다. 해리의 절친한 친구인 론마저도 해리가 유명해지고 싶어서 불의 잔을 조작해 자신의 이름을 호명하게 했다고 믿기 시작한다. 해리를 위험에 처하게 하기 위해 누군가 해리의 이름을 불의 잔에 넣은 것으로 생각한 덤블도어 교장은 신임 '어둠의 마법 방어술' 교수 '매드아이 무디'(브랜든 글리슨)에게 해리포터를 잘 지킬 것을 지시한다. 해리는 트리위저드 대회의 세가지 과제에 대비한 마법 훈련에 돌입한다. 그 과제란 불 뿜는 용 피하기, 거대한 호수 깊이 잠수하기, 살아있는 미로를 빠져 나오기 등. 그러나 그보다 해리에게 더 힘든 숙제는 크리스마스 무도회인 YULL BALL에 함께 참석할 파트너를 구하는 문제다. 해리에겐 용이나 인어, 그라인딜로우와 싸우는 편이 사랑스러운 여학생 초 챙(케이티 렁)에게 크리스마스 무도회의 파트너가 돼달라고 부탁하는 것보다 훨씬 쉬운 일이다. 한편 론은 헤르미온느에 대한 자신의 감정이 예전과 다르다는 걸 미처 깨닫지 못하고... 그러던 중 호그와트 교정에서 누군가 살해되면서 상황은 급변한다. 볼드모트의 악몽으로 두려움에 휩싸인 해리는 덤블도어를 찾아가지만 그 역시도 뚜렷한 해답을 제시하지 못한다. 경기가 진행되고, 해리와 다른 출전자들이 마지막 과제를 풀기 위해 안간힘을 쓰고 있을 때 무언가가 계속 이들을 주시한다. 승리가 목전에 다가온 그 순간, 이제까지의 모든 진실이 밝혀지고 해리포터에게는 진정한 악과의 피할 수 없는 대결이 기다리고 있는데....",
+                "plotLang": "한국어"
+              }
+            ]
+          },
+          "DOCID": "F11759",
+          "actors": {
+            "actor": [
+              {
+                "actorId": "00093365",
+                "actorNm": "케이티 렁",
+                "actorEnNm": "Katie Leung"
+              },
+              {
+                "actorId": "00098441",
+                "actorNm": "매기 스미스",
+                "actorEnNm": "Maggie Smith"
+              },
+              {
+                "actorId": "00048503",
+                "actorNm": "알란 릭맨",
+                "actorEnNm": "Alan Rickman"
+              },
+              {
+                "actorId": "00049303",
+                "actorNm": "게리 올드만",
+                "actorEnNm": "Gary Oldman"
+              },
+              {
+                "actorId": "00048945",
+                "actorNm": "다니엘 래드클리프",
+                "actorEnNm": "Daniel Radcliffe"
+              },
+              {
+                "actorId": "00069882",
+                "actorNm": "엠마 왓슨",
+                "actorEnNm": "Emma Watson"
+              },
+              {
+                "actorId": "00114057",
+                "actorNm": "루퍼트 그린트",
+                "actorEnNm": "Rupert Grint"
+              },
+              {
+                "actorId": "00048773",
+                "actorNm": "랄프 파인즈",
+                "actorEnNm": "Ralph Fiennes"
+              },
+              {
+                "actorId": "00219492",
+                "actorNm": "매튜 루이스",
+                "actorEnNm": "Matthew Lewis"
+              }
+            ]
+          },
+          "titleEtc": "해리포터와불의잔^해리 포터와 불의 잔^Harry Potter And The Goblet Of Fire^해리포터와불의잔, 해리포터와 불의잔^Harry Potter And The Goblet Of Fire^Harry Potter And The Goblet Of Fire",
+          "genre": "액션,어드벤처,가족,판타지",
+          "company": "Warner Bros."
+        },
+        {
+          "titleOrg": "Harry Potter and the Sorcerer's Stone",
+          "nation": "미국",
+          "kmdbUrl": "https://www.kmdb.or.kr/db/kor/detail/movie/F/07783",
+          "directors": {
+            "director": [
+              {
+                "directorId": "00062172",
+                "directorNm": "크리스 컬럼버스",
+                "directorEnNm": "Chris Columbus"
+              }
+            ]
+          },
+          "rating": "전체관람가",
+          "movieSeq": "07783",
+          "runtime": "152",
+          "movieId": "F",
+          "prodYear": "2001",
+          "title": "  !HS 해리 !HE   !HS 포터 !HE 와 마법사의 돌",
+          "titleEng": "Harry Potter and the Sorcerer's Stone",
+          "plots": {
+            "plot": [
+              {
+                "plotText": "상상을 뛰어넘는 환상과, 재미를 뛰어넘는 감동이 있는 곳, 이제껏 기다려 온 마법의 세계가 눈앞에 펼쳐진다!!! 해리 포터는 위압적인 버논 숙부와 냉담한 이모 페투니아, 욕심 많고 버릇없는 사촌 더즐리 밑에서 갖은 구박을 견디며 계단 밑 벽장에서 생활한다. 이모네 식구들 역시 해리와의 동거가 불편하기는 마찬가지. 이모 페투니아에겐 해리가 이상한(?) 동생 부부에 관한 기억을 떠올리게 만드는 달갑지 않은 존재다. 11살 생일이 며칠 앞으로 다가왔지만 한번도 생일파티를 치르거나 제대로 된 생일선물을 받아 본 적이 없는 해리로서는 특별히 신날 것도 기대 할 것도 없다. 하지만 11살 생일을 며칠 앞둔 어느 날, 해리에게 초록색 잉크로 쓰여진 한 통의 편지가 배달된다. 편지의 내용은 다름 아닌 해리의 11살 생일을 맞이하여 전설적인  호그와트 마법학교 에서 보낸 입학 초대장이었다. 그리고 해리의 생일을 축하하러 온 거인 해그리드는 해리가 모르고 있었던 해리의 진정한 정체를 알려주는데... 그것은 바로 해리가 굉장한 능력을 지닌 마법사라는 것! 해리는 이모네 집을 주저 없이 떠나 호그와트행을 택한다. 런던의 킹스크로스 역에 있는 비밀의 9와 3/4 승장장에서 호그와트 특급열차를 탄 해리는 열차 안에서 같은 호그와트 마법학교 입학생인 헤르미온느 그레인저와 론 위즐리를 만나 친구가 된다. 호그와트에 입학한 해리는 놀라운 모험의 세계를 경험하며 갖가지 신기한 마법들을 배워 나간다. 또한 빗자루를 타고 공중을 날아다니며 경기하는 스릴 만점의 퀴디치 게임에서 스타로 탄생하게 되며, 용, 머리가 셋 달린 개, 유니콘, 켄타우루스, 히포그리프등 신비한 동물들과 마주치며 모험을 즐긴다. 그러던 어느 날, 해리는 호그와트 지하실에 '영원한 생을 가져다주는 마법사의 돌'이 비밀리에 보관되어 있다는 것을 알게되고, 또한 해리의 부모님을 죽인 볼드모트가 그 돌을 노린다는 사실도 알게 된다. 볼드모트는 바로 해리를 죽이려다 실패하고 이마에 번개모양의 흉터를 남긴 장본인이다. 해리는 볼드모트로부터 마법의 돌과 호그와트 마법학교를 지키기 위해 필사의 노력을 하는데...",
+                "plotLang": "한국어"
+              }
+            ]
+          },
+          "DOCID": "F07783",
+          "actors": {
+            "actor": [
+              {
+                "actorId": "00048945",
+                "actorNm": "다니엘 래드클리프",
+                "actorEnNm": "Daniel Radcliffe"
+              },
+              {
+                "actorId": "00114057",
+                "actorNm": "루퍼트 그린트",
+                "actorEnNm": "Rupert Grint"
+              },
+              {
+                "actorId": "00069882",
+                "actorNm": "엠마 왓슨",
+                "actorEnNm": "Emma Watson"
+              },
+              {
+                "actorId": "00112230",
+                "actorNm": "로비 콜트레인",
+                "actorEnNm": "Robbie Coltrane"
+              },
+              {
+                "actorId": "00111543",
+                "actorNm": "리차드 해리스",
+                "actorEnNm": "Richard Harris"
+              },
+              {
+                "actorId": "00048503",
+                "actorNm": "알란 릭맨",
+                "actorEnNm": "Alan Rickman"
+              },
+              {
+                "actorId": "00084295",
+                "actorNm": "이안 하트",
+                "actorEnNm": "Ian Hart"
+              },
+              {
+                "actorId": "00120514",
+                "actorNm": "톰 펠튼",
+                "actorEnNm": "Tom Felton"
+              },
+              {
+                "actorId": "00098441",
+                "actorNm": "매기 스미스",
+                "actorEnNm": "Maggie Smith"
+              },
+              {
+                "actorId": "00111524",
+                "actorNm": "리차드 그리피스",
+                "actorEnNm": "Richard Griffiths"
+              },
+              {
+                "actorId": "00071369",
+                "actorNm": "피오나 쇼",
+                "actorEnNm": "Fiona Shaw"
+              },
+              {
+                "actorId": "00075946",
+                "actorNm": "해리 멜링",
+                "actorEnNm": "Harry Melling"
+              },
+              {
+                "actorId": "00115030",
+                "actorNm": "소운더스 트립렛",
+                "actorEnNm": "Saunders Triplets"
+              },
+              {
+                "actorId": "00066948",
+                "actorNm": "데릭 데드맨",
+                "actorEnNm": "Derek Deadman"
+              },
+              {
+                "actorId": "00219492",
+                "actorNm": "매튜 루이스",
+                "actorEnNm": "Matthew Lewis"
+              }
+            ]
+          },
+          "titleEtc": "해리포터와마법사의돌^해리 포터와 마법사의 돌^Harry Potter and the Sorcerer's Stone^해리포터와마법사의돌, 해리포터와 마법사의 돌, 해리포터와마법사의 돌, 해리포터와 마법사의돌, 해리 포터와 마법사의돌^Harry Potter and the Sorcerer's Stone^Harry Potter and the Sorcerer's St...",
+          "genre": "드라마,어드벤처,가족,판타지",
+          "company": "1492 Pictures,Heyday Films,Warner Bros."
+        },
+        {
+          "titleOrg": "Harry Potter And The Chamber Of Secrets",
+          "nation": "미국",
+          "kmdbUrl": "https://www.kmdb.or.kr/db/kor/detail/movie/F/08130",
+          "directors": {
+            "director": [
+              {
+                "directorId": "00062172",
+                "directorNm": "크리스 컬럼버스",
+                "directorEnNm": "Chris Columbus"
+              }
+            ]
+          },
+          "rating": "전체관람가",
+          "movieSeq": "08130",
+          "runtime": "160",
+          "movieId": "F",
+          "prodYear": "2002",
+          "title": "  !HS 해리 !HE   !HS 포터 !HE 와 비밀의 방",
+          "titleEng": "Harry Potter And The Chamber Of Secrets",
+          "plots": {
+            "plot": [
+              {
+                "plotText": "해리포터에겐 이번 여름방학이 별로 즐겁질 못했다. 마법이라면 질색을 하는 페투니아 이모와 버논 이모부의 구박도 그렇지만, 무엇보다 속상한 건 단짝이었던 론 위즐리와 헤르미온느 그레인저가 그 사이 자신을 까맣게 잊었는지 자신의 편지에 답장 한 통 없다는 것. 그러던 어느날 꼬마 집요정 도비가 해리의 침실에 나타나 뜻밖의 얘기를 한다. 호그와트 마법학교로 돌아가면 무서운 일을 당할 거라는 것. 도비는 해리를 학교에 못 가게 하려고 자신이 여태까지 론과 헤르미온느의 답장을 가로채 왔음을 고백한다. 그러나 도비와 더즐리 가족의 방해에도 불구, 해리는 론과 그의 형제들이 타고 온 하늘을 나는 자동차를 타고 이모집을 탈출, 따뜻한 가족애가 넘치는 론 위즐리의 집으로 간다.  개학을 앞두고 학교에 가는 날, 론과 해리는 뭔가의 방해로 9와 3/4 승강장에 못 들어가는 바람에 개학식에 지각할 위기에 처한다. 결국 하늘을 나는 자동차 포드 앵글리아를 타고 천신만고끝에 학교에 도착했으나 공교롭게도 차가 학교 선생님들이 소중히 여기는 '커다란 버드나무' 위에 불시착하는 바람에 화가 난 스네이프 교수로부터 퇴학 경고를 받게 된다. 한편 1학년 때 해리가 보여준 영웅적인 활약상은 학교 전체에 소문이 나고, 그 덕에 해리는 원치 않는 관심의 초점이 된다. 론의 여동생 지니, 사진작가 지망생 콜린 크리비 등의 신입생과 어둠의 마법 방어술을 가르치는 신임 교수 질데로이 록허트가 새롭게 해리포터의 팬이 된다.  남의 시선 끌기를 좋아하는 잘난척하는 성격 탓에 주변에서 따돌림 당하는 록허트 교수는 해리와 친해지고 싶어 안달하지만, 그 역시 학교에서 일어나는 무서운 사건에 대해 뾰족한 설명을 못해준다. 모든 이목은 해리에게 집중되고, 결국 급우들은 해리를 의심하기에 이른다. 물론 론과 헤르미온느, 그리고 수수께끼의 일기장에 마음을 뺏긴 론의 동생 지니만은 끝까지 해리를 믿는다.  자신을 믿는 친구들을 실망시킬 수는 없는 법. 해리는 -도움을 준다며 되려 걸리적 대는 록허트 교수가 다소 방해가 되긴 하지만- 어둠의 세력과 맞서 싸울 결심을 하는데..",
+                "plotLang": "한국어"
+              }
+            ]
+          },
+          "DOCID": "F08130",
+          "actors": {
+            "actor": [
+              {
+                "actorId": "00071369",
+                "actorNm": "피오나 쇼",
+                "actorEnNm": "Fiona Shaw"
+              },
+              {
+                "actorId": "00048945",
+                "actorNm": "다니엘 래드클리프",
+                "actorEnNm": "Daniel Radcliffe"
+              },
+              {
+                "actorId": "00069882",
+                "actorNm": "엠마 왓슨",
+                "actorEnNm": "Emma Watson"
+              },
+              {
+                "actorId": "00114057",
+                "actorNm": "루퍼트 그린트",
+                "actorEnNm": "Rupert Grint"
+              },
+              {
+                "actorId": "00111543",
+                "actorNm": "리차드 해리스",
+                "actorEnNm": "Richard Harris"
+              },
+              {
+                "actorId": "00098441",
+                "actorNm": "매기 스미스",
+                "actorEnNm": "Maggie Smith"
+              },
+              {
+                "actorId": "00112230",
+                "actorNm": "로비 콜트레인",
+                "actorEnNm": "Robbie Coltrane"
+              },
+              {
+                "actorId": "00048503",
+                "actorNm": "알란 릭맨",
+                "actorEnNm": "Alan Rickman"
+              },
+              {
+                "actorId": "00116232",
+                "actorNm": "셜리 헨더슨",
+                "actorEnNm": "Shirley Henderson"
+              },
+              {
+                "actorId": "00104009",
+                "actorNm": "미리암 마고리스",
+                "actorEnNm": "Miriam Margolyes"
+              },
+              {
+                "actorId": "00111524",
+                "actorNm": "리차드 그리피스",
+                "actorEnNm": "Richard Griffiths"
+              },
+              {
+                "actorId": "00219492",
+                "actorNm": "매튜 루이스",
+                "actorEnNm": "Matthew Lewis"
+              }
+            ]
+          },
+          "titleEtc": "해리포터와비밀의방^해리 포터와 비밀의 방^Harry Potter And The Chamber Of Secrets^해리포터와비밀의방^Harry Potter And The Chamber Of Secrets^Harry Potter And The Chamber Of Secrets",
+          "genre": "드라마,어드벤처,미스터리,가족,판타지",
+          "company": "1492 Pictures, Heyday Films, MIRACLE Productions G"
+        },
+        {
+          "titleOrg": "Harry Potter And The Half-Blood Prince",
+          "nation": "영국,미국",
+          "kmdbUrl": "https://www.kmdb.or.kr/db/kor/detail/movie/F/23893",
+          "directors": {
+            "director": [
+              {
+                "directorId": "00066352",
+                "directorNm": "데이빗 예이츠",
+                "directorEnNm": "David Yates"
+              }
+            ]
+          },
+          "rating": "전체관람가",
+          "movieSeq": "23893",
+          "runtime": "153",
+          "movieId": "F",
+          "prodYear": "2009",
+          "title": "  !HS 해리 !HE   !HS 포터 !HE 와 혼혈왕자",
+          "titleEng": "Harry Potter And The Half-Blood Prince",
+          "plots": {
+            "plot": [
+              {
+                "plotText": "진정한 판타지의 대장정, 마지막 전투를 준비하라어둠의 세력이 더욱 강력해져 머글 세계와 호그와트까지 위협해온다. 위험한 기운을 감지한 덤블도어 교수는 다가올 전투에 대비하기 위해 해리 포터와 함께 대장정의 길을 나선다. 볼드모트를 물리칠 수 있는 유일한 단서이자 그의 영혼을 나누어 놓은 7개의 호크룩스를 파괴하는 미션을 수행해야만 하는 것! 또한 덤블도어 교수는 호크룩스를 찾는 기억여행에 결정적 도움을 줄 슬러그혼 교수를 호그와트로 초청한다.   한편 학교에서는 계속된 수업과 함께 로맨스의 기운도 무르익는다. 해리는 자신도 모르게 지니에게 점점 끌리게 되고, 새로운 여자 친구가 생긴 론에게 헤르미온느는 묘한 질투심을 느끼는데... 남겨진 결전을 위한 최후의 미션, 볼드모트와 해리 포터에 얽힌 치명적인 비밀, 선택된 자만이 통과할 수 있는 대단원을 향한 본격적인 대결이 시작된다!",
+                "plotLang": "한국어"
+              }
+            ]
+          },
+          "DOCID": "F23893",
+          "actors": {
+            "actor": [
+              {
+                "actorId": "00048945",
+                "actorNm": "다니엘 래드클리프",
+                "actorEnNm": "Daniel Radcliffe"
+              },
+              {
+                "actorId": "00069882",
+                "actorNm": "엠마 왓슨",
+                "actorEnNm": "Emma Watson"
+              },
+              {
+                "actorId": "00114057",
+                "actorNm": "루퍼트 그린트",
+                "actorEnNm": "Rupert Grint"
+              },
+              {
+                "actorId": "00219492",
+                "actorNm": "매튜 루이스",
+                "actorEnNm": "Matthew Lewis"
+              }
+            ]
+          },
+          "titleEtc": "해리포터와혼혈왕자^해리 포터와 혼혈왕자^Harry Potter And The Half-Blood Prince^해리포터와혼혈왕자^Harry Potter And The Half-Blood Prince^Harry Potter And The Half-Blood Prince",
+          "genre": "멜로드라마,어드벤처,미스터리,판타지",
+          "company": "Warner Bros. Pictures"
+        },
+        {
+          "titleOrg": "The Amazing World Of Harry Potter And Other Films Of Wizardry",
+          "nation": "미국",
+          "kmdbUrl": "https://www.kmdb.or.kr/db/kor/detail/movie/B/04993",
+          "directors": {
+            "director": [
+              {
+                "directorId": "00155776",
+                "directorNm": "단테 J. 푸글리에스",
+                "directorEnNm": "Dante J.Pugliese"
+              }
+            ]
+          },
+          "rating": "",
+          "movieSeq": "04993",
+          "runtime": "",
+          "movieId": "B",
+          "prodYear": "2001",
+          "title": "  !HS 해리 !HE   !HS 포터 !HE 의 어메이징 월드",
+          "titleEng": "The Amazing World Of Harry Potter And Other Films Of Wizardry",
+          "plots": { "plot": [{ "plotText": "", "plotLang": "" }] },
+          "DOCID": "B04993",
+          "actors": {
+            "actor": [{ "actorId": "", "actorNm": "", "actorEnNm": "" }]
+          },
+          "titleEtc": "해리 포터의 어메이징 월드^The Amazing World Of Harry Potter And Other Films Of Wizardry^The Amazing World Of Harry Potter And Other Films Of Wizardry^해리포터의어메이징월드^해리포터의어메이징월드^TheAmazingWorldOfHarryPotterAndOtherF...",
+          "genre": "문화",
+          "company": ""
+        }
+      ]
+    }
   ]
 }

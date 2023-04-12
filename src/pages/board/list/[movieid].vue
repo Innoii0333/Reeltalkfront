@@ -67,7 +67,7 @@ const nextPage = () => {
   currentPage.value++
 }
 const goPostEdit = () => {
-  router.push(`../postedit/${movie_id}`)
+  router.push(`/board/postedit/${movie_id}`)
 }
 
 onMounted(async () => {

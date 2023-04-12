@@ -96,7 +96,8 @@ const deletePost = () => {
       </div>
     </div>
     <div>
-      컴포넌트-댓글
+      <reply-edit />
+      <reply-list />
     </div>
   </div>
 </template>
