@@ -1,19 +1,39 @@
 <script setup>
+import axios from 'axios'
+
+const route = useRoute()
+const category = route.params.category
+const tableData = ref(null)
+const filteredMovies = ref(null)
+
+const getMovies = async () => {
+  try {
+    const res = await axios.get(`/api/movieList/${category}`)
+    tableData.value = res.data
+  }
+  catch (e) {
+    console.error(e)
+  }
+}
+
 const titleSearch = (keyword) => {
   if (keyword.value === '') { filteredMovies.value = tableData.value }
-
   else {
     const lowerCaseKeyword = keyword.toLowerCase()
-    filteredPosts.value = tableData.value.filter(post =>
-      post.postTitle.toLowerCase().includes(lowerCaseKeyword),
+    filteredMovies.value = tableData.value.filter(movie =>
+      movie.title.toLowerCase().includes(lowerCaseKeyword),
     )
   }
 }
+
+onMounted (async () => {
+  await getMovies()
+})
 </script>
 
 <template>
   <div class="ml-3 px-auto text-left">
-    Category
+    {{ category }}
   </div>
   <div class="text-right">
     <!-- 검색 옵션 -->
@@ -35,19 +55,19 @@ const titleSearch = (keyword) => {
   <div>
     <el-row :gutter="20">
       <el-col
-        v-for="(o, index) in searchInfo"
+        v-for="(o, index) in filteredMovies"
         :key="index"
         class="mb-8"
         :span="6"
       >
-        <el-card :body-style="{ padding: '3px', border: isActive === index ? '2px solid #151AA3' : 'none' }" @click="handleCardActive(index)">
+        <el-card :body-style="{ padding: '3px', border: isActive === index ? '2px solid #151AA3' : 'none' }" @click="goMovieBoard(index)">
           <img
-            :src="searchInfo[index].poster_url" alt="알트"
+            :src="filteredMovies[index].poster_url" alt="알트"
             class="card-image"
           >
           <div class="text-left text-sm">
-            <p> {{ searchInfo[index].title }} </p>
-            <p> {{ searchInfo[index].release_date }} </p>
+            <p> {{ filteredMovies[index].title }} </p>
+            <p> {{ filteredMovies[index].release_date }} </p>
           </div>
         </el-card>
       </el-col>

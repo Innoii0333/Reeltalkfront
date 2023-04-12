@@ -10,6 +10,9 @@ const pageSize = ref(pageSizeOptions[0])
 const currentPage = ref(1)
 const filteredPosts = ref(tableData.value)
 
+const getMovie = async () => {
+  const res = await fetch(`/api/movie/${movie_id}`)
+}
 const inqueryPost = async () => {
   const res = await fetch('http://localhost:3000/post')
   const data = await res.json()
@@ -71,6 +74,7 @@ const goPostEdit = () => {
 }
 
 onMounted(async () => {
+  await getMovie()
   await inqueryPost()
   filteredPosts.value = tableData.value
 })

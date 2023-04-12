@@ -83,7 +83,7 @@ const submitMovie = async () => {
     </span>
   </div>
   <div>
-    <div class="w-2xl mx-auto my-3">
+    <div class="w-2xl mx-auto my-3 min-h-xs">
       <el-row :gutter="20">
         <el-col
           v-for="(o, index) in searchInfo"

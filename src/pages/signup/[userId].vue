@@ -13,11 +13,15 @@ const goBack = () => {
 }
 
 const userNameCheck = async () => {
+  if (user_name.value === '') {
+    nameResult.value = ref('한글 영문 숫자를 조합해 10자 이내로 입력해주세요')
+    return
+  }
   try {
-    const nameResponse = await axios.get (`/api/signup/${user_name.value}`)
+    const nameResponse = await axios.get(`/api/signup/${user_name.value}`)
     if (nameResponse.data === true)
       nameResult.value = '중복된 닉네임입니다'
-    else if (user_name.value !== '')
+    else
       nameResult.value = '사용할 수 있는 닉네임입니다'
   }
   catch (e) {
