@@ -20,6 +20,14 @@ routes.push(
       postId: route.params.postId,
     }),
   },
+  {
+    path: '/login/sso/:userId',
+    name: 'postindex',
+    component: () => import('./pages/login/sso-[userId].vue'),
+    props: route => ({
+      userId: route.params.userId,
+    }),
+  },
 )
 
 // https://github.com/antfu/vite-ssg

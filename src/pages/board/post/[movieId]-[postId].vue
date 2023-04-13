@@ -12,31 +12,30 @@ const create_at = ref('')
 const star_rate = ref(null)
 const view_count = ref(0)
 const comment_count = ref(0)
-
 const replyContents = ref('')
 const reReplyContents = ref('')
-
 const getPost = async () => {
   try {
     const res = await axios.get(
-      // `/api/movie/${movie_id}/post/${post_id}`
-      `http://localhost:3000/post?postid=${post_id}`,
+      `/api/movie/${movie_id}/post/${post_id}`,
+      // `http://localhost:3000/post?postid=${post_id}`,
     )
-    title.value = res.data.title
+    console.log(res)
+    title.value = res.data.movie_title
     content.value = res.data.content
-    // post_title.value = res.data.post_title
-    // create_at.value = res.data.create_at
-    // star_rate.value = res.data.star_rate
-    // view_count.value = res.data.view_count
-    // comment_count.value = res.data.comment_count
-    // postusername.value = res.data.user_name
-
-    postusername.value = res.data.username
-    post_title.value = res.data.postTitle
-    create_at.value = res.data.createAt
-    star_rate.value = res.data.starrate
-    view_count.value = res.data.viewCount
-    comment_count.value = res.data.commentCount
+    post_title.value = res.data.post_title
+    create_at.value = res.data.create_at
+    star_rate.value = res.data.star_rate
+    view_count.value = res.data.view_count
+    comment_count.value = res.data.comment_count
+    postusername.value = res.data.user_name
+    console.log(view_count.value)
+    // postusername.value = res.data.username
+    // post_title.value = res.data.postTitle
+    // create_at.value = res.data.createAt
+  //  star_rate.value = res.data.starrate
+  //  view_count.value = res.data.viewCount
+    // comment_count.value = res.data.commentCount
   }
   catch (e) {
     console.error(e)
@@ -44,12 +43,12 @@ const getPost = async () => {
   }
 }
 onMounted (async () => {
-  getPost()
+  await getPost()
 })
 const modifyPost = () => {
   // vue router를 활용해서 수정 페이지로 이동
   router.push({
-    path: `/board/postedit/${movie_id}`, // 'localhost:3000/post'
+    path: `/board/postedit/${movie_id}`,
     query: { postId: post_id },
   })
 }
@@ -94,7 +93,6 @@ const deletePost = async () => {
             <el-rate
               v-if="star_rate" v-model="star_rate" disabled show-score
               :colors="['#B5141C', '#B5141C', '#B5141C']"
-              score-template="평점 {star_rate} 점"
             />
             <span v-else>평점 미등록</span>
           </td>
@@ -107,11 +105,9 @@ const deletePost = async () => {
         </tr>
       </table>
       <hr class="border-rtblue my-2">
-      <div class="text-left">
-        {{ content }}
-      </div>
+      <div class="text-left" v-html="content" />
       <div class="text-right">
-        <el-button color="#c0c0c0" @click="modifyPost">
+        <el-button color="#C0C0C0" @click="modifyPost">
           수정
         </el-button>
         <el-button color="#B5141C" class="text-white" @click="deletePost">
