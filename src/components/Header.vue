@@ -74,7 +74,7 @@
   left: 0;
   right: 0;
   text-align: center;
-  margin-top: 325px;
+  margin-top: 300px;
   font-size: 20px;
 }
 
