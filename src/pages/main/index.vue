@@ -1,4 +1,5 @@
 <script setup>
+
 const items = [
   { image: 'https://example.com/image1.jpg', description: 'description 1' },
   { image: 'https://example.com/image2.jpg', description: 'description 2' },
