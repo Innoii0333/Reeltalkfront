@@ -32,8 +32,9 @@ watch(() => reReply, (newValue) => {
   <div>
     <ul>
       <li v-for="(item, index) in items" :key="index">
+        {{ item }}
         <button @click="toggleReReplyEdit(index)">
-          {{ item }}
+          <img src="/src/components/img/rep2.png">
         </button>
         <ReplyReplyEdit v-if="showReReplyEdit[index]" v-model="reReply" @update="handleInput" @reply-submit="reReplySubmit">
           <span class="leading-4.5">

@@ -48,7 +48,6 @@ export default defineConfig({
     Pages({
       dirs: [
         { dir: 'src/pages', baseRoute: '' },
-        { dir: 'src/guide/pages', baseRoute: 'guide' },
       ],
       extensions: ['vue', 'md'],
     }),

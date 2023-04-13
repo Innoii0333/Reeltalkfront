@@ -11,7 +11,6 @@ const goBack = () => {
 const getMovie = async (keyword) => {
   try {
     const res = await axios.get(
-      // `/api/movieadd?title=${keyword}`
       `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&listCount=100&ServiceKey=0M1CRMOD0W2RFMSLVG1G&title=${keyword}`,
     )
     // const res = await axios.get('http://localhost:3000/kmdbResult')
