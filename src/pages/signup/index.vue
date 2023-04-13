@@ -1,5 +1,4 @@
 <script setup>
-
 const router = useRouter()
 const clientId = '642329806194-vh1ikkvkaq7n94ajp0dejdqb1o6n73e9.apps.googleusercontent.com'
 const loginUri = '/api/googleSignUp'

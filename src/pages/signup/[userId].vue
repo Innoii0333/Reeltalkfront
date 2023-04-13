@@ -6,20 +6,29 @@ const route = useRoute()
 const nameResult = ref('한글 영문 숫자를 조합해 10자 이내로 입력해주세요')
 const user_name = ref('')
 const signUpFormCheck = ref(false)
-const user_id = route.params.value
+const user_id = route.params.userId
 
 const goBack = () => {
   router.back()
 }
 
 const userNameCheck = async () => {
-  const nameResponse = await fetch (`api/signup/${user_name.value}`)
-  if (nameResponse.data === ('true'))
-    nameResult.value = '중복된 닉네임입니다'
-  else if (user_name.value !== '')
-    nameResult.value = '사용할 수 있는 닉네임입니다'
+  if (user_name.value === '') {
+    nameResult.value = ref('한글 영문 숫자를 조합해 10자 이내로 입력해주세요')
+    return
+  }
+  try {
+    const nameResponse = await axios.get(`/api/signup/${user_name.value}`)
+    if (nameResponse.data === true)
+      nameResult.value = '중복된 닉네임입니다'
+    else
+      nameResult.value = '사용할 수 있는 닉네임입니다'
+  }
+  catch (e) {
+    console.error(e)
+  }
 }
-watch(nameResult, (value) => {
+watch(nameResult, async (value) => {
   signUpFormCheck.value = value === '사용할 수 있는 닉네임입니다'
 })
 
@@ -29,7 +38,7 @@ const submitSignup = async () => {
   formData.append('user_name', user_name.value)
 
   try {
-    await axios.post('/api/signUp', formData)
+    await axios.post('/api/signup', formData)
     // 성공적으로 서버로 전송된 경우의 처리
     router.push('/main')
   }
