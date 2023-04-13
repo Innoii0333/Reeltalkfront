@@ -59,7 +59,7 @@
 
 <style lang="scss">
 .background {
-  height: 45vh;
+  height: 15vh;
   overflow: hidden;
   background-image: url("./img/header.jpg");
   background-size: cover;
@@ -75,7 +75,7 @@
   left: 0;
   right: 0;
   text-align: center;
-  margin-top: 300px;
+  margin-top: 0px;
   font-size: 20px;
 }
 

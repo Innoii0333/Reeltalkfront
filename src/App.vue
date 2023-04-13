@@ -4,7 +4,7 @@ import '~/styles/test.scss'
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
 useHead({
-  title: 'Vue Dev Guide',
+  title: 'Reeltalks',
   meta: [
     { name: 'description', content: 'Vue3, Typescript 기반 개발 가이드' },
     {
