@@ -4,7 +4,7 @@ const route = useRoute()
 const router = useRouter()
 const movie_id = route.params.movieId
 const movie_name = ref('')
-const keyword = ref('검색')
+const keyword = ref('')
 const pageSizeOptions = [10, 20, 30]
 const pageSize = ref(pageSizeOptions[0])
 const currentPage = ref(1)
@@ -116,7 +116,7 @@ onMounted(async () => {
     </span>
     <!-- 검색 옵션 -->
     <span class="inline-block w-120 text-right">
-      <input v-model="keyword" type="text" class="border-rtgray px-1 my-1 w-50" @keyup.enter="titleSearch(keyword)">
+      <input v-model="keyword" type="text" placeholder="검색" class="border-rtgray px-1 my-1 w-50" @keyup.enter="titleSearch(keyword)">
       <button>
         <img
           src="/src/components/img/finder.png" alt="검색" width="24" style="margin-top: -2.8px;"

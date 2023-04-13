@@ -5,7 +5,7 @@ const route = useRoute()
 const category = route.params.category
 const tableData = ref(null)
 const filteredMovies = ref(null)
-
+const keyword = ref('')
 const getMovies = async () => {
   try {
     const res = await axios.get(`/api/movieList/${category}`)
@@ -38,7 +38,7 @@ onMounted (async () => {
   <div class="text-right">
     <!-- 검색 옵션 -->
     <span class="inline-block w-120 text-right">
-      <input v-model="keyword" type="text" class="border-rtgray px-1 my-1 w-50" @keyup.enter="titleSearch(keyword)">
+      <input v-model="keyword" type="text" placeholder="검색" class="border-rtgray px-1 my-1 w-50" @keyup.enter="titleSearch(keyword)">
       <button>
         <img
           src="/src/components/img/finder.png" alt="검색" width="24" style="margin-top: -2.8px;"

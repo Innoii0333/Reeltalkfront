@@ -12,6 +12,10 @@ const create_at = ref('')
 const star_rate = ref(null)
 const view_count = ref(0)
 const comment_count = ref(0)
+
+const replyContents = ref('')
+const reReplyContents = ref('')
+
 const getPost = async () => {
   try {
     const res = await axios.get(
@@ -116,8 +120,8 @@ const deletePost = async () => {
       </div>
     </div>
     <div>
-      <reply-edit />
-      <reply-list />
+      <reply-reply-edit v-model="replyContents" />
+      <reply-reply-list v-model="reReplyContents" />
     </div>
   </div>
 </template>

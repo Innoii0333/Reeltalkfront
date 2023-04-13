@@ -3,7 +3,7 @@ import axios from 'axios'
 const router = useRouter()
 const searchInfo = ref(null)
 const movieInfo = ref(null)
-const keyword = ref('검색')
+const keyword = ref('')
 const isActive = ref(false)
 const goBack = () => {
   router.back()
@@ -73,7 +73,7 @@ const submitMovie = async () => {
       출처 - 한국영화데이터베이스(KMDb) (https://www.kmdb.or.kr/)
     </p>
     <span class="inline-block w-120 text-left">
-      <input v-model="keyword" type="text" class="border-rtgray px-1 my-1 w-50" @keyup.enter="getMovie(keyword)">
+      <input v-model="keyword" type="text" placeholder="검색" class="border-rtgray px-1 my-1 w-50" @keyup.enter="getMovie(keyword)">
       <button>
         <img
           src="/src/components/img/finder.png" alt="검색" width="24" style="margin-top: -2.8px;"
