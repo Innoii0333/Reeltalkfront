@@ -1,5 +1,6 @@
 <script setup>
 import axios from 'axios'
+
 const router = useRouter()
 const searchInfo = ref(null)
 const movieInfo = ref(null)
@@ -8,10 +9,10 @@ const isActive = ref(false)
 const goBack = () => {
   router.back()
 }
-const getMovie = async (keyword) => {
+const getMovie = async () => {
   try {
     const res = await axios.get(
-      `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&listCount=100&ServiceKey=0M1CRMOD0W2RFMSLVG1G&title=${keyword}`,
+      `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&listCount=100&ServiceKey=0M1CRMOD0W2RFMSLVG1G&title=${keyword.value}`,
     )
     // const res = await axios.get('http://localhost:3000/kmdbResult')
     searchInfo.value = res.data.Data[0].Result
@@ -32,6 +33,7 @@ const handleCardActive = (index) => {
   isActive.value = (isActive.value === index) ? false : index
   movieInfo.value = searchInfo.value[index]
 }
+
 const submitMovie = async () => {
   const formData = new FormData()
   let actor = ''
@@ -72,11 +74,11 @@ const submitMovie = async () => {
       출처 - 한국영화데이터베이스(KMDb) (https://www.kmdb.or.kr/)
     </p>
     <span class="inline-block w-120 text-left">
-      <input v-model="keyword" type="text" placeholder="검색" class="border-rtgray px-1 my-1 w-50" @keyup.enter="getMovie(keyword)">
+      <input v-model="keyword" type="text" placeholder="검색" class="border-rtgray px-1 my-1 w-50" @keyup.enter="getMovie">
       <button>
         <img
-          src="/src/components/img/finder.png" alt="검색" width="24" style="margin-top: -2.8px;"
-          outline="solid 1.5px #C0C0C0" inline-block @click="getMovie(keyword)"
+          src="/src/components/img/finder.png" alt="go" width="24" style="margin-top: -2.8px;"
+          outline="solid 1.5px #C0C0C0" inline-block @click="getMovie"
         >
       </button>
     </span>
@@ -85,20 +87,22 @@ const submitMovie = async () => {
     <div class="w-2xl mx-auto my-3 min-h-xs">
       <el-row :gutter="20">
         <el-col
-          v-for="(o, index) in searchInfo"
+          v-for="(movieCard, index) in searchInfo"
           :key="index"
           class="mb-8"
           :span="6"
         >
           <el-card :body-style="{ padding: '3px', border: isActive === index ? '2px solid #151AA3' : 'none' }" @click="handleCardActive(index)">
-            <img
-              :src="searchInfo[index].posters" alt="알트"
-              class="card-image"
-            >
-            <div class="text-left text-sm">
-              <p> {{ searchInfo[index].title }} </p>
-              <p> {{ searchInfo[index].repRlsDate }} </p>
-            </div>
+            <button>
+              <el-image
+                :src="movieCard.posters" class="object-cover h-220px"
+                @error="movieCard.posters = '/src/components/img/alt.png'"
+              />
+              <div class="text-left text-xs">
+                <p> {{ movieCard.title }} </p>
+                <p> 개봉일: {{ movieCard.repRlsDate }} </p>
+              </div>
+            </button>
           </el-card>
         </el-col>
       </el-row>
@@ -116,10 +120,6 @@ const submitMovie = async () => {
 </template>
 
 <style lang="scss">
-.image {
-  width: 50%;
-  display: block;
-}
 input.border-rtgray{
   outline-style: solid;
   outline-width: 1.5px;

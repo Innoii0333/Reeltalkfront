@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
   value: {
-    type: string,
+    type: String,
   },
 })
 const emits = defineEmits(['update:modelValue', 'replySubmit'])

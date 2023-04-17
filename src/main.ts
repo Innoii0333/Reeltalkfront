@@ -22,7 +22,7 @@ routes.push(
   },
   {
     path: '/login/sso/:userId',
-    name: 'postindex',
+    name: 'sso',
     component: () => import('./pages/login/sso-[userId].vue'),
     props: route => ({
       userId: route.params.userId,

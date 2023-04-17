@@ -76,3 +76,8 @@ const submitForm = () => {
 </template>
 
 <style lang="scss"></style>
+
+<route lang="yaml">
+meta:
+  layout: bare
+  </route>

@@ -14,13 +14,14 @@ const view_count = ref(0)
 const comment_count = ref(0)
 const replyContents = ref('')
 const reReplyContents = ref('')
+const userId = ref('')
+
 const getPost = async () => {
   try {
     const res = await axios.get(
       `/api/movie/${movie_id}/post/${post_id}`,
       // `http://localhost:3000/post?postid=${post_id}`,
     )
-    console.log(res)
     title.value = res.data.movie_title
     content.value = res.data.content
     post_title.value = res.data.post_title
@@ -29,12 +30,11 @@ const getPost = async () => {
     view_count.value = res.data.view_count
     comment_count.value = res.data.comment_count
     postusername.value = res.data.user_name
-    console.log(view_count.value)
     // postusername.value = res.data.username
     // post_title.value = res.data.postTitle
     // create_at.value = res.data.createAt
-  //  star_rate.value = res.data.starrate
-  //  view_count.value = res.data.viewCount
+    // star_rate.value = res.data.starrate
+    // view_count.value = res.data.viewCount
     // comment_count.value = res.data.commentCount
   }
   catch (e) {
@@ -42,9 +42,6 @@ const getPost = async () => {
     alert('게시물 정보가 없습니다')
   }
 }
-onMounted (async () => {
-  await getPost()
-})
 const modifyPost = () => {
   // vue router를 활용해서 수정 페이지로 이동
   router.push({
@@ -53,6 +50,10 @@ const modifyPost = () => {
   })
 }
 const deletePost = async () => {
+  if (comment_count.value !== 0) {
+    alert('댓글이 달린 게시물은 삭제할 수 없습니다')
+    return
+  }
   await axios.delete(`/api/movie/${movie_id}/post/${post_id}`)
     .then(() => {
       // 성공적으로 서버로 전송된 경우의 처리
@@ -64,6 +65,29 @@ const deletePost = async () => {
       alert('게시물 삭제에 실패하였습니다 다시 시도해 보세요')
     })
 }
+const submitReply = async (pReplyId) => {
+  const formData = new FormData()
+  formData.append('user_id', userId.value)
+  if (pReplyId) {
+    formData.append('depth', 2)
+    formData.append('reply_content', reReplyContents.value)
+    formData.append('parent_reply_id', pReplyId)
+  }
+  else {
+    formData.append('depth', 1)
+    formData.append('reply_content', replyContents.value)
+  }
+  try {
+    const res = await axios.post(`/api/movie/${movie_id}/post/${post_id}/reply`, formData)
+  }
+  catch (e) {
+    console.error(e)
+    alert('댓글 작성에 실패했습니다')
+  }
+}
+onMounted(async () => {
+  await getPost()
+})
 </script>
 
 <template>
@@ -105,7 +129,7 @@ const deletePost = async () => {
         </tr>
       </table>
       <hr class="border-rtblue my-2">
-      <div class="text-left" v-html="content" />
+      <div class="text-left min-h-sm" v-html="content" />
       <div class="text-right">
         <el-button color="#C0C0C0" @click="modifyPost">
           수정
@@ -116,10 +140,14 @@ const deletePost = async () => {
       </div>
     </div>
     <div>
-      <reply-reply-edit v-model="replyContents" />
-      <reply-reply-list v-model="reReplyContents" />
+      <reply-reply-edit v-model="replyContents" @reply-submit="submitReply" />
+      <reply-reply-list
+        v-model="reReplyContents" :movie-id="movie_id" :post-id="post_id" :user-id="userId"
+        @re-reply-submit="submitReply(replyId)"
+      />
     </div>
   </div>
 </template>
 
 <style lang="scss"></style>
+
