@@ -14,7 +14,7 @@
           Sign up
         </RouterLink>
       </div>
-      <a href="#" class="logo"><img
+      <a href="/main" class="logo"><img
         alt="RT logo"
         style="width: 200px"
         src="./img/logo2.png"

@@ -20,7 +20,6 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-decoupled-document": "^36.0.1",
     "@ckeditor/ckeditor5-vue": "^4.0.1",
-    "@ckeditor/vite-plugin-ckeditor5": "^0.1.1",
     "@unocss/reset": "^0.45.8",
     "@vueuse/core": "^9.1.0",
     "@vueuse/head": "^0.7.9",
@@ -44,6 +43,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
+    "@ckeditor/vite-plugin-ckeditor5": "^0.1.1",
     "@iconify-json/carbon": "^1.1.7",
     "@intlify/vite-plugin-vue-i18n": "^6.0.0",
     "@types/markdown-it-link-attributes": "^3.0.1",
