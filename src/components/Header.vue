@@ -2,7 +2,6 @@
 
 </script>
 
-<!-- css -->
 <template>
   <div class="background">
     <header>
@@ -14,7 +13,7 @@
           Sign up
         </RouterLink>
       </div>
-      <a href="#" class="logo"><img
+      <a href="/main" class="logo"><img
         alt="RT logo"
         style="width: 200px"
         src="./img/logo2.png"
@@ -75,7 +74,7 @@
   left: 0;
   right: 0;
   text-align: center;
-  margin-top: 300px;
+  margin-top: 280px;
   font-size: 20px;
 }
 
