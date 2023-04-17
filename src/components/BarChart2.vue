@@ -20,14 +20,14 @@ const props = defineProps({
 const ctx = ref(null)
 
 onMounted(() => {
-  ctx.value = document.getElementById('canvas').getContext('2d')
+  ctx.value = document.getElementById('canvas2').getContext('2d')
   const chart = new Chart(ctx.value, {
     type: 'bar',
     data: {
       labels: props.labels,
       datasets: [{
         label: props.label,
-        backgroundColor: '#151aa3',
+        backgroundColor: '#b5141c',
         data: props.data,
       }],
     },
@@ -37,7 +37,6 @@ onMounted(() => {
         y: [{
           ticks: {
             beginAtZero: true,
-            fontSize: 10,
           },
         }],
       },
@@ -49,6 +48,6 @@ onMounted(() => {
 
 <template>
   <div>
-    <canvas id="canvas" ref="canvas" />
+    <canvas id="canvas2" ref="canvas2" />
   </div>
 </template>
