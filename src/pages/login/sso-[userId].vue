@@ -29,3 +29,9 @@ onMounted(async () => {
 </template>
 
 <style></style>
+
+<route lang="yaml">
+meta:
+  layout: bare
+    </route>
+

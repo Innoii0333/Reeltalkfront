@@ -12,8 +12,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <p>Google 계정으로 로그인해 주세요</p>
+  <div class="w-auto h-auto pt-20 text-center items-center justify-center">
+    <p class="my-5">
+      Google 계정으로 로그인해 주세요
+    </p>
     <div class="google-login">
       <div id="g_id_onload" :data-client_id="clientId" :data-login_uri="loginUri" data-auto_prompt="false" />
       <div
@@ -32,4 +34,9 @@ onMounted(() => {
   height: 100%;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  layout: bare
+    </route>
 

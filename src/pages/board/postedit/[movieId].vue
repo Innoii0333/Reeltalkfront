@@ -66,10 +66,10 @@ const submitForm = () => {
     <el-rate v-model="star_rate" class="mx-1" show-score :colors="['#B5141C', '#B5141C', '#B5141C']" allow-half />
   </p>
   <div class="w-full text-right mx-auto">
-    <el-button color="#c0c0c0" @click="goBack">
+    <el-button color="#c0c0c0" class="bg-rtgray" @click="goBack">
       뒤로가기
     </el-button>
-    <el-button color="#151AA3" class="text-white" @click="submitForm">
+    <el-button color="#151AA3" class="bg-rtblue text-white" @click="submitForm">
       등록하기
     </el-button>
   </div>

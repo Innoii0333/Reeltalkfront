@@ -12,10 +12,9 @@ const create_at = ref('')
 const star_rate = ref(null)
 const view_count = ref(0)
 const comment_count = ref(0)
-const replyContents = ref('')
-const reReplyContents = ref('')
-const userId = ref('')
-
+const replyContents = ref(null)
+const reReplyContents = ref(null)
+const userId = ref('123')
 const getPost = async () => {
   try {
     const res = await axios.get(
@@ -69,16 +68,16 @@ const submitReply = async (pReplyId) => {
   const formData = new FormData()
   formData.append('user_id', userId.value)
   if (pReplyId) {
-    formData.append('depth', 2)
     formData.append('reply_content', reReplyContents.value)
     formData.append('parent_reply_id', pReplyId)
   }
   else {
-    formData.append('depth', 1)
     formData.append('reply_content', replyContents.value)
   }
   try {
     const res = await axios.post(`/api/movie/${movie_id}/post/${post_id}/reply`, formData)
+    alert('댓글이 등록되었습니다')
+    router.push(`/board/post/${movie_id}/${post_id}`)
   }
   catch (e) {
     console.error(e)
@@ -131,10 +130,10 @@ onMounted(async () => {
       <hr class="border-rtblue my-2">
       <div class="text-left min-h-sm" v-html="content" />
       <div class="text-right">
-        <el-button color="#C0C0C0" @click="modifyPost">
+        <el-button color="#C0C0C0" class="bg-rtgray" @click="modifyPost">
           수정
         </el-button>
-        <el-button color="#B5141C" class="text-white" @click="deletePost">
+        <el-button color="#B5141C" class="bg-rtred text-white" @click="deletePost">
           삭제
         </el-button>
       </div>
@@ -143,11 +142,10 @@ onMounted(async () => {
       <reply-reply-edit v-model="replyContents" @reply-submit="submitReply" />
       <reply-reply-list
         v-model="reReplyContents" :movie-id="movie_id" :post-id="post_id" :user-id="userId"
-        @re-reply-submit="submitReply(replyId)"
+        @re-reply-submit="submitReply"
       />
     </div>
   </div>
 </template>
 
 <style lang="scss"></style>
-

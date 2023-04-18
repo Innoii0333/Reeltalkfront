@@ -94,6 +94,17 @@ onUnmounted(() => {
 
 <template>
   <div>
+    <div class="inline-block flex justify-center items-center">
+      <textarea class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-2xl text-3 leading-normal" />
+      <el-button color="#151AA3" class="text-white bg-rtblue ml-2 mr-0">
+        수정
+      </el-button>
+      <el-button color="#c0c0c0" class="bg-rtgray ml-2 mr-auto">
+        취소
+      </el-button>
+    </div>
+  </div>
+  <div>
     <el-row :gutter="20">
       <el-col v-for="(movieCard, index) in filteredMovies" :key="index" class="mb-8" :span="6">
         <el-card :body-style="{ padding: '3px' }" @click="goMovieBoard(movieCard.movie_id)">

@@ -109,10 +109,10 @@ const submitMovie = async () => {
     </div>
     <hr class="w-2xl border-black border-1.5 my-2 mx-auto">
     <div class="w-2xl text-right mx-auto">
-      <el-button color="#C0C0C0" @click="goBack">
+      <el-button color="#C0C0C0" class="bg-rtgray" @click="goBack">
         뒤로가기
       </el-button>
-      <el-button color="#151AA3" class="text-white" @click="submitMovie">
+      <el-button color="#151AA3" class="text-white bg-rtblue" @click="submitMovie">
         등록하기
       </el-button>
     </div>

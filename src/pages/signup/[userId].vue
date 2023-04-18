@@ -51,8 +51,10 @@ const submitSignup = async () => {
 </script>
 
 <template>
-  <div>
-    <p>Google 계정이 자동으로 등록됩니다.</p>
+  <div class="w-auto h-auto pt-20 text-center items-center justify-center">
+    <p class="my-5">
+      Google 계정이 자동으로 등록됩니다.
+    </p>
     <br>
     닉네임을 입력해주세요 :
     <input v-model="user_name" type="text" class="50px border border-black ml-2" @blur="userNameCheck"><br>
@@ -67,3 +69,9 @@ const submitSignup = async () => {
     </p>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  layout: bare
+    </route>
+

@@ -1,58 +1,64 @@
 <script setup lang="ts">
-
+const openLogin = () => {
+  const loginWindow = window.open('/login', 'loginWindow',
+   `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
+}
+const openSignup = () => {
+  const SignupWindow = window.open('/signup', 'signupWindow',
+  `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
+}
 </script>
 
 <template>
   <div class="background">
-    <header>
-      <div style="color: white; margin-top: 5px; float: right">
-        <RouterLink class="menu" to="/">
-          Sign in |
-        </RouterLink>
-        <RouterLink class="menu" to="/" style="margin-right:10px">
-          Sign up
-        </RouterLink>
-      </div>
-      <a href="/main" class="logo"><img
-        alt="RT logo"
-        style="width: 200px"
-        src="./img/logo2.png"
-      >
-      </a>
+    <div style="color: white; margin-top: 5px; float: right">
+      <button class="menu" @click="openLogin">
+        Sign in
+      </button>
+      <span class="mx-1">|</span>
+      <button class="menu" style="margin-right:10px" @click="openSignup">
+        Sign up
+      </button>
+    </div>
+    <a href="/main" class="logo"><img
+      alt="RT logo"
+      style="width: 200px"
+      src="./img/logo2.png"
+    >
+    </a>
 
-      <div id="menu">
-        <RouterLink to="/movielist/movie" style="color: white">
-          Movie
-        </RouterLink>
-        <RouterLink to="/movielist/action" style="color: white">
-          Action
-        </RouterLink>
-        <RouterLink to="/movielist/drama" style="color: white">
-          Drama
-        </RouterLink>
-        <RouterLink to="/movielist/romance" style="color: white">
-          Romance
-        </RouterLink>
-        <RouterLink to="/movielist/comedy" style="color: white">
-          Comedy
-        </RouterLink>
-        <RouterLink to="/movielist/ani" style="color: white">
-          Ani
-        </RouterLink>
-        <RouterLink to="/movielist/horror" style="color: white">
-          Horror
-        </RouterLink>
-        <RouterLink to="/movielist/sf" style="color: white">
-          SF
-        </RouterLink>
-        <RouterLink to="/movielist/fantasy" style="color: white">
-          Fantasy
-        </RouterLink>
-        <RouterLink to="/movielist/etc" style="color: white">
-          Etc
-        </RouterLink>
-      </div>
-    </header>
+    <div id="menu">
+      <RouterLink to="/movielist/movie" style="color: white">
+        Movie
+      </RouterLink>
+      <RouterLink to="/movielist/action" style="color: white">
+        Action
+      </RouterLink>
+      <RouterLink to="/movielist/drama" style="color: white">
+        Drama
+      </RouterLink>
+      <RouterLink to="/movielist/romance" style="color: white">
+        Romance
+      </RouterLink>
+      <RouterLink to="/movielist/comedy" style="color: white">
+        Comedy
+      </RouterLink>
+      <RouterLink to="/movielist/ani" style="color: white">
+        Ani
+      </RouterLink>
+      <RouterLink to="/movielist/horror" style="color: white">
+        Horror
+      </RouterLink>
+      <RouterLink to="/movielist/sf" style="color: white">
+        SF
+      </RouterLink>
+      <RouterLink to="/movielist/fantasy" style="color: white">
+        Fantasy
+      </RouterLink>
+      <RouterLink to="/movielist/etc" style="color: white">
+        Etc
+      </RouterLink>
+    </div>
   </div>
 </template>
 
