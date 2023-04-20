@@ -17,7 +17,7 @@ onMounted(() => {
       Google 계정으로 로그인해 주세요
     </p>
     <div class="google-login">
-      <div id="g_id_onload" :data-client_id="clientId" :data-login_uri="loginUri" data-auto_prompt="false" />
+      <div id="g_id_onload" :data-client_id="clientId" :data-login_uri="loginUri" data-auto_prompt="true" />
       <div
         class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="signin_with"
         data-shape="circle" data-logo_alignment="left"

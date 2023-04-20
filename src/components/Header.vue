@@ -10,11 +10,11 @@ const openLogin = () => {
         return // 보안을 위한 체크
       if (event.source !== loginWindow)
         return
-      if (event.data.message === 'session_ready') { loginWindow.postMessage({ message: 'give-me-data' }) }
-      else if (event.data) {
+      if (event.data) {
         console.log(event.data)
+        session.initToken([event.data[0], event.data[1]])
         try {
-          await session.checkLogin()
+          await session.getSession()
           loginWindow.postMessage({ message: 'authenticated' })
         }
         catch (e) {

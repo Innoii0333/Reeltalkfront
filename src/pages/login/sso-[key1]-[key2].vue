@@ -29,21 +29,19 @@ const finishSession = () => {
 onMounted(async () => {
   const token = [key1, key2]
   session.initToken(token)
-  window.opener.postMessage({ message: 'session_ready' }, '*')
   window.addEventListener('message', async (event) => {
     console.log('event', token)
     try {
       switch (event.data.message) {
-        case 'give-me-data':
-          await sendDataToParent(token)
-          break
         case 'invalid-session':
-          throw new Error('session checking failed')
+          alert('session checking failed')
+          finishSession()
+          break
         case 'authenticated':
           loadingInstance1.close()
           finishSession()
           break
-        default: throw new Error('session checking failed')
+        default: break
       }
     }
     catch (e) {

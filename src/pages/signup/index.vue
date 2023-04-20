@@ -19,7 +19,7 @@ onMounted(() => {
       Google 계정이 자동으로 등록됩니다.
     </p>
     <div class="google-login">
-      <div id="g_id_onload" :data-client_id="clientId" :data-login_uri="loginUri" data-auto_prompt="false" />
+      <div id="g_id_onload" :data-client_id="clientId" :data-login_uri="loginUri" data-auto_prompt="true" />
       <div
         class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="signup_with"
         data-shape="circle" data-logo_alignment="left"
