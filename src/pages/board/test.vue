@@ -94,8 +94,56 @@ onUnmounted(() => {
 
 <template>
   <div>
+    <ul class="max-w-2xl my-5 mx-auto text-16px">
+      <li class="ml-3 px-2 inline-block">
+        <div class="flex">
+          <span class="basis-15 px-2 text-left">
+            aaaa
+          </span>
+          <span class="flex-1  mx-5 text-left">
+            bbbbbb
+          </span>
+          <span class="basis-15 mx-3 pr-2">
+            ccccccccc
+          </span>
+          <span class="basis-10 mx-1 px-2 whitespace-nowrap">
+            <button class="mx-1 inline-block">
+              <img class="inline-block" src="/src/components/img/rep2.png" inline-block>
+            </button>
+            <button class="mx-1 inline-block">
+              <img class="inline-block" src="/src/components/img/rep3.png" inline-block>
+            </button>
+            <button class="mx-1 inline-block">
+              <img class="inline-block" src="/src/components/img/rep4.png" inline-block>
+            </button>
+          </span>
+        </div>
+      </li>
+      <li class="ml-3 px-2 inline-block">
+        <div class="flex">
+          <img class="ml-1 pl-1 w-5.4 justify-center mt-1.8" inline-block src="/src/components/img/rep1.png">
+          <span class="basis-15 px-2 text-left">
+            aaaa
+          </span>
+          <span class="flex-1 mx-5 text-left">
+            bbbbbb
+          </span>
+          <span class="basis-15 mx-3 pr-2">
+            ccccccccc
+          </span>
+          <span class="basis-10 mx-1 px-2 whitespace-nowrap">
+            <button class="mx-1 inline-block">
+              <img class="inline-block" src="/src/components/img/rep3.png" inline-block>
+            </button>
+            <button class="mx-1 inline-block">
+              <img class="inline-block" src="/src/components/img/rep4.png" inline-block>
+            </button>
+          </span>
+        </div>
+      </li>
+    </ul>
     <div class="inline-block flex justify-center items-center">
-      <textarea class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-2xl text-3 leading-normal" />
+      <textarea class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-xl max-w-2xl text-3 leading-normal" />
       <el-button color="#151AA3" class="text-white bg-rtblue ml-2 mr-0">
         수정
       </el-button>
@@ -110,8 +158,7 @@ onUnmounted(() => {
         <el-card :body-style="{ padding: '3px' }" @click="goMovieBoard(movieCard.movie_id)">
           <button>
             <el-image
-              :key="index" :src="movieCard.poster_url"
-              class="object-cover"
+              :key="index" :src="movieCard.poster_url" class="object-cover"
               @error.once="movieCard.poster_url = '/src/components/img/alt.png'"
             />
             <div class="text-left text-sm">

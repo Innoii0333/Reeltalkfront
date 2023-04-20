@@ -1,11 +1,20 @@
 <script setup lang="ts">
+const session = useSessionStore()
 const openLogin = () => {
-  const loginWindow = window.open('/login', 'loginWindow',
+  window.open('/login', 'loginWindow',
    `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
 }
 const openSignup = () => {
-  const SignupWindow = window.open('/signup', 'signupWindow',
+  window.open('/signup', 'signupWindow',
   `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
+}
+const receiveChild = async (data) => {
+  // 전달받은 데이터 처리
+  console.log('Received data from child:', data)
+  // 자식 창으로 메시지 전송
+  window.postMessage({ message: 'received' }, '*')
+  try { await session.checkLogin() }
+  catch { alert('로그인에 실패했습니다') }
 }
 </script>
 

@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps, onMounted, ref } from 'vue'
 import Chart from 'chart.js/auto'
 
 const props = defineProps({

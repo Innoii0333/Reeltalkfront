@@ -40,7 +40,8 @@ const submitSignup = async () => {
   try {
     await axios.post('/api/signup', formData)
     // 성공적으로 서버로 전송된 경우의 처리
-    router.push('/main')
+    alert('회원 가입에 성공했습니다')
+    window.close()
   }
   catch (e) {
     // 서버 전송 실패의 처리

@@ -34,6 +34,7 @@ const getReplyList = async () => {
   try {
     const res = await axios.get(`/api/movie/${props.movieId}/post/${props.postId}/reply`)
     replyList.value = res.data
+    triggerRef(replyList)
   }
   catch (e) {
     console.error(e)
@@ -48,23 +49,26 @@ const modifyReply = async (idx) => {
     const res = await axios.put(
       `/api/movie/${props.movieId}/post/${props.postId}/reply/${replyList.value[idx].reply_id}`,
       formData)
-    await getReplyList()
+    changedReply.value = ''
   }
   catch (e) {
     console.error(e)
     alert('댓글 수정에 실패했습니다')
   }
+  await getReplyList()
 }
 const deleteReply = async (index) => {
   try {
     const res = await axios.delete(
       `/api/movie/${props.movieId}/post/${props.postId}/reply/${replyList.value[index].reply_id}`)
-    await getReplyList()
+    if (res.data === false)
+      throw new Error(e)
   }
   catch (e) {
     console.error(e)
     alert('댓글을 삭제하지 못했습니다. 대댓글이 달린 경우 삭제할 수 없습니다.')
   }
+  await getReplyList()
 }
 const reReplySubmit = (pReplyId) => {
   emits('reReplySubmit', pReplyId)
@@ -75,7 +79,7 @@ const handleInput = () => {
 onMounted(async () => {
   await getReplyList()
 })
-watch(() => reReply, (newValue) => {
+watch(() => reReply.value, (newValue) => {
   if (newValue !== '')
     handleInput()
 })
@@ -83,36 +87,36 @@ watch(() => reReply, (newValue) => {
 
 <template>
   <div>
-    <ul class="min-w-5xl">
-      <li v-if="replyList.value.length === 0">
+    <ul class="max-w-2xl my-5 mx-auto text-16px">
+      <li v-if="replyList.value.length === 0" class="ml-3 px-2 inline-block">
         등록된 댓글이 없습니다
       </li>
-      <li v-for="(item, index) in replyList" v-else :key="index" class="ml-3">
-        <div v-if="showModifyReply !== index">
-          <span class="w-30 px-2 text-left">
+      <li v-for="(item, index) in replyList" v-else :key="index" class="ml-3 px-2 inline-block">
+        <div v-if="showModifyReply !== index" class="flex">
+          <img v-if="item?.depth === 2" class="ml-1 pl-1 w-5.4 justify-center mt-1.8" inline-block src="/src/components/img/rep1.png">
+          <span class="basis-15 px-2 text-left">
             {{ item?.user_id }}
           </span>
-          <span class="w-auto text-left">
-            <img v-if="item?.depth === 2" class="ml-2 pl-2" inline-block src="/src/components/img/rep1.png">
+          <span class="flex-1 mx-5 text-left">
             {{ item?.reply_contents }}
           </span>
-          <span class="w-15">
+          <span class="basis-15 mx-3 pr-2">
             {{ item?.create_at }}
           </span>
-          <span class="w-15">
-            <button v-if="item?.depth === 1" @click="toggleReReplyEdit(index)">
+          <span class="basis-10 mx-1 px-2 whitespace-nowrap">
+            <button v-if="item?.depth === 1" class="mx-1 inline-block" @click="toggleReReplyEdit(index)">
               <img src="/src/components/img/rep2.png" inline-block>
             </button>
-            <button @click="toggleModifyReply(index)">
+            <button class="mx-1 inline-block" @click="toggleModifyReply(index)">
               <img src="/src/components/img/rep3.png" inline-block>
             </button>
-            <button @click="deleteReply(index)">
+            <button class="mx-1 inline-block" @click="deleteReply(index)">
               <img src="/src/components/img/rep4.png" inline-block>
             </button>
           </span>
         </div>
         <div v-else-if="showModifyReply === index" class="inline-block flex justify-center items-center">
-          <textarea v-model="changedReply" class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-2xl text-3 leading-normal" />
+          <textarea v-model="changedReply" class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-xl max-w-2xl text-3 leading-normal" />
           <el-button color="#151AA3" class="text-white bg-rtblue ml-2 mr-0" @click="modifyReply(index)">
             수정
           </el-button>
@@ -121,7 +125,7 @@ watch(() => reReply, (newValue) => {
           </el-button>
         </div>
         <ReplyReplyEdit
-          v-if="showReReplyEdit === index" v-model="reReply" @update="handleInput"
+          v-if="showReReplyEdit === index" v-model="reReply" class="absolute mx-auto"
           @reply-submit="reReplySubmit(item?.reply_id)"
         >
           <span class="leading-4.5">
@@ -135,8 +139,4 @@ watch(() => reReply, (newValue) => {
 </template>
 
 <style scoped>
-img {
-  width: 15px;
-  height: auto;
-}
 </style>

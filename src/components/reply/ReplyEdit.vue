@@ -1,14 +1,14 @@
 <script setup>
 const props = defineProps({
-  value: {
+  modelValue: {
     type: String,
   },
 })
 const emits = defineEmits(['update:modelValue', 'replySubmit'])
 
-const reply = ref(props.value)
+const reply = ref(props.modelValue)
 const handleInput = () => {
-  emits('update:modelValue', reply)
+  emits('update:modelValue', reply.value)
 }
 const replySubmit = () => {
   emits('replySubmit')

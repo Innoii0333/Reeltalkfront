@@ -2,8 +2,8 @@
 </script>
 
 <template>
-  <div class="bg-black text-white mx-auto my-5 px-2 py-2 text-left text-13px">
-    <p>
+  <div class="bg-black text-white mx-auto my-5 px-5 py-2 text-left text-13px">
+    <p class="text-16px my-3">
       Reeltalks 개인정보 취급 방침
     </p>
     <p>
@@ -36,7 +36,7 @@
     <p>
       - 필요 시 이용자 동의를 다시 받을 수 있습니다
     </p>
-    <p>
+    <p class="my-3">
       대표 : 최수영 (contact: susu4334@gmail.com)
     </p>
     <p>

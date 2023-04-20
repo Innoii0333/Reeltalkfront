@@ -8,7 +8,8 @@ const tableData = ref([])
 const filteredMovies = ref([])
 const keyword = ref('')
 const isLoading = ref(0)
-const pages = ref(0)
+const pages = ref(1)
+
 const options = {
   root: null,
   rootMargin: '100px',
@@ -80,7 +81,7 @@ onUnmounted(() => {
   <hr class="border-rtblue my-2">
   <!-- 카드 요소를 이용한 데이터 출력 및 infinite scrolling -->
   <div>
-    <el-row :gutter="20">
+    <el-row class="min-h-sm" :gutter="20">
       <el-col
         v-for="(movieCard, index) in filteredMovies"
         :key="index"
