@@ -43,7 +43,7 @@ const getMovie = async () => {
   catch (e) {
     console.error(e)
     alert('영화 정보를 찾을 수 없습니다')
-    router.back()
+    router.push('/main')
   }
 }
 

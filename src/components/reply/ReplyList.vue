@@ -88,7 +88,7 @@ watch(() => reReply.value, (newValue) => {
 <template>
   <div>
     <ul class="max-w-2xl my-5 mx-auto text-16px">
-      <li v-if="replyList.value.length === 0" class="ml-3 px-2 inline-block">
+      <li v-if="replyList.length === 0" class="ml-3 px-2 inline-block">
         등록된 댓글이 없습니다
       </li>
       <li v-for="(item, index) in replyList" v-else :key="index" class="ml-3 px-2 inline-block">

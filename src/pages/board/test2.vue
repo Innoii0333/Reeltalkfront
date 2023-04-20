@@ -1,34 +1,22 @@
 <script setup>
-import axios from 'axios'
-const route = useRoute()
-const router = useRouter()
+import { ElLoading } from 'element-plus'
 const session = useSessionStore()
-const key1 = route.params.key1
-const key2 = route.params.key2
-// const requestSession = async () => {
-//   try {
-//     const res = await axios.get(`/api/session/${key1}/${key2}`)
-//     const userToken = res.data.token_id
-//     useSessionStore().setToken(userToken)
-//     router.push('/main')
-//   }
-//   catch (e) {
-//     console.error(e)
-//     router.push('/login')
-//   }
-// }
+
 const sendDataToParent = async (data) => {
   // 부모 창의 함수 호출
   console.log(window.opener, data)
   window.opener.postMessage(data, '*')
 }
+
 const finishSession = () => {
   console.log('done')
   window.close()
 }
 onMounted(async () => {
-  const token = [key1, key2]
+  const loadingInstance1 = ElLoading.service({ fullscreen: true })
+  const token = ['121313131', '1231313131']
   session.initToken(token)
+  console.log(token)
   window.opener.postMessage({ message: 'session_ready' }, '*')
   window.addEventListener('message', async (event) => {
     console.log('event', token)
@@ -37,9 +25,7 @@ onMounted(async () => {
         case 'give-me-data':
           await sendDataToParent(token)
           break
-        case 'invalid-session':
-          throw new Error('session checking failed')
-        case 'authenticated':
+        case 'received':
           loadingInstance1.close()
           finishSession()
           break
@@ -48,24 +34,13 @@ onMounted(async () => {
     }
     catch (e) {
       alert('session checking failed')
-      window.close()
     }
   })
 })
 </script>
 
 <template>
-  <div>
-    <p>
-      "checking the session..."
-    </p>
-  </div>
+  <p>
+    checking the session....
+  </p>
 </template>
-
-<style></style>
-
-<route lang="yaml">
-meta:
-  layout: bare
-    </route>
-

@@ -1,9 +1,10 @@
 <script setup>
 import axios from 'axios'
 import TextEditor from '~/components/TextEditor.vue'
+const session = useSessionStore()
 const router = useRouter()
 const route = useRoute()
-const post_title = ref('제목을 입력하세요')
+const post_title = ref('')
 const post_id = route.query.postId
 const title = ref('movietitle')
 const star_rate = ref(0)
@@ -17,7 +18,7 @@ const goBack = () => {
 const submitForm = () => {
   const formData = new FormData()
   formData.append('movie_id', movie_id)
-  formData.append('post_title', post_title)
+  formData.append('post_title', post_title.value)
   formData.append('content', content.value)
   formData.append('star_rate', star_rate.value)
   formData.append('user_id', user_id.value)
@@ -47,6 +48,17 @@ const submitForm = () => {
       })
   }
 }
+onMounted(async () => {
+  try {
+    await session.checkLogin()
+    await session.checkAuth()
+    user_id.value = session.user_id
+  }
+  catch (e) {
+    alert('권한이 없습니다')
+    router.push(`/board/list/${movie_id}`)
+  }
+})
 </script>
 
 <template>
@@ -59,7 +71,7 @@ const submitForm = () => {
     </p>
   </div>
   <hr class="border-rtblue my-2">
-  <input v-model="post_title" type="text" class="w-full px-2 py-2 my-5 text-16px font-bold outline"><br>
+  <input v-model="post_title" type="text" placeholder="제목을 입력하세요" class="w-full px-2 py-2 my-5 text-16px font-bold outline"><br>
   <TextEditor v-model="content" />
   <p class="w-full text-left mx-auto text-rtred">
     별점 :

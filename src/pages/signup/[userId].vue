@@ -9,7 +9,7 @@ const signUpFormCheck = ref(false)
 const user_id = route.params.userId
 
 const goBack = () => {
-  router.back()
+  window.close()
 }
 
 const userNameCheck = async () => {

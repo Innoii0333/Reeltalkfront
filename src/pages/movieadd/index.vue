@@ -52,7 +52,7 @@ const submitMovie = async () => {
   formData.append('rating', movieInfo.value.rating)
   formData.append('poster', movieInfo.value.posters)
   try {
-    const res = await axios.post('/api/movieadd', formData)
+    const res = await axios.post('/api/movieadd', formData, { validateStatus: false })
     router.push('/main')
   }
   catch (e) {

@@ -1,20 +1,41 @@
 <script setup lang="ts">
 const session = useSessionStore()
 const openLogin = () => {
-  window.open('/login', 'loginWindow',
+  const loginWindow = window.open('/login', 'loginWindow',
    `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
+  if (loginWindow) {
+    window.addEventListener('message', (event) => {
+      console.log('Received message:', event.data.message)
+      if (event.origin !== window.location.origin)
+        return // 보안을 위한 체크
+      if (event.source !== loginWindow)
+        return
+      if (event.data.message === 'session_ready') { loginWindow.postMessage({ message: 'give-me-data' }) }
+      else if (event.data) {
+        console.log(event.data)
+        loginWindow.postMessage({ message: 'received' })
+      }
+    })
+  }
 }
+
 const openSignup = () => {
-  window.open('/signup', 'signupWindow',
+  const signupWindow = window.open('/signup', 'signupWindow',
   `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
-}
-const receiveChild = async (data) => {
-  // 전달받은 데이터 처리
-  console.log('Received data from child:', data)
-  // 자식 창으로 메시지 전송
-  window.postMessage({ message: 'received' }, '*')
-  try { await session.checkLogin() }
-  catch { alert('로그인에 실패했습니다') }
+  if (signupWindow) {
+    window.addEventListener('message', (event) => {
+      console.log('Received message:', event.data.message)
+      if (event.origin !== window.location.origin)
+        return // 보안을 위한 체크
+      if (event.source !== signupWindow)
+        return
+      if (event.data.message === 'session_ready') { signupWindow.postMessage({ message: 'give-me-data' }) }
+      else if (event.data) {
+        console.log(event.data)
+        signupWindow.postMessage({ message: 'received' })
+      }
+    })
+  }
 }
 </script>
 

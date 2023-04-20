@@ -5,6 +5,23 @@ const pages = ref(0)
 const intersectionTarget = ref(null)
 let observer = null
 
+const newWindow = () => {
+  const childWindow = window.open('/board/test2', 'example', 'width=500,height=500')
+
+  window.addEventListener('message', (event) => {
+    console.log('Received message:', event.data.message)
+    if (event.origin !== window.location.origin)
+      return // 보안을 위한 체크
+    if (event.source !== childWindow)
+      return
+    if (event.data.message === 'session_ready') { childWindow.postMessage({ message: 'give-me-data' }) }
+    else if (event.data) {
+      console.log(event.data)
+      childWindow.postMessage({ message: 'received' })
+    }
+  })
+}
+
 const tableData = ref([
   { id: 1, title: 'Movie 1', poster_url: '/src/components/img/1.png', release_date: '2022-01-01', star_avg_rate: 4.5, category_id: [1, 2] },
   { id: 2, title: 'Movie 2', poster_url: '/src/components/img/2.png', release_date: '2022-01-02', star_avg_rate: 3.5, category_id: [2, 3] },
@@ -144,7 +161,7 @@ onUnmounted(() => {
     </ul>
     <div class="inline-block flex justify-center items-center">
       <textarea class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-xl max-w-2xl text-3 leading-normal" />
-      <el-button color="#151AA3" class="text-white bg-rtblue ml-2 mr-0">
+      <el-button color="#151AA3" class="text-white bg-rtblue ml-2 mr-0" @click="newWindow">
         수정
       </el-button>
       <el-button color="#c0c0c0" class="bg-rtgray ml-2 mr-auto">
