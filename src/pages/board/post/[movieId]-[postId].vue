@@ -21,10 +21,6 @@ const comment_count = ref(0)
 const replyContents = ref(null)
 const reReplyContents = ref(null)
 const userId = ref('userid1')
-const now = new Date()
-const formedDate = ref(null)
-const postuserId = ref('')
-
 const getPost = async () => {
   try {
     const res = await axios.get(
@@ -106,6 +102,9 @@ const submitReply = async (pReplyId) => {
   }
 }
 onMounted(async () => {
+  // if (!session.user_id)
+  //   await session.checkLogin()
+  // userId.value = session.user_id
   // if (!session.user_id)
   //   await session.checkLogin()
   // userId.value = session.user_id
