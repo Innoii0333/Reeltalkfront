@@ -1,11 +1,13 @@
 <script setup>
 import axios from 'axios'
-
+const session = useSessionStore()
 const router = useRouter()
 const searchInfo = ref(null)
 const movieInfo = ref(null)
 const keyword = ref('')
 const isActive = ref(false)
+const ADMIN_ID = 'admin'
+
 const goBack = () => {
   router.back()
 }
@@ -52,7 +54,7 @@ const submitMovie = async () => {
   formData.append('rating', movieInfo.value.rating)
   formData.append('poster', movieInfo.value.posters)
   try {
-    const res = await axios.post('/api/movieadd', formData)
+    const res = await axios.post('/api/movieadd', formData, { validateStatus: false })
     router.push('/main')
   }
   catch (e) {
@@ -61,6 +63,10 @@ const submitMovie = async () => {
     alert('영화 등록에 실패하였습니다 다시 시도해 보세요')
   }
 }
+onMounted(() => {
+  if (!session.user_id)
+    goBack()
+})
 </script>
 
 <template>
@@ -109,10 +115,10 @@ const submitMovie = async () => {
     </div>
     <hr class="w-2xl border-black border-1.5 my-2 mx-auto">
     <div class="w-2xl text-right mx-auto">
-      <el-button color="#C0C0C0" @click="goBack">
+      <el-button color="#C0C0C0" class="bg-rtgray" @click="goBack">
         뒤로가기
       </el-button>
-      <el-button color="#151AA3" class="text-white" @click="submitMovie">
+      <el-button color="#151AA3" class="text-white bg-rtblue" @click="submitMovie">
         등록하기
       </el-button>
     </div>
@@ -126,3 +132,8 @@ input.border-rtgray{
   outline-color:#c0c0c0;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  layout: onlyheader
+</route>

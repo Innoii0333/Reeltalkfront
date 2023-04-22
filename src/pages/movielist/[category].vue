@@ -8,7 +8,8 @@ const tableData = ref([])
 const filteredMovies = ref([])
 const keyword = ref('')
 const isLoading = ref(0)
-const pages = ref(0)
+const pages = ref(1)
+
 const options = {
   root: null,
   rootMargin: '100px',
@@ -18,7 +19,12 @@ const options = {
 const getMovies = async (n) => {
   isLoading.value = 1
   try {
-    const res = await axios.get(`/api/movieList/${category}?page=${n}`)
+    const res = await axios.get('/api/movieList', {
+      params: {
+        category: route.params.category,
+        page: n,
+      },
+    })
     tableData.value = tableData.value.concat(res)
     isLoading.value = 0
     if (res.data.length === 0)
@@ -63,8 +69,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="ml-3 px-auto text-left">
-    {{ category }}
+  <div class="ml-3 px-auto text-left text-10">
+    {{ category.toLocaleUpperCase() }}
   </div>
   <div class="text-right">
     <!-- 검색 옵션 -->
@@ -80,7 +86,7 @@ onUnmounted(() => {
   <hr class="border-rtblue my-2">
   <!-- 카드 요소를 이용한 데이터 출력 및 infinite scrolling -->
   <div>
-    <el-row :gutter="20">
+    <el-row class="min-h-sm" :gutter="20">
       <el-col
         v-for="(movieCard, index) in filteredMovies"
         :key="index"

@@ -3,9 +3,6 @@ const router = useRouter()
 const clientId = '642329806194-vh1ikkvkaq7n94ajp0dejdqb1o6n73e9.apps.googleusercontent.com'
 const loginUri = '/api/googleSignUp'
 
-const goBack = () => {
-  router.back()
-}
 onMounted(() => {
   const script = document.createElement('script')
   script.type = 'text/javascript'
@@ -17,23 +14,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <p>Google 계정이 자동으로 등록됩니다.</p>
+  <div class="w-auto h-auto pt-20 text-center items-center justify-center">
+    <p class="my-5">
+      Google 계정이 자동으로 등록됩니다.
+    </p>
     <div class="google-login">
-      <div id="g_id_onload" :data-client_id="clientId" :data-login_uri="loginUri" data-auto_prompt="false" />
+      <div id="g_id_onload" :data-client_id="clientId" :data-login_uri="loginUri" data-auto_prompt="true" />
       <div
         class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="signup_with"
         data-shape="circle" data-logo_alignment="left"
       />
     </div>
-    <p class="w-128 text-right mx-auto">
-      <el-button disabled color="#151AA3" class="text-white">
-        가입
-      </el-button>
-      <el-button color="#c0c0c0" @click="goBack">
-        취소
-      </el-button>
-    </p>
   </div>
 </template>
 
@@ -45,3 +36,9 @@ onMounted(() => {
   height: 100%;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  layout: bare
+    </route>
+

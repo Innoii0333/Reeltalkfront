@@ -21,11 +21,12 @@ routes.push(
     }),
   },
   {
-    path: '/login/sso/:userId',
+    path: '/login/sso/:key1/:key2',
     name: 'sso',
-    component: () => import('./pages/login/sso-[userId].vue'),
+    component: () => import('./pages/login/sso-[key1]-[key2].vue'),
     props: route => ({
-      userId: route.params.userId,
+      key1: route.params.key1,
+      key2: route.params.key2,
     }),
   },
 )

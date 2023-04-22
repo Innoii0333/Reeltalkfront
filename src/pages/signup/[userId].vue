@@ -9,12 +9,12 @@ const signUpFormCheck = ref(false)
 const user_id = route.params.userId
 
 const goBack = () => {
-  router.back()
+  window.close()
 }
 
 const userNameCheck = async () => {
-  if (user_name.value === '') {
-    nameResult.value = ref('한글 영문 숫자를 조합해 10자 이내로 입력해주세요')
+  if (user_name.value === '' || user_name.value.length > 10) {
+    nameResult.value = '한글 영문 숫자를 조합해 10자 이내로 입력해주세요'
     return
   }
   try {
@@ -40,7 +40,8 @@ const submitSignup = async () => {
   try {
     await axios.post('/api/signup', formData)
     // 성공적으로 서버로 전송된 경우의 처리
-    router.push('/main')
+    alert('회원 가입에 성공했습니다')
+    window.close()
   }
   catch (e) {
     // 서버 전송 실패의 처리
@@ -51,19 +52,27 @@ const submitSignup = async () => {
 </script>
 
 <template>
-  <div>
-    <p>Google 계정이 자동으로 등록됩니다.</p>
+  <div class="w-auto h-auto pt-20 text-center items-center justify-center">
+    <p class="my-5">
+      Google 계정이 자동으로 등록됩니다.
+    </p>
     <br>
     닉네임을 입력해주세요 :
     <input v-model="user_name" type="text" class="50px border border-black ml-2" @blur="userNameCheck"><br>
     <span>{{ nameResult }}</span>
     <p class="w-128 text-right mx-auto">
-      <el-button :disabled="!signUpFormCheck" color="#151AA3" class="text-white" @click="submitSignup">
+      <el-button :disabled="!signUpFormCheck" color="#151AA3" class="text-white bg-rtblue" @click="submitSignup">
         가입
       </el-button>
-      <el-button color="#c0c0c0" @click="goBack">
+      <el-button color="#c0c0c0" class="bg-rtgray" @click="goBack">
         취소
       </el-button>
     </p>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  layout: bare
+    </route>
+
