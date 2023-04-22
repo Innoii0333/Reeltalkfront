@@ -6,18 +6,7 @@ const session = useSessionStore()
 const key1 = route.params.key1
 const key2 = route.params.key2
 const isLoading = ref(false)
-// const requestSession = async () => {
-//   try {
-//     const res = await axios.get(`/api/session/${key1}/${key2}`)
-//     const userToken = res.data.token_id
-//     useSessionStore().setToken(userToken)
-//     router.push('/main')
-//   }
-//   catch (e) {
-//     console.error(e)
-//     router.push('/login')
-//   }
-// }
+
 const sendDataToParent = async (data) => {
   // 부모 창의 함수 호출
   window.opener.postMessage(data, '*')

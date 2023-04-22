@@ -64,8 +64,8 @@ const submitMovie = async () => {
   }
 }
 onMounted(() => {
-  if (!session.user_id)
-    goBack()
+  // if (!session.user_id)
+  //   goBack()
 })
 </script>
 

@@ -8,7 +8,7 @@ const post_title = ref('')
 const post_id = route.query.postId
 const title = ref('movietitle')
 const star_rate = ref(0)
-const user_id = ref('')
+const user_id = ref('userid1')
 const postusername = ref(null)
 const content = ref('')
 const movie_id = route.params.movieId
@@ -21,7 +21,6 @@ const submitForm = () => {
   formData.append('post_title', post_title.value)
   formData.append('content', content.value)
   formData.append('star_rate', star_rate.value)
-  formData.append('user_id', user_id.value)
   if (post_id) {
     formData.append('post_id', post_id)
     axios.put(`/api/movie/${movie_id}/post/${post_id}`, formData)
@@ -36,6 +35,7 @@ const submitForm = () => {
       })
   }
   else {
+    formData.append('user_id', user_id.value)
     axios.post(`/api/movie/${movie_id}/post`, formData)
       .then(() => {
         // 성공적으로 서버로 전송된 경우의 처리
@@ -59,12 +59,6 @@ const getPost = async () => {
     post_title.value = res.data.post_title
     star_rate.value = res.data.star_rate
     postusername.value = res.data.user_name
-    // postusername.value = res.data.username
-    // post_title.value = res.data.postTitle
-    // create_at.value = res.data.createAt
-    // star_rate.value = res.data.starrate
-    // view_count.value = res.data.viewCount
-    // comment_count.value = res.data.commentCount
   }
   catch (e) {
     console.error(e)
@@ -73,12 +67,12 @@ const getPost = async () => {
 }
 onMounted(async () => {
   try {
-    if (!session.user_id)
-      await session.checkLogin()
-    user_id.value = session.user_id
-    console.log(user_id.value)
-    const authResponse = await session.checkAuth()
-    console.log(authResponse)
+    // if (!session.user_id)
+    //   await session.checkLogin()
+    // user_id.value = session.user_id
+    // console.log(user_id.value)
+    // const authResponse = await session.checkAuth()
+    // console.log(authResponse)
     if (post_id)
       await getPost()
     if (postusername.value && postusername.value !== user_id.value)
