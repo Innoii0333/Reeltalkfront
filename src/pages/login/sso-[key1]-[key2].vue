@@ -5,6 +5,7 @@ const router = useRouter()
 const session = useSessionStore()
 const key1 = route.params.key1
 const key2 = route.params.key2
+const isLoading = ref(false)
 // const requestSession = async () => {
 //   try {
 //     const res = await axios.get(`/api/session/${key1}/${key2}`)
@@ -19,34 +20,29 @@ const key2 = route.params.key2
 // }
 const sendDataToParent = async (data) => {
   // 부모 창의 함수 호출
-  console.log(window.opener, data)
   window.opener.postMessage(data, '*')
 }
 const finishSession = () => {
-  console.log('done')
+  isLoading.value = false
   window.close()
 }
 onMounted(async () => {
+  isLoading.value = true
   const token = [key1, key2]
   session.initToken(token)
+  await sendDataToParent(token)
   window.addEventListener('message', async (event) => {
-    console.log('event', token)
-    try {
+    if (event.data.message) {
       switch (event.data.message) {
         case 'invalid-session':
           alert('session checking failed')
           finishSession()
           break
         case 'authenticated':
-          loadingInstance1.close()
           finishSession()
           break
         default: break
       }
-    }
-    catch (e) {
-      alert('session checking failed')
-      window.close()
     }
   })
 })
@@ -54,9 +50,11 @@ onMounted(async () => {
 
 <template>
   <div>
-    <p>
-      "checking the session..."
-    </p>
+    <el-loading :visible="isLoading">
+      <div>
+        "checking the session..."
+      </div>
+    </el-loading>
   </div>
 </template>
 

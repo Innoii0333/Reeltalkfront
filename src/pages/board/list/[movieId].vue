@@ -1,4 +1,5 @@
 <script setup>
+import axios from 'axios'
 const tableData = ref([])
 const route = useRoute()
 const router = useRouter()
@@ -21,6 +22,7 @@ const inqueryPost = async () => {
   try {
     const res = await axios.get(`/api/movie/${movie_id}/post`)
     tableData.value = await res.data
+    console.log(tableData.value)
   }
   catch (e) {
     alert('게시물 정보를 불러올 수 없습니다')
@@ -38,17 +40,17 @@ const getMovie = async () => {
     grade.value = data.grade
     star_avg_rate.value = data.star_avg_rate
     poster_url.value = `/app/web/images/${movie_id}.png` // ?
-    await inqueryPost()
   }
   catch (e) {
     console.error(e)
-    alert('영화 정보를 찾을 수 없습니다')
-    router.push('/main')
+    //   alert('영화 정보를 찾을 수 없습니다')
+    //   router.push('/main')
   }
+  await inqueryPost()
 }
 
 const movetoPost = (row) => {
-  const postPage = `/board/post/${movie_id}/${row.postno}`
+  const postPage = `/board/post/${movie_id}/${row.post_id}`
   router.push(postPage)
 }
 
@@ -148,7 +150,7 @@ onMounted(async () => {
             </li>
             <li> {{ plot }}  </li>
             <li> {{ director_nm }}  </li>
-            <li> <span v-for="{ categories, i } in category_id" :key="i" class="hover:underline-solid" @click="goToCategory(categories)">#{{ categories }} </span> </li>
+            <li> <span v-for="(categories, i) in category_id" :key="i" class="hover:underline-solid" @click="goToCategory(categories)">#{{ categories }} </span> </li>
             <li> {{ grade }} </li>
             <li> {{ release_date }}  </li>
             <li> {{ star_avg_rate }}  </li>
@@ -181,25 +183,25 @@ onMounted(async () => {
   <!-- 게시물 테이블 -->
   <div>
     <el-table :data="pagedPosts" style="width: 100%; border-collapse: collapse;">
-      <el-table-column prop="postno" label="번호" :min-width="40" :max-width="100" />
+      <el-table-column prop="post_id" label="번호" :min-width="40" :max-width="100" />
       <el-table-column
-        prop="postTitle" label="제목" :min-width="300" :show-overflow-tooltip="true"
+        prop="post_title" label="제목" :min-width="300" :show-overflow-tooltip="true"
       >
         <template #default="{ row }">
           <button @click="movetoPost(row)">
-            {{ row.postTitle }}
+            {{ row.post_title }}
           </button>
-          <span class="text-rtred ml-2">[{{ row.commentCount }}]</span>
+          <span class="text-rtred ml-2">[{{ row.comment_count }}]</span>
         </template>
       </el-table-column>
-      <el-table-column prop="username" label="작성자" :min-width="70" :max-width="150" :show-overflow-tooltip="true" />
-      <el-table-column prop="createAt" label="작성일시" :min-width="70" :max-width="100" :show-overflow-tooltip="true" />
-      <el-table-column prop="viewCount" label="조회수" :min-width="50" :max-width="80" :show-overflow-tooltip="true" />
+      <el-table-column prop="user_name" label="작성자" :min-width="70" :max-width="150" :show-overflow-tooltip="true" />
+      <el-table-column prop="create_at" label="작성일시" :min-width="70" :max-width="100" :show-overflow-tooltip="true" />
+      <el-table-column prop="view_count" label="조회수" :min-width="50" :max-width="80" :show-overflow-tooltip="true" />
     </el-table>
     <hr class="border-rtblue my-2 border-1">
     <!-- 게시물 생성 버튼 -->
     <div class="mr-auto text-right">
-      <el-button color="#151AA3" class="text-white" @click="goPostEdit">
+      <el-button color="#151AA3" class="text-white bg-rtblue" @click="goPostEdit">
         글쓰기
       </el-button>
     </div>

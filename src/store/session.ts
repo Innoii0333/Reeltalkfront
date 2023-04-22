@@ -10,16 +10,16 @@ export const useSessionStore = defineStore('session', () => {
   const isLoggedIn = ref(false)
 
   const initToken = (originToken: string[]) => {
-    localStorage.setItem(STORAGE_KEY1, originToken[0])
-    localStorage.setItem(STORAGE_KEY2, originToken[1])
+    localStorage.STORAGE_KEY1 = originToken[0]
+    localStorage.STORAGE_KEY2 = originToken[1]
     token.value = originToken
   }
   const setToken = () => {
-    const key1 = localStorage.getItem(STORAGE_KEY1)
-    const key2 = localStorage.getItem(STORAGE_KEY2)
-    if (key1 && key2)
-      token.value = [key1, key2]
+    const key1 = localStorage.STORAGE_KEY1
+    const key2 = localStorage.STORAGE_KEY2
+    token.value = [key1, key2]
   }
+
   const getSession = async () => {
     try {
       const res = await fetch(`/api/session/${token.value[0]}/${token.value[1]}`, {
@@ -43,20 +43,22 @@ export const useSessionStore = defineStore('session', () => {
     const data = await res.text()
     if (data === 'false')
       throw new Error('Session expired or invalid')
+    else return data
   }
   const checkLogin = async () => {
     if ((localStorage.getItem(STORAGE_KEY1) && localStorage.getItem(STORAGE_KEY2))
-  && (user_id.value.length * user_name.value.length === 0)) {
-      if (token.value.length === 0)
+  && (!user_id.value || !user_name.value)) {
+      if (!token.value[1])
         setToken()
       try {
-        getSession()
+        await getSession()
       }
       catch {
         localStorage.removeItem(STORAGE_KEY1)
         localStorage.removeItem(STORAGE_KEY2)
       }
     }
+    else { return isLoggedIn.value }
   }
 
   return { user_id, user_name, isLoggedIn, checkLogin, initToken, getSession, checkAuth }

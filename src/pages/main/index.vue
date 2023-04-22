@@ -1,11 +1,10 @@
 <script setup>
-
 const items = [
-  { image: '../../components/img/alt.png', description: 'description 1' },
-  { image: '../../components/img/alt.png', description: 'description 2' },
-  { image: '../../components/img/alt.png', description: 'description 3' },
-  { image: '../../components/img/alt.png', description: 'description 4' },
-  { image: '../../components/img/alt.png', description: 'description 5' },
+  { image: '/src/components/img/alt.png', description: 'description 1' },
+  { image: '/src/components/img/alt.png', description: 'description 2' },
+  { image: '/src/components/img/alt.png', description: 'description 3' },
+  { image: '/src/components/img/alt.png', description: 'description 4' },
+  { image: '/src/components/img/alt.png', description: 'description 5' },
 ]
 
 function handleImageClick(item) {
@@ -63,7 +62,7 @@ const postItems = [
 
   <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
     <button id="openTalkButton" @click="openNewWindow">
-      <img src="../../components/img/opentalk.png" alt="버튼 이미지" style="width: 50%; height: auto; margin-left: 20px;">
+      <img src="/src/components/img/opentalk.png" alt="버튼 이미지" style="width: 50%; height: auto; margin-left: 20px;">
     </button>
   </div>
 

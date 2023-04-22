@@ -1,5 +1,6 @@
 <script setup>
 import axios from 'axios'
+const session = useSessionStore()
 const route = useRoute()
 const router = useRouter()
 const title = ref('')
@@ -14,7 +15,7 @@ const view_count = ref(0)
 const comment_count = ref(0)
 const replyContents = ref(null)
 const reReplyContents = ref(null)
-const userId = ref('123')
+const userId = ref('')
 const getPost = async () => {
   try {
     const res = await axios.get(
@@ -79,6 +80,7 @@ const submitReply = async (pReplyId) => {
     alert('댓글이 등록되었습니다')
     replyContents.value = null
     reReplyContents.value = null
+    triggerRef(userId)
   }
   catch (e) {
     console.error(e)
@@ -86,6 +88,9 @@ const submitReply = async (pReplyId) => {
   }
 }
 onMounted(async () => {
+  if (!session.user_id)
+    await session.checkLogin()
+  userId.value = session.user_id
   await getPost()
 })
 </script>
@@ -106,7 +111,7 @@ onMounted(async () => {
             {{ post_title }}
           </th>
         </tr>
-        <tr class="text-10px align-top h-5">
+        <tr class="text-10px text-center px-auto h-5">
           <td class="w-30">
             {{ postusername }}
           </td>

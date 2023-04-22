@@ -3,47 +3,38 @@ const session = useSessionStore()
 const openLogin = () => {
   const loginWindow = window.open('/login', 'loginWindow',
    `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
-  if (loginWindow) {
-    window.addEventListener('message', (event) => {
-      console.log('Received message:', event.data.message)
-      if (event.origin !== window.location.origin)
-        return // 보안을 위한 체크
-      if (event.source !== loginWindow)
-        return
-      if (event.data.message === 'session_ready') { loginWindow.postMessage({ message: 'give-me-data' }) }
-      else if (event.data) {
-        console.log(event.data)
-        loginWindow.postMessage({ message: 'received' })
+  window.addEventListener('message', async (event) => {
+    if (event.origin !== window.location.origin)
+      return // 보안을 위한 체크
+    if (event.source !== loginWindow)
+      return
+    if (event.data) {
+      session.initToken([event.data[0], event.data[1]])
+      try {
+        await session.getSession()
+        console.log(session.user_id, session.user_name)
+        loginWindow?.postMessage({ message: 'authenticated' })
       }
-    })
-  }
+      catch {
+        loginWindow?.postMessage({ message: 'invalid-session' })
+      }
+    }
+  })
 }
-
 const openSignup = () => {
-  const signupWindow = window.open('/signup', 'signupWindow',
+  window.open('/signup', 'signupWindow',
   `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
-  if (signupWindow) {
-    window.addEventListener('message', (event) => {
-      console.log('Received message:', event.data.message)
-      if (event.origin !== window.location.origin)
-        return // 보안을 위한 체크
-      if (event.source !== signupWindow)
-        return
-      if (event.data.message === 'session_ready') { signupWindow.postMessage({ message: 'give-me-data' }) }
-      else if (event.data) {
-        console.log(event.data)
-        signupWindow.postMessage({ message: 'received' })
-      }
-    })
-  }
 }
+onMounted(() => {
+  session.checkLogin()
+})
 </script>
 
 <!-- css -->
 <template>
-  <div class="background">
+  <div class="background relative">
     <div style="color: white; margin-top: 5px; float: right">
-      <button class="menu" @click="openLogin">
+      <button v-if="!session.isLoggedIn" class="menu" @click="openLogin">
         Sign in
       </button>
       <span class="mx-1">|</span>
@@ -51,42 +42,43 @@ const openSignup = () => {
         Sign up
       </button>
     </div>
-    <a href="/main" class="logo"><img
+
+    <img
+      href="/main"
       alt="RT logo"
       style="width: 200px"
       src="./img/logo2.png"
     >
-    </a>
 
-    <div id="menu">
-      <RouterLink to="/movielist/movie" style="color: white">
+    <div id="menu" class="absolute w-full bottom-2 mb-2 px-5 text-center justify-center flex">
+      <RouterLink to="/movielist/movie" class="min-w-a mx-a color-white">
         Movie
       </RouterLink>
-      <RouterLink to="/movielist/action" style="color: white">
+      <RouterLink to="/movielist/action" class="min-w-a mx-a color-white">
         Action
       </RouterLink>
-      <RouterLink to="/movielist/drama" style="color: white">
+      <RouterLink to="/movielist/drama" class="min-w-a mx-a color-white">
         Drama
       </RouterLink>
-      <RouterLink to="/movielist/romance" style="color: white">
+      <RouterLink to="/movielist/romance" class="min-w-a mx-a color-white">
         Romance
       </RouterLink>
-      <RouterLink to="/movielist/comedy" style="color: white">
+      <RouterLink to="/movielist/comedy" class="min-w-a mx-a color-white">
         Comedy
       </RouterLink>
-      <RouterLink to="/movielist/ani" style="color: white">
+      <RouterLink to="/movielist/ani" class="min-w-a mx-a color-white">
         Ani
       </RouterLink>
-      <RouterLink to="/movielist/horror" style="color: white">
+      <RouterLink to="/movielist/horror" class="min-w-a mx-a color-white">
         Horror
       </RouterLink>
-      <RouterLink to="/movielist/sf" style="color: white">
+      <RouterLink to="/movielist/sf" class="min-w-a mx-a color-white">
         SF
       </RouterLink>
-      <RouterLink to="/movielist/fantasy" style="color: white">
+      <RouterLink to="/movielist/fantasy" class="min-w-a mx-a color-white">
         Fantasy
       </RouterLink>
-      <RouterLink to="/movielist/etc" style="color: white">
+      <RouterLink to="/movielist/etc" class="min-w-a mx-a color-white">
         Etc
       </RouterLink>
     </div>
@@ -95,28 +87,12 @@ const openSignup = () => {
 
 <style lang="scss">
 .background {
-  height: 15vh;
+  height: 25vh;  /// 헤더가 화면 사이즈에 비례해야하나...?
+  min-height: 130px;
   overflow: hidden;
   background-image: url("./img/header.jpg");
   background-size: cover;
   background-size: no-repeat;
   background-position: center;
-}
-.logo {
-  padding-left: 50px;
-}
-#menu {
-  position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  margin-top: 0px;
-  font-size: 20px;
-}
-
-#menu a {
-  color: white;
-  margin: 0 33px;
 }
 </style>

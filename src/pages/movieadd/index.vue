@@ -1,11 +1,13 @@
 <script setup>
 import axios from 'axios'
-
+const session = useSessionStore()
 const router = useRouter()
 const searchInfo = ref(null)
 const movieInfo = ref(null)
 const keyword = ref('')
 const isActive = ref(false)
+const ADMIN_ID = 'admin'
+
 const goBack = () => {
   router.back()
 }
@@ -61,6 +63,10 @@ const submitMovie = async () => {
     alert('영화 등록에 실패하였습니다 다시 시도해 보세요')
   }
 }
+onMounted(() => {
+  if (!session.user_id)
+    goBack()
+})
 </script>
 
 <template>
@@ -126,3 +132,8 @@ input.border-rtgray{
   outline-color:#c0c0c0;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  layout: onlyheader
+</route>

@@ -97,7 +97,7 @@ watch(() => reReply.value, (newValue) => {
           <span class="basis-15 px-2 text-left">
             {{ item?.user_id }}
           </span>
-          <span class="flex-1 mx-5 text-left">
+          <span class="flex-1 mx-5 max-w-2xl text-left">
             {{ item?.reply_contents }}
           </span>
           <span class="basis-15 mx-3 pr-2">

@@ -36,6 +36,11 @@ export default defineConfig({
         // path rewrite가 필요할 경우 사용
         // rewrite: (path) => path.replace(/^\/api/, ''),
       },
+      '/chat': {
+        target: 'ws://localhost:8080', // 'ec2-3-34-5-243.ap-northeast-2.compute.amazonaws.com:8078',
+        ws: true,
+        rewrite: path => path.replace(/^\/chat/, ''),
+      },
     },
   },
 
