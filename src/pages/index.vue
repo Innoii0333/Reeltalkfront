@@ -5,14 +5,16 @@ const timeout = ref(5)
 const canvasRef = ref(null)
 let n = 0
 let canvas: Nullable<Object>
+let mainInterval: NodeJS.Timeout
 
 const goMain = () => {
-  setInterval(() => { timeout.value -= 1 }, 1000)
+  mainInterval = setInterval(() => { timeout.value -= 1 }, 1000)
   setTimeout(() => {
     router.push('/main')
   }, 5000)
 }
 const goMainDirect = () => {
+  clearTimeout(mainInterval)
   router.push('/main')
 }
 onMounted(() => {
