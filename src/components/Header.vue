@@ -11,11 +11,9 @@ const openLogin = () => {
     if (event.source !== loginWindow)
       return
     if (event.data) {
-      console.log([event.data[0], event.data[1]])
       session.initToken([event.data[0], event.data[1]])
       try {
         await session.getSession()
-        console.log(session.user_id, session.user_name)
         loginWindow?.postMessage({ message: 'authenticated' })
       }
       catch {
