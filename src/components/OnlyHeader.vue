@@ -34,7 +34,7 @@ onMounted(() => {
 <template>
   <div class="background relative">
     <div style="color: white; margin-top: 5px; float: right">
-      <button v-if="!session.isLoggedIn" class="menu" @click="openLogin">
+      <button class="menu" @click="openLogin">
         Sign in
       </button>
       <span class="mx-1">|</span>
@@ -42,13 +42,12 @@ onMounted(() => {
         Sign up
       </button>
     </div>
-
-    <img
-      href="/main"
+    <a href="/main" class="logo"><img
       alt="RT logo"
-      style="width: 200px"
+      style="width: 150px"
       src="./img/logo2.png"
     >
+    </a>
 
     <div id="menu" class="absolute w-full bottom-2 mb-2 px-5 text-center justify-center flex">
       <RouterLink to="/movielist/movie" class="min-w-a mx-a color-white">
@@ -94,5 +93,10 @@ onMounted(() => {
   background-size: cover;
   background-size: no-repeat;
   background-position: center;
+}
+.logo {
+  position: relative;
+left: 10px;
+top:-10px;
 }
 </style>
