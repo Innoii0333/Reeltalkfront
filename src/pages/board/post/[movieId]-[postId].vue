@@ -21,6 +21,9 @@ const comment_count = ref(0)
 const replyContents = ref(null)
 const reReplyContents = ref(null)
 const userId = ref('userid1')
+const now = new Date()
+const formedDate = ref(null)
+
 const getPost = async () => {
   try {
     const res = await axios.get(
@@ -30,11 +33,6 @@ const getPost = async () => {
     title.value = res.data.movie_title
     content.value = res.data.content
     post_title.value = res.data.post_title
-    const date = new Date(res.data.create_at)
-    formedDate.value = now.toDateString() !== date.toDateString()
-      ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
-      : `${date.getHours()}:${date.getMinutes()}`
-    create_at.value = formedDate.value
     const date = new Date(res.data.create_at)
     formedDate.value = now.toDateString() !== date.toDateString()
       ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
