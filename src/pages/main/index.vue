@@ -1,15 +1,6 @@
 <script setup>
-const items = [
-  { image: '/src/components/img/alt.png', description: 'description 1' },
-  { image: '/src/components/img/alt.png', description: 'description 2' },
-  { image: '/src/components/img/alt.png', description: 'description 3' },
-  { image: '/src/components/img/alt.png', description: 'description 4' },
-  { image: '/src/components/img/alt.png', description: 'description 5' },
-]
-
-function handleImageClick(item) {
-  console.log(`Clicked on ${item.text}`)
-}
+import axios from 'axios'
+import { watch } from 'vue'
 
 function openNewWindow() {
   const windowFeatures = {
@@ -24,38 +15,113 @@ function openNewWindow() {
 }
 
 // 통계 입력 부분
-const labels1 = ['movie1', 'movie2', 'movie3', 'movie4', 'movie5']
-const data1 = [21, 35, 18, 25, 32]
 
-const labels2 = ['movie6', 'movie7', 'movie8', 'movie9', 'movie10']
-const data2 = [14, 29, 36, 21, 27]
+function handleImageClick(item) {
+  console.log(`Clicked on ${item.text}`)
+}
 
-const labels3 = ['genre1', 'genre2', 'genre3', 'genre4', 'genre5']
-const data3 = [40, 32, 25, 20, 15]
+const boxOfficeList = ref([])
+const hotMovieList = ref([])
+const hotPostList = ref([])
+const labels1 = ref([])
+const data1 = ref([])
+const labels2 = ref([])
+const data2 = ref([])
+const labels3 = ref([])
+const data3 = ref([])
 
-// 게시물
-const movieItems = [
-  { id: 1, title: 'Movie Item 1', link: '/movies/1' },
-  { id: 2, title: 'Movie Item 2', link: '/movies/2' },
-  { id: 3, title: 'Movie Item 3', link: '/movies/3' },
-  { id: 4, title: 'Movie Item 4', link: '/movies/4' },
-  { id: 5, title: 'Movie Item 5', link: '/movies/5' },
-]
+const getMainPageData = async () => {
+  try {
+    const result = await axios.get('/api/main')
 
-const postItems = [
-  { id: 1, title: 'Post Item 1', link: '/posts/1' },
-  { id: 2, title: 'Post Item 2', link: '/posts/2' },
-  { id: 3, title: 'Post Item 3', link: '/posts/3' },
-  { id: 4, title: 'Post Item 4', link: '/posts/4' },
-  { id: 5, title: 'Post Item 5', link: '/posts/5' },
-]
+    // box office list
+    boxOfficeList.value = result.data.boxOffice
+    console.log('Box Office List:', boxOfficeList.value)
+
+    // Log image URLs
+    boxOfficeList.value.forEach((boxOffice) => {
+      console.log('Image URL:', boxOffice.imageLink)
+    })
+    // hot movie list
+    const hotMovieResult = await axios.get('/api/hotMovie/7')
+    const hotMovieData = hotMovieResult.data
+    const sortedHotMovies = hotMovieData.sort((a, b) => b.postCount - a.postCount).slice(0, 5)
+    hotMovieList.value = sortedHotMovies
+
+    // hot post list
+    const hotPostResult = await axios.get('/api/hotPost/7')
+    const hotPostData = hotPostResult.data
+    const sortedHotPosts = hotPostData.sort((a, b) => b.replyCount - a.replyCount).slice(0, 5)
+    hotPostList.value = sortedHotPosts
+
+    // 통계 데이터 가져오기
+    const postResult = await axios.get('/api/statisticsPost/7')
+    const replyResult = await axios.get('/api/statisticsReply/30')
+    const genreResult = await axios.get('/api/statisticsGenre/30')
+
+    watch(data2, (newVal) => {
+      console.log('data2 length:', newVal.length)
+    })
+
+    watch(data3, (newVal) => {
+      console.log('data3 length:', newVal.length)
+    })
+
+    if (postResult.data.length === 0) {
+      console.log('현재 등록된 게시물이 없습니다')
+    }
+    else {
+      console.log('Post Result:', postResult.data)
+      labels1.value = postResult.data.map(item => item.label)
+      data1.value = postResult.data.map(item => item.value)
+    }
+
+    if (replyResult.data.length === 0) {
+      console.log('현재 등록된 댓글이 없습니다')
+    }
+    else {
+      console.log('Reply Result:', replyResult.data)
+      labels2.value = replyResult.data.map(item => item.label)
+      data2.value = replyResult.data.map(item => item.value)
+    }
+
+    if (genreResult.data.length === 0) {
+      console.log('현재 등록된 장르가 없습니다')
+    }
+    else {
+      console.log('Genre Result:', genreResult.data)
+      labels3.value = genreResult.data.map(item => item.label)
+      data3.value = genreResult.data.map(item => item.value)
+    }
+  }
+  catch (e) {
+    console.error(e)
+  }
+}
+
+onMounted(getMainPageData)
 </script>
 
 <template>
   <div style="display: flex; flex-direction: column;">
     <ElCarousel :interval="4000" arrow="always">
-      <ElCarouselItem v-for="(item, index) in items" :key="index">
-        <img :src="item.image" alt="item.description" @error="item.image = '/src/components/img/alt.png'">
+      <ElCarouselItem v-for="(boxOffices, boxOfficeOrder) in boxOfficeList" :key="boxOfficeOrder" style="display: flex; flex-direction: column; min-height: 400px;">
+        <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: auto;">
+          <img v-if="boxOffices.imageLink !== '/src/components/img/alt.png'" :src="boxOffices.imageLink" alt="item.description" style="width: auto; height: auto; max-width: 100%; max-height: 100%;" @error="boxOffices.imageLink = '/src/components/img/alt.png'">
+          <img v-else src="/src/components/img/alt.png" alt="item.description" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
+        </div>
+        <div>
+          제 목 : {{ boxOffices.title }}
+        </div>
+        <div>
+          감 독 : {{ boxOffices.director_Nm }}
+        </div>
+        <div>
+          개봉일 : {{ boxOffices.release_Date }}
+        </div>
+        <div v-if="boxOffices.category_Id_list">
+          <span v-for="(category, i) in boxOffices.category_Id_list" :key="i"># {{ category }}</span>
+        </div>
       </ElCarouselItem>
     </ElCarousel>
   </div>
@@ -66,23 +132,27 @@ const postItems = [
     </button>
   </div>
 
-  <div style="display: flex; justify-content: space-between;">
+  <div style="display: flex; justify-content: space-between; margin-top:50px;">
     <div
-      style="width: 30%; height: 330px; background-color: white; margin-left:18%; margin-right: 2%; border: solid;
+      style="width: 30%; height: 330px; background-color: white; margin-left:12%; margin-right: 2%; border: solid;
       border-top-width: 1px; border-left-width: 1px; border-bottom-right-width:3px; display: flex; flex-direction: column; justify-content: center;"
     >
       <div style="display: flex; align-items: center;">
-        <img alt="Hot Movie" src="../../components/img/req5.png" style="width: 7%; height: auto; margin: 10px;">
+        <img alt="Hot Movie" src="/src/components/img/req5.png" style="width: 7%; height: auto; margin: 10px;">
         <div style="margin-left: 10px;">
           HOT Movie
         </div>
       </div>
       <div>
+        <!-- 핫 무비 템플릿 -->
         <ul style="text-align: left; padding-left: 30px;">
-          <li v-for="item in movieItems" :key="item.id" style="margin-top: 22px;">
-            {{ item.title }}
+          <li v-for="item in hotMovieList.value" :key="item.movie_id" style="margin-top: 22px;">
+            {{ item.movie_title }}
           </li>
         </ul>
+        <div v-if="!hotMovieList.value || hotMovieList.value.length === 0" style="text-align: center;">
+          현재 등록된 핫 무비가 없습니다.
+        </div>
       </div>
     </div>
     <div
@@ -90,33 +160,52 @@ const postItems = [
       border-top-width: 1px; border-left-width: 1px; border-bottom-right-width:3px; display: flex; flex-direction: column; justify-content: center;"
     >
       <div style="display: flex; align-items: center;">
-        <img alt="Hot Post" src="../../components/img/rep3.png" style="width: 6%; height: auto; margin: 10px;">
+        <img alt="Hot Post" src="/src/components/img/rep3.png" style="width: 6%; height: auto; margin: 10px;">
         <div style="margin-left: 10px;">
           HOT Post
         </div>
       </div>
       <div>
+        <!-- 핫 포스트 템플릿 -->
         <ul style="text-align: left; padding-left: 30px;">
-          <li v-for="item in postItems" :key="item.id" style="margin-top: 22px;">
-            {{ item.title }}
+          <li v-for="item in hotPostList.value" :key="item.post_id" style="margin-top: 22px;">
+            {{ item.post_title }}
           </li>
         </ul>
+        <div v-if="!hotPostList.value || hotPostList.value.length === 0" style="text-align: center;">
+          현재 등록된 핫 포스트가 없습니다.
+        </div>
       </div>
     </div>
   </div>
   <div class="charts-container">
     <div class="chart">
-      <h1>Weelky Movie</h1>
-      <BarChart :labels="labels1" :data="data1" />
+      <h1>Weekly Movie</h1>
+      <div v-if="!data1.value || data1.value.length === 0">
+        현재 등록된 게시물이 없습니다.
+      </div>
+      <div v-else>
+        <BarChart :labels="labels1" :data="data1" />
+      </div>
     </div>
     <div class="chart">
       <h1>Monthly Movie</h1>
-      <BarChart2 :labels="labels2" :data="data2" />
+      <div v-if="!data2.value || data2.value.length === 0">
+        현재 등록된 게시물이 없습니다.
+      </div>
+      <div v-else>
+        <BarChart2 :labels="labels2" :data="data2" />
+      </div>
     </div>
   </div>
   <div class="piechart">
     <h1>Popular Genre</h1>
-    <PieChart :labels="labels3" :data="data3" />
+    <div v-if="!data3.value || data3.value.length === 0">
+      현재 등록된 게시물이 없습니다.
+    </div>
+    <div v-else>
+      <PieChart :labels="labels3" :data="data3" />
+    </div>
   </div>
   <RouterView />
 </template>
@@ -141,7 +230,7 @@ const postItems = [
 .charts-container {
   display: flex;
   justify-content: space-between;
-  padding: 80px 270px;
+  padding: 80px 80px;
   font-size: 30px;
 }
 .piechart{
@@ -157,10 +246,10 @@ const postItems = [
 }
 
 .chart:first-child {
-  margin-left: 50px;
+  margin-left: 20px;
 }
 
 .chart:last-child {
-  margin-right: 50px;
+  margin-right: 30px;
 }
 </style>
