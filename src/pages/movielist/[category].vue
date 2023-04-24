@@ -67,9 +67,9 @@ onMounted(async () => {
   observer = new IntersectionObserver(handleIntersect, options)
   observer.observe(intersectionTarget.value)
 })
-// onUnmounted(() => {
-//   observer.unobserve(intersectionTarget.value)
-// })
+onBeforeUnmount(() => {
+  observer.unobserve(intersectionTarget.value)
+})
 </script>
 
 <template>

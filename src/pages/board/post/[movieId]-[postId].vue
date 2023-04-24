@@ -23,6 +23,7 @@ const reReplyContents = ref(null)
 const userId = ref('userid1')
 const now = new Date()
 const formedDate = ref(null)
+const postuserId = ref('')
 
 const getPost = async () => {
   try {
