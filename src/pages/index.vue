@@ -1,23 +1,19 @@
 <script setup lang="ts">
-import { useCategoryId } from '~/store/category'
-
-const category = useCategoryId()
-const genre = $ref(category.savedGenre)
-
 const router = useRouter()
-const go = () => {
-  if (genre)
-    router.push(`/movielist/${encodeURIComponent(genre)}`)
-}
 
-const { t } = useI18n()
+// 4초 뒤에 '/main' 페이지로 이동하는 함수
+setTimeout(() => {
+  router.push('/main')
+}, 4000)
 </script>
 
 <template>
-  <div />
+  <div style="width:100%; height:auto;">
+    <img src="/src/components/img/welcome.gif" alt="Welcome GIF">
+  </div>
 </template>
 
 <route lang="yaml">
 meta:
-  layout: home
+  layout: bare
 </route>

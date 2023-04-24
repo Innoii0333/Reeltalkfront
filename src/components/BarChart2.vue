@@ -37,10 +37,11 @@ onMounted(() => {
         y: [{
           ticks: {
             beginAtZero: true,
+            fontSize: 20,
           },
         }],
       },
-      barThickness: 30,
+      barThickness: 20,
     },
   })
 })

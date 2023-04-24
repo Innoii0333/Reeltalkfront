@@ -74,8 +74,8 @@
   left: 0;
   right: 0;
   text-align: center;
-  margin-top: 280px;
-  font-size: 20px;
+  margin-top: 300px;
+  font-size: 18px;
 }
 
 #menu a {
