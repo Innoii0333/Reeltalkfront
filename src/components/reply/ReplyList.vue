@@ -44,6 +44,9 @@ const getReplyList = async () => {
   }
 }
 const modifyReply = async (idx) => {
+  const formData = new FormData()
+  formData.append('user_id', props.userId)
+  formData.append('reply_content', changedReply.value)
   try {
     const confirmBox = await ElMessageBox.confirm(
       '댓글을 수정하시겠습니까?',
@@ -92,10 +95,7 @@ const reReplySubmit = (pReplyId) => {
   emits('reReplySubmit', pReplyId)
 }
 const handleInput = () => {
-  if (reReply.value !== '')
-    emits('update:modelValue', reReply.value)
-  else
-    emits('update:modelValue', changedReply.value)
+  emits('update:modelValue', reReply.value)
 }
 onMounted(async () => {
   await getReplyList()
@@ -140,11 +140,7 @@ watch(() => reReply.value, (newValue) => {
           </span>
         </div>
         <div v-else-if="showModifyReply === index" class="inline-block flex justify-center items-center">
-          <textarea
-            v-model="changedReply"
-            class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-xl max-w-2xl text-3 leading-normal"
-          />
-          <textarea v-model="changedReply" class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-xl max-w-2xl text-3 leading-normal" @keyup="handleInput()" />
+          <textarea v-model="changedReply" class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-xl max-w-2xl text-3 leading-normal" />
           <el-button color="#151AA3" class="text-white bg-rtblue ml-2 mr-0" @click="modifyReply(index)">
             수정
           </el-button>
