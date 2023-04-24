@@ -23,6 +23,7 @@ const reReplyContents = ref(null)
 const userId = ref('userid1')
 const now = new Date()
 const formedDate = ref(null)
+const postuserId = ref('')
 
 const getPost = async () => {
   try {
@@ -97,7 +98,7 @@ const submitReply = async (pReplyId) => {
   }
   try {
     const res = await axios.post(`/api/movie/${movie_id}/post/${post_id}/reply`, formData)
-    alert('댓글이 등록되었습니다')
+    ElMessage({ type: 'confirm', message: '댓글이 등록되었습니다' })
     router.go(0)
   }
   catch {
