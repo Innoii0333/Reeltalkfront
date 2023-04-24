@@ -17,11 +17,19 @@ const release_date = ref('')
 const grade = ref('')
 const star_avg_rate = ref('')
 const poster_url = ref('/src/components/img/alt.png')
+const now = new Date()
+const formedDate = ref(null)
 
 const inqueryPost = async () => {
   try {
     const res = await axios.get(`/api/movie/${movie_id}/post`)
-    tableData.value = await res.data
+    tableData.value = res.data.map((item) => {
+      const date = new Date(item.create_at)
+      formedDate.value = now.toDateString() !== date.toDateString()
+        ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
+        : `${date.getHours()}:${date.getMinutes()}`
+      return { ...item, create_at: formedDate }
+    })
     console.log(tableData.value)
   }
   catch (e) {

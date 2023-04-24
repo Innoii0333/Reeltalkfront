@@ -16,6 +16,9 @@ const comment_count = ref(0)
 const replyContents = ref(null)
 const reReplyContents = ref(null)
 const userId = ref('userid1')
+const now = new Date()
+const formedDate = ref(null)
+
 const getPost = async () => {
   try {
     const res = await axios.get(
@@ -25,7 +28,11 @@ const getPost = async () => {
     title.value = res.data.movie_title
     content.value = res.data.content
     post_title.value = res.data.post_title
-    create_at.value = res.data.create_at
+    const date = new Date(res.data.create_at)
+    formedDate.value = now.toDateString() !== date.toDateString()
+      ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
+      : `${date.getHours()}:${date.getMinutes()}`
+    create_at.value = formedDate.value
     star_rate.value = res.data.star_rate
     view_count.value = res.data.view_count
     comment_count.value = res.data.comment_count
@@ -78,9 +85,7 @@ const submitReply = async (pReplyId) => {
   try {
     const res = await axios.post(`/api/movie/${movie_id}/post/${post_id}/reply`, formData)
     alert('댓글이 등록되었습니다')
-    replyContents.value = null
-    reReplyContents.value = null
-    triggerRef(userId)
+    router.go(0)
   }
   catch (e) {
     console.error(e)

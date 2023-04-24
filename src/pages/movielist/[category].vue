@@ -9,6 +9,8 @@ const filteredMovies = ref([])
 const keyword = ref('')
 const isLoading = ref(0)
 const pages = ref(1)
+const intersectionTarget = ref(null)
+let observer = null
 
 const options = {
   root: null,
@@ -63,9 +65,9 @@ onMounted(async () => {
   observer = new IntersectionObserver(handleIntersect, options)
   observer.observe(intersectionTarget.value)
 })
-onUnmounted(() => {
-  observer.unobserve(intersectionTarget.value)
-})
+// onUnmounted(() => {
+//   observer.unobserve(intersectionTarget.value)
+// })
 </script>
 
 <template>
