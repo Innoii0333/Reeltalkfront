@@ -1,5 +1,8 @@
 <script setup>
 import axios from 'axios'
+const props = defineProps({
+  movieId: { type: String, required: true },
+})
 const tableData = ref([])
 const route = useRoute()
 const router = useRouter()
@@ -33,7 +36,7 @@ const inqueryPost = async () => {
     console.log(tableData.value)
   }
   catch (e) {
-    alert('게시물 정보를 불러올 수 없습니다')
+    ElMessage({ type: 'error', message: '게시물 정보를 불러올 수 없습니다' })
     console.error(e)
   }
 }
@@ -51,7 +54,7 @@ const getMovie = async () => {
   }
   catch (e) {
     console.error(e)
-    //   alert('영화 정보를 찾을 수 없습니다')
+    ElMessage({ type: 'error', message: '영화 정보를 찾을 수 없습니다' })
     //   router.push('/main')
   }
   await inqueryPost()

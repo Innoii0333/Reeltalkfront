@@ -1,6 +1,8 @@
 <script setup>
 import axios from 'axios'
-
+const props = defineProps({
+  category: { type: String, required: true },
+})
 const route = useRoute()
 const router = useRouter()
 const category = route.params.category
@@ -34,7 +36,7 @@ const getMovies = async (n) => {
   }
   catch (e) {
     console.error(e)
-    alert('영화 목록 조회에 실패했습니다')
+    ElMessage({ type: 'error', message: '영화 목록 조회에 실패하였습니다' })
     isLoading.value = -1
   }
 }
@@ -65,9 +67,9 @@ onMounted(async () => {
   observer = new IntersectionObserver(handleIntersect, options)
   observer.observe(intersectionTarget.value)
 })
-// onUnmounted(() => {
-//   observer.unobserve(intersectionTarget.value)
-// })
+onBeforeUnmount(() => {
+  observer.unobserve(intersectionTarget.value)
+})
 </script>
 
 <template>

@@ -1,17 +1,23 @@
 <script setup>
 import axios from 'axios'
+import { onBeforeRouteLeave } from 'vue-router'
 import TextEditor from '~/components/TextEditor.vue'
+const props = defineProps({
+  movieId: { type: String, required: true },
+  postId: { type: String },
+})
 const session = useSessionStore()
 const router = useRouter()
 const route = useRoute()
 const post_title = ref('')
-const post_id = route.query.postId
+const post_id = route.query.postId ? route.query.postId : null
 const title = ref('movietitle')
 const star_rate = ref(0)
 const user_id = ref('userid1')
 const postusername = ref(null)
 const content = ref('')
 const movie_id = route.params.movieId
+
 const goBack = () => {
   router.push(`/board/list/${movie_id}`)
 }
@@ -25,34 +31,42 @@ const submitForm = () => {
     formData.append('post_id', post_id)
     axios.put(`/api/movie/${movie_id}/post/${post_id}`, formData)
       .then(() => {
-        // 성공적으로 서버로 전송된 경우의 처리
-        router.push(`/board/list/${movie_id}`)
+        ElMessage({ type: 'confirm', message: '게시물이 수정되었습니다' })
+        router.push(`/board/list/${movie_id}`).catch (() => {})
       })
-      .catch((e) => {
-        // 서버 전송 실패의 처리
-        console.error('서버 요청 실패:', e)
-        alert('게시물 수정에 실패하였습니다 다시 시도해 보세요')
+      .catch(() => {
+        ElMessage({ type: 'error', message: '게시물 수정에 실패하였습니다 다시 시도해 보세요' })
       })
   }
   else {
     formData.append('user_id', user_id.value)
     axios.post(`/api/movie/${movie_id}/post`, formData)
       .then(() => {
-        // 성공적으로 서버로 전송된 경우의 처리
-        router.push(`/board/list/${movie_id}`)
+        ElMessage({ type: 'confirm', message: '게시물이 등록되었습니다' })
+        router.push(`/board/list/${movie_id}`).catch (() => {})
       })
-      .catch((e) => {
-        // 서버 전송 실패의 처리
-        console.error('서버 요청 실패:', e)
-        alert('게시물 등록에 실패하였습니다 다시 시도해 보세요')
+      .catch(() => {
+        ElMessage({ type: 'error', message: '게시물 등록에 실패하였습니다 다시 시도해 보세요' })
       })
   }
+}
+const submitFormOpen = () => {
+  ElMessageBox.confirm(
+    '게시물을 등록하시겠습니까?',
+    'Confirm',
+    {
+      confirmButtonText: '네',
+      cancelButtonText: '아니오',
+      type: 'warning',
+    })
+    .then(() => {
+      submitForm()
+    })
 }
 const getPost = async () => {
   try {
     const res = await axios.get(
       `/api/movie/${movie_id}/post/${post_id}`,
-      // `http://localhost:3000/post?postid=${post_id}`,
     )
     title.value = res.data.movie_title
     content.value = res.data.content
@@ -60,9 +74,8 @@ const getPost = async () => {
     star_rate.value = res.data.star_rate
     postusername.value = res.data.user_name
   }
-  catch (e) {
-    console.error(e)
-    alert('게시물 정보가 없습니다')
+  catch {
+    ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
   }
 }
 onMounted(async () => {
@@ -76,14 +89,31 @@ onMounted(async () => {
     if (post_id)
       await getPost()
     if (postusername.value && postusername.value !== user_id.value)
-      router.push(`/board/list/${movie_id}`)
+      router.push(`/board/list/${movie_id}`).catch (() => {})
   }
-  catch (e) {
-    alert('권한이 없습니다')
-    router.push(`/board/list/${movie_id}`)
+  catch {
+    ElMessage({ type: 'error', message: '권한이 없습니다' })
+    router.push(`/board/list/${movie_id}`).catch (() => {})
   }
 },
 )
+onBeforeRouteLeave((to, from, next) => {
+  if (content.value !== '' || post_title.value !== '') {
+    ElMessageBox.confirm(
+      '지금 이동하시면 작성/수정중인 정보를 잃게 됩니다. 이동하시겠습니까?',
+      'Warning',
+      {
+        confirmButtonText: '네',
+        cancelButtonText: '아니오',
+        type: 'warning',
+      })
+      .then(() => {
+        ElMessage({ type: 'info', message: '페이지를 이동합니다' })
+        next()
+      })
+      .catch(() => next(false))
+  }
+})
 </script>
 
 <template>
@@ -100,7 +130,7 @@ onMounted(async () => {
     v-model="post_title" type="text" placeholder="제목을 입력하세요"
     class="w-full px-2 py-2 my-5 text-16px font-bold outline"
   ><br>
-  <TextEditor v-model="content" />
+  <TextEditor v-model="content" @update:model-value="() => {}" />
   <p class="w-full text-left mx-auto text-rtred">
     별점 :
     <el-rate v-model="star_rate" class="mx-1" show-score :colors="['#B5141C', '#B5141C', '#B5141C']" allow-half />
@@ -109,7 +139,7 @@ onMounted(async () => {
     <el-button color="#c0c0c0" class="bg-rtgray" @click="goBack">
       뒤로가기
     </el-button>
-    <el-button color="#151AA3" class="bg-rtblue text-white" @click="submitForm">
+    <el-button color="#151AA3" class="bg-rtblue text-white" @click="submitFormOpen">
       등록하기
     </el-button>
   </div>
@@ -119,5 +149,5 @@ onMounted(async () => {
 
 <route lang="yaml">
 meta:
-  layout: bare
+  layout: onlyheader
   </route>

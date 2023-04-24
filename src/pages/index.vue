@@ -32,7 +32,7 @@ const rotate = () => {
 </script>
 
 <template>
-  <div class="flex flex-col h-100vh ml-50 justify-center items-center">
+  <div class="flex flex-col h-100vh justify-center items-center">
     <canvas ref="canvasRef" width="80" height="200" @click="rotate" />
     <p class="">
       {{ timeout }}초 뒤 자동으로 이동합니다...

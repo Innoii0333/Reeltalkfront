@@ -1,5 +1,9 @@
 <script setup>
 import axios from 'axios'
+const props = defineProps({
+  key1: { type: String, required: true },
+  key2: { type: String, required: true },
+})
 const route = useRoute()
 const router = useRouter()
 const session = useSessionStore()
@@ -24,10 +28,11 @@ onMounted(async () => {
     if (event.data.message) {
       switch (event.data.message) {
         case 'invalid-session':
-          alert('session checking failed')
+          ElMessage({ type: 'error', message: 'session checking failed' })
           finishSession()
           break
         case 'authenticated':
+          ElMessage({ type: 'confirm', message: '로그인 되었습니다' })
           finishSession()
           break
         default: break

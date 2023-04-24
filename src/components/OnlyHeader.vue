@@ -5,7 +5,7 @@ const openLogin = () => {
    `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
   window.addEventListener('message', async (event) => {
     if (event.origin !== window.location.origin)
-      return // 보안을 위한 체크
+      return
     if (event.source !== loginWindow)
       return
     if (event.data) {
