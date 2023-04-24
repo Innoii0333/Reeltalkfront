@@ -49,7 +49,7 @@ const modifyReply = async (idx) => {
     const res = await axios.put(
       `/api/movie/${props.movieId}/post/${props.postId}/reply/${replyList.value[idx].reply_id}`,
       formData)
-    changedReply.value = ''
+    toggleModifyReply(idx)
   }
   catch (e) {
     console.error(e)
