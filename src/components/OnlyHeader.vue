@@ -12,7 +12,6 @@ const openLogin = () => {
       session.initToken([event.data[0], event.data[1]])
       try {
         await session.getSession()
-        console.log(session.user_id, session.user_name)
         loginWindow?.postMessage({ message: 'authenticated' })
       }
       catch {
@@ -43,12 +42,13 @@ onMounted(() => {
       </button>
     </div>
 
-    <img
-      href="/main"
-      alt="RT logo"
-      style="width: 200px"
-      src="./img/logo2.png"
-    >
+    <a href="/main" class="block w-200px">
+      <img
+        alt="RT logo"
+        style="width: 200px"
+        src="./img/logo2.png"
+      >
+    </a>
 
     <div id="menu" class="absolute w-full bottom-2 mb-2 px-5 text-center justify-center flex">
       <RouterLink to="/movielist/movie" class="min-w-a mx-a color-white">
