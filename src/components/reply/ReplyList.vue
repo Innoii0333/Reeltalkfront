@@ -59,16 +59,13 @@ const modifyReply = async (idx) => {
       const res = await axios.put(
       `/api/movie/${props.movieId}/post/${props.postId}/reply/${replyList.value[idx].reply_id}`,
       formData)
-      toggleModifyReply(idx)
-    }
-    catch {
-      ElMessage({ type: 'error', message: '댓글 수정에 실패했습니다' })
-    }
-    await getReplyList()
+    toggleModifyReply(idx)
   }
-  catch {
-    ElMessage({ type: 'info', message: '댓글을 수정하지 않았습니다' })
+  catch (e) {
+    console.error(e)
+    alert('댓글 수정에 실패했습니다')
   }
+  await getReplyList()
 }
 const deleteReply = async (index) => {
   try {

@@ -1,7 +1,4 @@
 <script setup>
-const props = defineProps({
-  category: { type: String, required: true },
-})
 const route = useRoute()
 const router = useRouter()
 const path = route.params.category
