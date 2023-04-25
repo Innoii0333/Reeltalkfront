@@ -161,7 +161,7 @@ onMounted(async () => {
             </li>
             <li> {{ plot }}  </li>
             <li> {{ director_nm }}  </li>
-            <li> <span v-for="(categories, i) in category_id" :key="i" class="hover:underline-solid" @click="goToCategory(categories)">#{{ categories }} </span> </li>
+            <li> <span v-for="(categories, i) in category_id" :key="i" class="hover:underline-solid" @click="goToCategory(categories)">{{ categories }}&nbsp;</span> </li>
             <li> {{ grade }} </li>
             <li> {{ release_date }}  </li>
             <li> {{ star_avg_rate }}  </li>

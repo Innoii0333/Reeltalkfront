@@ -11,6 +11,7 @@ const keyword = ref('')
 const isLoading = ref(0)
 const pages = ref(1)
 const intersectionTarget = ref(null)
+const filteredTable = ref([])
 let observer = null
 
 const options = {
@@ -20,9 +21,10 @@ const options = {
 }
 
 const titleSearch = () => {
-  if (keyword.value !== '') {
+  if (keyword.value === '') { filteredTable.value = tableData.value }
+  else {
     const lowerCaseKeyword = keyword.value.toLowerCase()
-    tableData.value = tableData.value.filter(movie =>
+    filteredTable.value = tableData.value.filter(movie =>
       movie.title.toLowerCase().includes(lowerCaseKeyword),
     )
   }
@@ -39,7 +41,12 @@ const getMovies = async (n) => {
     })
     const res1 = res.data.map((item) => {
       const categories = item.category_id.split(' ')
-      return { ...item, category_id: categories }
+      if (item.release_date) {
+        const date = new Date(item.release_date)
+        const newDate = `${date.getFullYear().toString()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+      }
+      else { const newDate = '' }
+      return { ...item, release_date: newDate, category_id: categories }
     })
     tableData.value = tableData.value.concat(res1)
     console.log(tableData.value)
@@ -109,11 +116,11 @@ onBeforeUnmount(() => {
               :src="movieCard.poster_url" class="object-cover"
               @error="movieCard.poster_url = '/src/components/img/alt.png'"
             />
-            <div class="text-left text-xs">
+            <div class="text-left text-xs h-20">
               <p> {{ movieCard.title }} </p>
               <p> {{ movieCard.release_date }} </p>
               <p> {{ movieCard.star_avg_rate }}</p>
-              <p> <span v-for="(exCategory, idx) in movieCard.category_id" :key="idx">#{{ exCategory }}</span></p>
+              <p> <span v-for="(exCategory, idx) in movieCard.category_id" :key="idx">{{ exCategory }}&nbsp;</span></p>
             </div>
           </button>
         </el-card>
