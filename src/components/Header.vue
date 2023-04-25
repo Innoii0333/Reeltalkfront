@@ -108,18 +108,4 @@ onMounted(async () => {
 .logo {
   padding-left: 50px;
 }
-#menu {
-  position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  margin-top: 280px;
-  font-size: 20px;
-}
-
-#menu a {
-  color: white;
-  margin: 0 33px;
-}
 </style>

@@ -264,3 +264,8 @@ onMounted(async () => await getMainPageData())
   margin-right: 30px;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  layout: home
+</route>

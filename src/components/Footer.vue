@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="bg-black text-white mx-auto my-5 px-5 py-2 text-left text-13px">
+  <div class="bg-black text-white mx-auto mt-5 px-5 py-2 text-left text-13px">
     <p class="text-16px my-3">
       Reeltalks 개인정보 취급 방침
     </p>
