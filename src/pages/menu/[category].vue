@@ -11,3 +11,5 @@ onMounted(() => router.push(`/movielist/${path}`))
 <template>
   <div />
 </template>
+
+<style></style>
