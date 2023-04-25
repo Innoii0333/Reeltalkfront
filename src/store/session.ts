@@ -5,9 +5,9 @@ const STORAGE_KEY2 = 'Reeltalks_session_keyset2'
 
 export const useSessionStore = defineStore('session', () => {
   const token = ref([''])
-  const user_id = ref('')
-  const user_name = ref('')
-  const isLoggedIn = ref(false)
+  const user_id = ref('userid1')// ''
+  const user_name = ref('123')// ''
+  const isLoggedIn = ref(true)// false
 
   const initToken = (originToken: string[]) => {
     localStorage.STORAGE_KEY1 = originToken[0]

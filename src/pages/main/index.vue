@@ -37,11 +37,11 @@ const getMainPageData = async () => {
 
     // box office list
     boxOfficeList.value = result.data.boxOffice
-    // console.log('Box Office List:', boxOfficeList.value)
+    console.log('Box Office List:', boxOfficeList.value)
 
     // Log image URLs
     boxOfficeList.value.forEach((boxOffice) => {
-      //    console.log('Image URL:', boxOffice.imageLink)
+      console.log('Image URL:', boxOffice.imageLink)
     })
     // hot movie list
     const hotMovieResult = await axios.get('/api/hotMovie/7')
@@ -63,7 +63,7 @@ const getMainPageData = async () => {
     const genreResult = await axios.get('/api/statisticsGenre/30')
 
     if (postResult.data.length === 0) {
-    //  console.log('현재 등록된 게시물이 없습니다')
+      ElMessage({ type: 'error', message: '인기 영화에 대한 통계 데이터가 없습니다' })
     }
     else {
       //     console.log('Post Result:', postResult.data)
@@ -73,23 +73,19 @@ const getMainPageData = async () => {
     }
 
     if (replyResult.data.length === 0) {
-      //      console.log('현재 등록된 댓글이 없습니다')
+      ElMessage({ type: 'error', message: '인기 게시물에 대한 통계 데이터가 없습니다' })
     }
     else {
-      //      console.log('Reply Result:', replyResult.data)
       labels2.value = replyResult.data.map(item => item.stat_name)
       data2.value = replyResult.data.map(item => item.stat_count)
-      //     console.log(labels2, data2)
     }
 
     if (genreResult.data.length === 0) {
-      //    console.log('현재 등록된 장르가 없습니다')
+      ElMessage({ type: 'error', message: '인기 장르에 대한 통계 데이터가 없습니다' })
     }
     else {
-      //   console.log('Genre Result:', genreResult.data)
       labels3.value = genreResult.data.map(item => item.stat_name)
       data3.value = genreResult.data.map(item => item.stat_count)
-      //   console.log(labels3, data3)
     }
   }
   catch (e) {
@@ -97,13 +93,6 @@ const getMainPageData = async () => {
   }
 }
 
-watch(data2, (newVal) => {
-  // console.log('data2 length:', newVal.length)
-})
-
-watch(data3, (newVal) => {
-  // console.log('data3 length:', newVal.length)
-})
 onMounted(async () => await getMainPageData())
 </script>
 

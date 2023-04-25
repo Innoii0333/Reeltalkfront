@@ -110,6 +110,16 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+  <table class="my-10 table-fixed items-center">
+    <tr>
+      <td class="min-w-xl text-right">
+        <img src="/src/components/img/alt.png" class="object-fill inline-block px-5" @error="poster_url.value = '/src/components/img/alt.png' ">
+      </td>
+      <td class="min-w-xl mx-5 px-5 text-left">
+        11124141414141231313<br>12414141<br>1414141<br>12414141414
+      </td>
+    </tr>
+  </table>
   <div>
     <ul class="max-w-2xl my-5 mx-auto text-16px">
       <li class="ml-3 px-2 inline-block">

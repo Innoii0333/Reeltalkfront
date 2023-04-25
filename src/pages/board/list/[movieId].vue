@@ -57,7 +57,7 @@ const getMovie = async () => {
   catch (e) {
     console.error(e)
     ElMessage({ type: 'error', message: '영화 정보를 찾을 수 없습니다' })
-    //   router.push('/main')
+    router.replace('/main')
   }
   await inqueryPost()
 }
@@ -151,12 +151,12 @@ onMounted(async () => {
   </div>
   <hr class="border-rtblue my-2 border-2">
   <div>
-    <table class="my-10 table-fixed">
+    <table class="my-10 table-fixed items-center">
       <tr>
-        <td class="w-180 items-end justify-end pr-2 ">
-          <img :src="poster_url" class="object-fill" @error="poster_url.value = '/src/components/img/alt.png' ">
+        <td class="min-w-xl text-right items-end pr-2 mx-auto">
+          <img :src="poster_url" class="object-fill inline-block px-5" @error="poster_url.value = '/src/components/img/alt.png' ">
         </td>
-        <td class="w-100% px-2 text-left">
+        <td class="min-w-xl mx-5 px-5 text-left">
           <ul>
             <li>
               {{ movie_name }}에 관한 내용을 다루는 게시판입니다

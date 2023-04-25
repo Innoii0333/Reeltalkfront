@@ -1,5 +1,6 @@
 <script setup>
 import axios from 'axios'
+import { onBeforeRouteLeave } from 'vue-router'
 
 const props = defineProps({
   movieId: { type: String, required: true },
@@ -20,7 +21,7 @@ const view_count = ref(0)
 const comment_count = ref(0)
 const replyContents = ref(null)
 const reReplyContents = ref(null)
-const userId = ref('userid1')
+const userId = ref('')
 const now = new Date()
 const formedDate = ref(null)
 const postuserId = ref('')
@@ -29,7 +30,6 @@ const getPost = async () => {
   try {
     const res = await axios.get(
       `/api/movie/${movie_id}/post/${post_id}`,
-      // `http://localhost:3000/post?postid=${post_id}`,
     )
     title.value = res.data.movie_title
     content.value = res.data.content
@@ -44,12 +44,6 @@ const getPost = async () => {
     comment_count.value = res.data.comment_count
     postusername.value = res.data.user_name
     postuserId.value = res.data.user_id
-    // postusername.value = res.data.username
-    // post_title.value = res.data.postTitle
-    // create_at.value = res.data.createAt
-    // star_rate.value = res.data.starrate
-    // view_count.value = res.data.viewCount
-    // comment_count.value = res.data.commentCount
   }
   catch (e) {
     console.error(e)
@@ -82,6 +76,10 @@ const deletePost = async () => {
   }
 }
 const submitReply = async (pReplyId) => {
+  if (userId.value === '') {
+    ElMessage({ type: 'error', message: '로그인 상태가 아닙니다' })
+    return
+  }
   const formData = new FormData()
   formData.append('user_id', userId.value)
   if (pReplyId) {
@@ -101,28 +99,28 @@ const submitReply = async (pReplyId) => {
   }
 }
 onMounted(async () => {
-  // if (!session.user_id)
-  //   await session.checkLogin()
-  // userId.value = session.user_id
+  if (!session.user_id)
+    await session.checkLogin()
+  userId.value = session.user_id
   await getPost()
 })
-// onBeforeRouteLeave((to, from, next) => {
-//   if (reReplyContents.value !== '' || replyContents.value !== '') {
-//     ElMessageBox.confirm(
-//       '지금 이동하시면 정보를 잃게 됩니다. 이동하시겠습니까?',
-//       'Warning',
-//       {
-//         confirmButtonText: '네',
-//         cancelButtonText: '아니오',
-//         type: 'warning',
-//       })
-//       .then(() => {
-//         ElMessage({ type: 'info', message: '페이지를 이동합니다' })
-//         next()
-//       })
-//       .catch(() => next(false))
-//   }
-// })
+onBeforeRouteLeave((to, from, next) => {
+  if (reReplyContents.value !== '' || replyContents.value !== '') {
+    ElMessageBox.confirm(
+      '지금 이동하시면 정보를 잃게 됩니다. 이동하시겠습니까?',
+      'Warning',
+      {
+        confirmButtonText: '네',
+        cancelButtonText: '아니오',
+        type: 'warning',
+      })
+      .then(() => {
+        ElMessage({ type: 'info', message: '페이지를 이동합니다' })
+        next()
+      })
+      .catch(() => next(false))
+  }
+})
 </script>
 
 <template>

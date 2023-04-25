@@ -29,15 +29,7 @@ const openSignup = () => {
 }
 onMounted(async () => {
   await session.checkLogin()
-  // console.log (session.checkLogin())
-//  console.log (session.isLoggedIn)
 })
-
-// const router = useRouter()
-// const getUser = () => {
-//   // console.log(session.user_id, session.user_name)
-//   router.push('/chat')
-// }
 </script>
 
 <template>

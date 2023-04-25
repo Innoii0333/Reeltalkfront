@@ -15,7 +15,7 @@ const getMovie = async () => {
   let i = 0
   try {
     const res = await axios.get(
-      `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&listCount=100&ServiceKey=0M1CRMOD0W2RFMSLVG1G&title=${keyword.value}`,
+      `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&listCount=100&ServiceKey=0M1CRMOD0W2RFMSLVG1G&title=${keyword.value}`,
     )
     searchInfo.value = res.data.Data[0].Result
     for (const titles of searchInfo.value) {
@@ -65,8 +65,8 @@ const submitMovie = async () => {
   }
 }
 onMounted(() => {
-  // if (!session.user_id)
-  //   goBack()
+  if (!session.user_id)
+    goBack()
 })
 </script>
 
