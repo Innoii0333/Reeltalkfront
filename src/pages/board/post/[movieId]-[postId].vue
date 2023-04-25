@@ -54,7 +54,7 @@ const getPost = async () => {
   catch (e) {
     console.error(e)
     ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
-    router.push(`board/list/${movie_id}`)
+    router.push(`/board/list/${movie_id}`)
   }
 }
 const modifyPost = () => {
@@ -109,23 +109,23 @@ onMounted(async () => {
   // userId.value = session.user_id
   await getPost()
 })
-onBeforeRouteLeave((to, from, next) => {
-  if (reReplyContents.value !== '' || replyContents.value !== '') {
-    ElMessageBox.confirm(
-      '지금 이동하시면 정보를 잃게 됩니다. 이동하시겠습니까?',
-      'Warning',
-      {
-        confirmButtonText: '네',
-        cancelButtonText: '아니오',
-        type: 'warning',
-      })
-      .then(() => {
-        ElMessage({ type: 'info', message: '페이지를 이동합니다' })
-        next()
-      })
-      .catch(() => next(false))
-  }
-})
+// onBeforeRouteLeave((to, from, next) => {
+//   if (reReplyContents.value !== '' || replyContents.value !== '') {
+//     ElMessageBox.confirm(
+//       '지금 이동하시면 정보를 잃게 됩니다. 이동하시겠습니까?',
+//       'Warning',
+//       {
+//         confirmButtonText: '네',
+//         cancelButtonText: '아니오',
+//         type: 'warning',
+//       })
+//       .then(() => {
+//         ElMessage({ type: 'info', message: '페이지를 이동합니다' })
+//         next()
+//       })
+//       .catch(() => next(false))
+//   }
+// })
 </script>
 
 <template>

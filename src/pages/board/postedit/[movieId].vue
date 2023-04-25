@@ -97,23 +97,23 @@ onMounted(async () => {
   }
 },
 )
-onBeforeRouteLeave((to, from, next) => {
-  if (content.value !== '' || post_title.value !== '') {
-    ElMessageBox.confirm(
-      '지금 이동하시면 작성/수정중인 정보를 잃게 됩니다. 이동하시겠습니까?',
-      'Warning',
-      {
-        confirmButtonText: '네',
-        cancelButtonText: '아니오',
-        type: 'warning',
-      })
-      .then(() => {
-        ElMessage({ type: 'info', message: '페이지를 이동합니다' })
-        next()
-      })
-      .catch(() => next(false))
-  }
-})
+// onBeforeRouteLeave((to, from, next) => {
+//   if (content.value !== '' || post_title.value !== '') {
+//     ElMessageBox.confirm(
+//       '지금 이동하시면 작성/수정중인 정보를 잃게 됩니다. 이동하시겠습니까?',
+//       'Warning',
+//       {
+//         confirmButtonText: '네',
+//         cancelButtonText: '아니오',
+//         type: 'warning',
+//       })
+//       .then(() => {
+//         ElMessage({ type: 'info', message: '페이지를 이동합니다' })
+//         next()
+//       })
+//       .catch(() => next(false))
+//   }
+// })
 </script>
 
 <template>
