@@ -7,7 +7,6 @@ const route = useRoute()
 const router = useRouter()
 const category = route.params.category
 const tableData = ref([])
-const filteredMovies = ref([])
 const keyword = ref('')
 const isLoading = ref(0)
 const pages = ref(1)
@@ -20,16 +19,31 @@ const options = {
   threshold: 0.3,
 }
 
+const titleSearch = () => {
+  if (keyword.value !== '') {
+    const lowerCaseKeyword = keyword.value.toLowerCase()
+    tableData.value = tableData.value.filter(movie =>
+      movie.title.toLowerCase().includes(lowerCaseKeyword),
+    )
+  }
+  console.log(tableData.value)
+}
 const getMovies = async (n) => {
   isLoading.value = 1
   try {
     const res = await axios.get('/api/movieList', {
       params: {
-        category: route.params.category,
-        page: n,
+        category_id: category,
+        curPage: n,
       },
     })
-    tableData.value = tableData.value.concat(res)
+    const res1 = res.data.map((item) => {
+      const categories = item.category_id.split(' ')
+      return { ...item, category_id: categories }
+    })
+    tableData.value = tableData.value.concat(res1)
+    console.log(tableData.value)
+    titleSearch()
     isLoading.value = 0
     if (res.data.length === 0)
       isLoading.value = -1
@@ -49,15 +63,7 @@ const handleIntersect = async (entries, observer) => {
   if (isLoading.value === 0)
     observer.observe(intersectionTarget.value)
 }
-const titleSearch = () => {
-  if (keyword.value === '') { filteredMovies.value = tableData.value }
-  else {
-    const lowerCaseKeyword = keyword.value.toLowerCase()
-    filteredMovies.value = tableData.value.filter(movie =>
-      movie.title.toLowerCase().includes(lowerCaseKeyword),
-    )
-  }
-}
+
 const goMovieBoard = (movieId) => {
   router.push(`/board/list/${movieId}`)
 }
@@ -92,7 +98,7 @@ onBeforeUnmount(() => {
   <div>
     <el-row class="min-h-sm" :gutter="20">
       <el-col
-        v-for="(movieCard, index) in filteredMovies"
+        v-for="(movieCard, index) in tableData"
         :key="index"
         class="mb-8"
         :span="6"
@@ -107,7 +113,7 @@ onBeforeUnmount(() => {
               <p> {{ movieCard.title }} </p>
               <p> {{ movieCard.release_date }} </p>
               <p> {{ movieCard.star_avg_rate }}</p>
-              <p> <span v-for="{ exCategory, idx } in movieCard.category_id" :key="idx">#{{ exCategory }}</span></p>
+              <p> <span v-for="(exCategory, idx) in movieCard.category_id" :key="idx">#{{ exCategory }}</span></p>
             </div>
           </button>
         </el-card>

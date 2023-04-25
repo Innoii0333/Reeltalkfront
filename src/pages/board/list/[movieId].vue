@@ -46,7 +46,7 @@ const getMovie = async () => {
     const data = res.data
     movie_name.value = data.title
     director_nm.value = data.director_nm
-    category_id.value = data.category_id.split(', ')// parse해서 array로 만들고 v-for, 조건 일치하는지 확인 필요함, 클릭시 각 카테고리 이동?
+    category_id.value = data.category_id.split(' ')// parse해서 array로 만들고 v-for, 조건 일치하는지 확인 필요함, 클릭시 각 카테고리 이동?
     release_date.value = data.release_date
     grade.value = data.grade
     star_avg_rate.value = data.star_avg_rate
