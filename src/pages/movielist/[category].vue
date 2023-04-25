@@ -28,7 +28,6 @@ const titleSearch = () => {
       movie.title.toLowerCase().includes(lowerCaseKeyword),
     )
   }
-  console.log(tableData.value)
 }
 const getMovies = async (n) => {
   isLoading.value = 1
@@ -49,7 +48,6 @@ const getMovies = async (n) => {
       return { ...item, release_date: newDate, category_id: categories }
     })
     tableData.value = tableData.value.concat(res1)
-    console.log(tableData.value)
     titleSearch()
     isLoading.value = 0
     if (res.data.length === 0)
