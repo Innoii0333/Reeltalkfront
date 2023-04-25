@@ -48,7 +48,7 @@ const getPost = async () => {
   catch (e) {
     console.error(e)
     ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
-    router.push(`/board/list/${movie_id}`)
+    router.replace(`/board/list/${movie_id}`)
   }
 }
 const modifyPost = () => {
@@ -68,7 +68,7 @@ const deletePost = async () => {
     await axios.delete(`/api/movie/${movie_id}/post/${post_id}`)
       .then(() => {
         ElMessage({ type: 'confirm', message: '게시물이 삭제되었습니다' })
-        router.push(`/board/list/${movie_id}`)
+        router.replace(`/board/list/${movie_id}`)
       })
       .catch(() => {
         ElMessage({ type: 'error', message: '게시물 삭제에 실패하였습니다 다시 시도해 보세요' })
