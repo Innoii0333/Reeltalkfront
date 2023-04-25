@@ -62,14 +62,6 @@ const getMainPageData = async () => {
     const replyResult = await axios.get('/api/statisticsReply/30')
     const genreResult = await axios.get('/api/statisticsGenre/30')
 
-    watch(data2, (newVal) => {
-      console.log('data2 length:', newVal.length)
-    })
-
-    watch(data3, (newVal) => {
-      console.log('data3 length:', newVal.length)
-    })
-
     if (postResult.data.length === 0) {
       console.log('현재 등록된 게시물이 없습니다')
     }
@@ -105,6 +97,13 @@ const getMainPageData = async () => {
   }
 }
 
+watch(data2, (newVal) => {
+  console.log('data2 length:', newVal.length)
+})
+
+watch(data3, (newVal) => {
+  console.log('data3 length:', newVal.length)
+})
 onMounted(async () => await getMainPageData())
 </script>
 
@@ -218,7 +217,6 @@ onMounted(async () => await getMainPageData())
       <PieChart :labels="labels3" :data="data3" />
     </div>
   </div>
-  <RouterView />
 </template>
 
 <style lang="scss">

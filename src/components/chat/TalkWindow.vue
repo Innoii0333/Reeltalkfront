@@ -5,7 +5,7 @@ const inputMessage = ref('')
 let ws
 
 onMounted(() => {
-  ws = new WebSocket('ws://localhost:8888')
+  ws = new WebSocket('ws://localhost:8079')
 
   ws.addEventListener('message', (event) => {
     messages.value.push(event.data)
