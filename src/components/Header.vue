@@ -29,8 +29,8 @@ const openSignup = () => {
 }
 onMounted(async () => {
   await session.checkLogin()
-  console.log (session.checkLogin())
-  console.log (session.isLoggedIn)
+  // console.log (session.checkLogin())
+//  console.log (session.isLoggedIn)
 })
 
 // const router = useRouter()

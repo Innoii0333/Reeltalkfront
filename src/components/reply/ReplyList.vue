@@ -37,7 +37,6 @@ const getReplyList = async () => {
   try {
     const res = await axios.get(`/api/movie/${props.movieId}/post/${props.postId}/reply`)
     replyList.value = res.data
-    triggerRef(replyList)
   }
   catch {
     ElMessage({ type: 'error', message: '댓글 정보를 불러오지 못했습니다' })

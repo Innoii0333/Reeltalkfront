@@ -54,14 +54,14 @@ const getPost = async () => {
   catch (e) {
     console.error(e)
     ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
-    router.push(`board/list/${movie_id}`).catch(() => {})
+    router.push(`board/list/${movie_id}`)
   }
 }
 const modifyPost = () => {
   router.push({
     path: `/board/postedit/${movie_id}`,
     query: { postId: post_id },
-  }).catch(() => {})
+  })
 }
 const deletePost = async () => {
   if (comment_count.value !== 0) {

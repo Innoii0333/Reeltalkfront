@@ -28,7 +28,7 @@ function openNewWindow() {
 
 function handleImageClick(item) {
   router.push(`/board/list/${item.movie_id}`)
-  console.log(`Clicked on ${item.movie_id}`)
+  // console.log(`Clicked on ${item.movie_id}`)
 }
 
 const getMainPageData = async () => {
@@ -37,22 +37,22 @@ const getMainPageData = async () => {
 
     // box office list
     boxOfficeList.value = result.data.boxOffice
-    console.log('Box Office List:', boxOfficeList.value)
+    // console.log('Box Office List:', boxOfficeList.value)
 
     // Log image URLs
     boxOfficeList.value.forEach((boxOffice) => {
-      console.log('Image URL:', boxOffice.imageLink)
+      //    console.log('Image URL:', boxOffice.imageLink)
     })
     // hot movie list
     const hotMovieResult = await axios.get('/api/hotMovie/7')
-    console.log('hot Movie : ', hotMovieResult)
+    //   console.log('hot Movie : ', hotMovieResult)
     hotMovieData.value = hotMovieResult.data
     const sortedHotMovies = hotMovieData.value?.sort((a, b) => b.postCount - a.postCount).slice(0, 5)
     hotMovieList.value = sortedHotMovies.length > 0 ? sortedHotMovies : [hotMovieData.value[0]]
 
     // hot post list
     const hotPostResult = await axios.get('/api/hotPost/7')
-    console.log('hot Post : ', hotPostResult)
+    //   console.log('hot Post : ', hotPostResult)
     const hotPostData = hotPostResult.data
     const sortedHotPosts = hotPostData.sort((a, b) => b.replyCount - a.replyCount).slice(0, 5)
     hotPostList.value = sortedHotPosts.length > 0 ? sortedHotPosts : [hotPostData[0]]
@@ -63,33 +63,33 @@ const getMainPageData = async () => {
     const genreResult = await axios.get('/api/statisticsGenre/30')
 
     if (postResult.data.length === 0) {
-      console.log('현재 등록된 게시물이 없습니다')
+    //  console.log('현재 등록된 게시물이 없습니다')
     }
     else {
-      console.log('Post Result:', postResult.data)
+      //     console.log('Post Result:', postResult.data)
       labels1.value = postResult.data.map(item => item.stat_name)
       data1.value = postResult.data.map(item => item.stat_count)
-      console.log(labels1, data1)
+      //      console.log(labels1, data1)
     }
 
     if (replyResult.data.length === 0) {
-      console.log('현재 등록된 댓글이 없습니다')
+      //      console.log('현재 등록된 댓글이 없습니다')
     }
     else {
-      console.log('Reply Result:', replyResult.data)
+      //      console.log('Reply Result:', replyResult.data)
       labels2.value = replyResult.data.map(item => item.stat_name)
       data2.value = replyResult.data.map(item => item.stat_count)
-      console.log(labels2, data2)
+      //     console.log(labels2, data2)
     }
 
     if (genreResult.data.length === 0) {
-      console.log('현재 등록된 장르가 없습니다')
+      //    console.log('현재 등록된 장르가 없습니다')
     }
     else {
-      console.log('Genre Result:', genreResult.data)
+      //   console.log('Genre Result:', genreResult.data)
       labels3.value = genreResult.data.map(item => item.stat_name)
       data3.value = genreResult.data.map(item => item.stat_count)
-      console.log(labels3, data3)
+      //   console.log(labels3, data3)
     }
   }
   catch (e) {
@@ -98,11 +98,11 @@ const getMainPageData = async () => {
 }
 
 watch(data2, (newVal) => {
-  console.log('data2 length:', newVal.length)
+  // console.log('data2 length:', newVal.length)
 })
 
 watch(data3, (newVal) => {
-  console.log('data3 length:', newVal.length)
+  // console.log('data3 length:', newVal.length)
 })
 onMounted(async () => await getMainPageData())
 </script>

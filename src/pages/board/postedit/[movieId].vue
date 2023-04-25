@@ -32,7 +32,7 @@ const submitForm = () => {
     axios.put(`/api/movie/${movie_id}/post/${post_id}`, formData)
       .then(() => {
         ElMessage({ type: 'confirm', message: '게시물이 수정되었습니다' })
-        router.push(`/board/list/${movie_id}`).catch (() => {})
+        router.push(`/board/list/${movie_id}`)
       })
       .catch(() => {
         ElMessage({ type: 'error', message: '게시물 수정에 실패하였습니다 다시 시도해 보세요' })
@@ -43,7 +43,7 @@ const submitForm = () => {
     axios.post(`/api/movie/${movie_id}/post`, formData)
       .then(() => {
         ElMessage({ type: 'confirm', message: '게시물이 등록되었습니다' })
-        router.push(`/board/list/${movie_id}`).catch (() => {})
+        router.push(`/board/list/${movie_id}`)
       })
       .catch(() => {
         ElMessage({ type: 'error', message: '게시물 등록에 실패하였습니다 다시 시도해 보세요' })
@@ -89,11 +89,11 @@ onMounted(async () => {
     if (post_id)
       await getPost()
     if (postusername.value && postusername.value !== user_id.value)
-      router.push(`/board/list/${movie_id}`).catch (() => {})
+      router.push(`/board/list/${movie_id}`)
   }
   catch {
     ElMessage({ type: 'error', message: '권한이 없습니다' })
-    router.push(`/board/list/${movie_id}`).catch (() => {})
+    router.push(`/board/list/${movie_id}`)
   }
 },
 )
