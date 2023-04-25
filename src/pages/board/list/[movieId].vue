@@ -47,10 +47,12 @@ const getMovie = async () => {
     movie_name.value = data.title
     director_nm.value = data.director_nm
     category_id.value = data.category_id.split(' ')// parse해서 array로 만들고 v-for, 조건 일치하는지 확인 필요함, 클릭시 각 카테고리 이동?
-    release_date.value = data.release_date
+    const date = new Date(data.release_date)
+    release_date.value = `${date.getFullYear().toString()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
     grade.value = data.grade
+    plot.value = data.plot.slice(0, 50) + (data.plot.length > 50 ? '...' : '')
     star_avg_rate.value = data.star_avg_rate
-    poster_url.value = `/app/web/images/${movie_id}.png` // ?
+    poster_url.value = `/images/${movie_id}.png` // ?
   }
   catch (e) {
     console.error(e)
@@ -151,20 +153,20 @@ onMounted(async () => {
   <div>
     <table class="my-10 table-fixed">
       <tr>
-        <td class="w-180 text-center">
+        <td class="w-180 items-end justify-end pr-2 ">
           <img :src="poster_url" class="object-fill" @error="poster_url.value = '/src/components/img/alt.png' ">
         </td>
-        <td class="w-100% text-center">
+        <td class="w-100% px-2 text-left">
           <ul>
             <li>
               {{ movie_name }}에 관한 내용을 다루는 게시판입니다
             </li>
-            <li> {{ plot }}  </li>
-            <li> {{ director_nm }}  </li>
+            <li> 줄거리: {{ plot }}  </li>
+            <li> 감독: {{ director_nm }}  </li>
             <li> <span v-for="(categories, i) in category_id" :key="i" class="hover:underline-solid" @click="goToCategory(categories)">{{ categories }}&nbsp;</span> </li>
-            <li> {{ grade }} </li>
-            <li> {{ release_date }}  </li>
-            <li> {{ star_avg_rate }}  </li>
+            <li> 등급: {{ grade }} </li>
+            <li> 개봉일: {{ release_date }}  </li>
+            <li> Reeltalks 평점: {{ star_avg_rate.toFixed(1) }}  </li>
           </ul>
         </td>
       </tr>
