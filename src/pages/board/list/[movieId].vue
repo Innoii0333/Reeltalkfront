@@ -33,7 +33,7 @@ const inqueryPost = async () => {
         : `${date.getHours()}:${date.getMinutes()}`
       return { ...item, create_at: formedDate }
     })
-    console.log(tableData.value)
+    // console.log(tableData.value)
   }
   catch (e) {
     ElMessage({ type: 'error', message: '게시물 정보를 불러올 수 없습니다' })
