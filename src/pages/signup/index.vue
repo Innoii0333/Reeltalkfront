@@ -14,7 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-auto h-auto pt-20 text-center items-center justify-center">
+  <div class="w-auto h-auto pt-20 text-center max-w-5xl items-center justify-center">
     <p class="my-5">
       Google 계정이 자동으로 등록됩니다.
     </p>

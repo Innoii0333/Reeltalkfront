@@ -1,7 +1,7 @@
 import { WebSocketServer } from 'ws'
 
 // server.js
-const server = new WebSocketServer({ port: 8080 })
+const server = new WebSocketServer({ port: 8079 })
 
 server.on('connection', (socket) => {
   console.log('클라이언트가 연결되었습니다.')
@@ -26,4 +26,4 @@ server.on('connection', (socket) => {
   socket.send('서버로부터 메시지: 연결되었습니다.')
 })
 
-console.log('WebSocket 서버가 8080포트에서 실행 중입니다.')
+console.log('WebSocket 서버가 8079포트에서 실행 중입니다.')

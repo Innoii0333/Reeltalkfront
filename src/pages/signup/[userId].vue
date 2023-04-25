@@ -1,6 +1,8 @@
 <script setup>
 import axios from 'axios'
-
+const props = defineProps({
+  userId: { type: String, required: true },
+})
 const router = useRouter()
 const route = useRoute()
 const nameResult = ref('한글 영문 숫자를 조합해 10자 이내로 입력해주세요')
@@ -39,20 +41,18 @@ const submitSignup = async () => {
 
   try {
     await axios.post('/api/signup', formData)
-    // 성공적으로 서버로 전송된 경우의 처리
-    alert('회원 가입에 성공했습니다')
+    ElMessage({ type: 'confirm', message: '회원 가입에 성공했습니다' })
     window.close()
   }
   catch (e) {
-    // 서버 전송 실패의 처리
     console.error('서버 요청 실패:', e)
-    alert('회원 가입에 실패했습니다. 다시 시도해 보세요')
+    ElMessage({ type: 'error', message: '회원 가입이 되지 않았습니다. 다시 시도해 보세요' })
   }
 }
 </script>
 
 <template>
-  <div class="w-auto h-auto pt-20 text-center items-center justify-center">
+  <div class="w-auto h-auto pt-20 text-center max-w-5xl items-center justify-center">
     <p class="my-5">
       Google 계정이 자동으로 등록됩니다.
     </p>

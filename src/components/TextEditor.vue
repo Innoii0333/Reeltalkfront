@@ -3,7 +3,7 @@ import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document'
 import CKEditor from '@ckeditor/ckeditor5-vue'
 import '@ckeditor/ckeditor5-build-decoupled-document/build/translations/ko'
 const props = defineProps({
-  value: {
+  modelValue: {
     type: String,
   },
 })
@@ -23,18 +23,18 @@ const onEditorReady = (editor) => {
 }
 onMounted(async () => {
   if (props.value !== '')
-    editorData.value = props.value
+    editorData.value = props.modelValue
 })
 watch(() => editorData.value, () => { emits('update:modelValue', editorData.value) })
 </script>
 
 <template>
   <div id="textEditor">
-    <CkEditor v-model="editorData" :editor="editor" :config="editorConfig" @ready="onEditorReady" @change="emitContents" />
+    <CkEditor v-model="editorData" :editor="editor" :config="editorConfig" @ready="onEditorReady" />
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .ck-content {
   height: 500px;
   overflow: auto;
