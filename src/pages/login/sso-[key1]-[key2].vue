@@ -5,22 +5,16 @@ const props = defineProps({
   key2: { type: String, required: true },
 })
 const route = useRoute()
-const router = useRouter()
 const session = useSessionStore()
 const key1 = route.params.key1
 const key2 = route.params.key2
-const isLoading = ref(false)
 
 const sendDataToParent = async (data) => {
   // 부모 창의 함수 호출
   window.opener.postMessage(data, '*')
 }
-const finishSession = () => {
-  isLoading.value = false
-  window.close()
-}
+
 onMounted(async () => {
-  isLoading.value = true
   const token = [key1, key2]
   session.initToken(token)
   await sendDataToParent(token)
@@ -29,11 +23,11 @@ onMounted(async () => {
       switch (event.data.message) {
         case 'invalid-session':
           ElMessage({ type: 'error', message: 'session checking failed' })
-          finishSession()
+          window.close()
           break
         case 'authenticated':
           ElMessage({ type: 'confirm', message: '로그인 되었습니다' })
-          finishSession()
+          window.close()
           break
         default: break
       }
@@ -44,11 +38,9 @@ onMounted(async () => {
 
 <template>
   <div>
-    <el-loading :visible="isLoading">
-      <div>
-        "checking the session..."
-      </div>
-    </el-loading>
+    <div>
+      "checking the session..."
+    </div>
   </div>
 </template>
 
