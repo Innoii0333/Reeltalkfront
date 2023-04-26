@@ -56,7 +56,7 @@ const submitMovie = async () => {
   formData.append('poster', movieInfo.value.posters)
   try {
     const res = await axios.post('/api/movieadd', formData, { validateStatus: false })
-    ElMessage({ type: 'confirm', message: '영화가 DB에 등록되었습니다' })
+    ElMessage({ type: 'success', message: '영화가 DB에 등록되었습니다' })
     router.push('/main')
   }
   catch (e) {

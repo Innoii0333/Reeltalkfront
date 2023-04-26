@@ -40,7 +40,7 @@ const submitSignup = async () => {
 
   try {
     await axios.post('/api/signup', formData)
-    ElMessage({ type: 'confirm', message: '회원 가입에 성공했습니다' })
+    ElMessage({ type: 'success', message: '회원 가입에 성공했습니다' })
     window.close()
   }
   catch (e) {

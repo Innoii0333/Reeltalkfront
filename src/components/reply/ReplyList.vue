@@ -56,6 +56,7 @@ const modifyReply = async (idx) => {
       `/api/movie/${props.movieId}/post/${props.postId}/reply/${replyList.value[idx].reply_id}`,
       formData)
       toggleModifyReply(idx)
+      ElMessage({ type: 'success', message: '댓글이 수정되었습니다' })
     }
     catch {
       ElMessage({ type: 'error', message: '댓글 수정에 실패했습니다' })
@@ -77,6 +78,7 @@ const deleteReply = async (index) => {
         `/api/movie/${props.movieId}/post/${props.postId}/reply/${replyList.value[index].reply_id}`)
       if (res.data === false)
         throw new Error(e)
+      ElMessage({ type: 'success', message: '댓글이 삭제되었습니다' })
     }
     catch {
       ElMessage({ type: 'error', message: '댓글이 삭제되지 않았습니다 대댓글이 달린 경우 삭제할 수 없습니다' })

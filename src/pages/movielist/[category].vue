@@ -40,11 +40,11 @@ const getMovies = async (n) => {
     })
     const res1 = res.data.map((item) => {
       const categories = item.category_id.split(' ')
+      let newDate = ''
       if (item.release_date) {
         const date = new Date(item.release_date)
-        const newDate = `${date.getFullYear().toString()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+        newDate = `${date.getFullYear().toString()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
       }
-      else { const newDate = '' }
       return { ...item, release_date: newDate, category_id: categories }
     })
     tableData.value = tableData.value.concat(res1)
