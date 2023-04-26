@@ -17,6 +17,7 @@ const user_id = ref('')
 const postusername = ref(null)
 const content = ref('')
 const movie_id = route.params.movieId
+let guard = true
 
 const goBack = () => {
   router.push(`/board/list/${movie_id}`)
@@ -31,7 +32,8 @@ const submitForm = () => {
     formData.append('post_id', post_id)
     axios.put(`/api/movie/${movie_id}/post/${post_id}`, formData)
       .then(() => {
-        ElMessage({ type: 'confirm', message: '게시물이 수정되었습니다' })
+        ElMessage({ type: 'success', message: '게시물이 수정되었습니다' })
+        guard = false
         router.replace(`/board/list/${movie_id}`)
       })
       .catch(() => {
@@ -42,7 +44,8 @@ const submitForm = () => {
     formData.append('user_id', user_id.value)
     axios.post(`/api/movie/${movie_id}/post`, formData)
       .then(() => {
-        ElMessage({ type: 'confirm', message: '게시물이 등록되었습니다' })
+        ElMessage({ type: 'success', message: '게시물이 등록되었습니다' })
+        guard = false
         router.replace(`/board/list/${movie_id}`)
       })
       .catch(() => {
@@ -76,6 +79,8 @@ const getPost = async () => {
   }
   catch {
     ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
+    guard = false
+    router.back()
   }
 }
 onMounted(async () => {
@@ -88,17 +93,20 @@ onMounted(async () => {
     // console.log(authResponse)
     if (post_id)
       await getPost()
-    if (postusername.value && postusername.value !== user_id.value)
-      router.replace(`/board/list/${movie_id}`)
+    if (postusername.value && postusername.value !== user_id.value) {
+      guard = false
+      router.push(`/board/list/${movie_id}`)
+    }
   }
   catch {
+    guard = false
     ElMessage({ type: 'error', message: '권한이 없습니다' })
-    router.replace(`/board/list/${movie_id}`)
+    router.push(`/board/list/${movie_id}`)
   }
 },
 )
 onBeforeRouteLeave((to, from, next) => {
-  if (content.value !== '' || post_title.value !== '') {
+  if (guard && (content.value !== '' || post_title.value !== '')) {
     ElMessageBox.confirm(
       '지금 이동하시면 작성/수정중인 정보를 잃게 됩니다. 이동하시겠습니까?',
       'Warning',
@@ -113,6 +121,7 @@ onBeforeRouteLeave((to, from, next) => {
       })
       .catch(() => next(false))
   }
+  else { next() }
 })
 </script>
 

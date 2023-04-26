@@ -13,14 +13,13 @@ const pageSizeOptions = [10, 20, 30]
 const pageSize = ref(pageSizeOptions[0])
 const currentPage = ref(1)
 const filteredPosts = ref(tableData.value)
-const plot = ref('')
+const plot = ref('줄거리가 없습니다')
 const director_nm = ref('')
 const category_id = ref('')
 const release_date = ref('')
 const grade = ref('')
 const star_avg_rate = ref('')
 const poster_url = ref('/src/components/img/alt.png')
-const now = new Date()
 const formedDate = ref(null)
 
 const inqueryPost = async () => {
@@ -28,6 +27,7 @@ const inqueryPost = async () => {
     const res = await axios.get(`/api/movie/${movie_id}/post`)
     tableData.value = res.data.map((item) => {
       const date = new Date(item.create_at)
+      const now = new Date()
       formedDate.value = now.toDateString() !== date.toDateString()
         ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
         : `${date.getHours()}:${date.getMinutes()}`
@@ -50,8 +50,9 @@ const getMovie = async () => {
     const date = new Date(data.release_date)
     release_date.value = `${date.getFullYear().toString()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
     grade.value = data.grade
-    plot.value = data.plot.slice(0, 50) + (data.plot.length > 50 ? '...' : '')
-    star_avg_rate.value = data.star_avg_rate
+    if (data.plot)
+      plot.value = data.plot.slice(0, 50) + (data.plot.length > 50 ? '...' : '')
+    star_avg_rate.value = data.star_avg_rate?.toFixed(1)
     poster_url.value = `/images/${movie_id}.png` // ?
   }
   catch (e) {
@@ -140,6 +141,7 @@ const goToCategory = (genre) => {
 onMounted(async () => {
   await getMovie()
   filteredPosts.value = tableData.value
+  console.log(useSessionStore().user_id)
 })
 </script>
 
@@ -166,7 +168,7 @@ onMounted(async () => {
             <li> <span v-for="(categories, i) in category_id" :key="i" class="hover:underline-solid" @click="goToCategory(categories)">{{ categories }}&nbsp;</span> </li>
             <li> 등급: {{ grade }} </li>
             <li> 개봉일: {{ release_date }}  </li>
-            <li> Reeltalks 평점: {{ star_avg_rate.toFixed(1) }}  </li>
+            <li> Reeltalks 평점: {{ star_avg_rate }}  </li>
           </ul>
         </td>
       </tr>

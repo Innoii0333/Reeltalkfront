@@ -25,6 +25,7 @@ const userId = ref('')
 const now = new Date()
 const formedDate = ref(null)
 const postuserId = ref('')
+let guard = true
 
 const getPost = async () => {
   try {
@@ -46,6 +47,7 @@ const getPost = async () => {
     postuserId.value = res.data.user_id
   }
   catch (e) {
+    guard = false
     console.error(e)
     ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
     router.replace(`/board/list/${movie_id}`)
@@ -67,7 +69,8 @@ const deletePost = async () => {
   else {
     await axios.delete(`/api/movie/${movie_id}/post/${post_id}`)
       .then(() => {
-        ElMessage({ type: 'confirm', message: '게시물이 삭제되었습니다' })
+        ElMessage({ type: 'success', message: '게시물이 삭제되었습니다' })
+        guard = false
         router.replace(`/board/list/${movie_id}`)
       })
       .catch(() => {
@@ -91,7 +94,7 @@ const submitReply = async (pReplyId) => {
   }
   try {
     const res = await axios.post(`/api/movie/${movie_id}/post/${post_id}/reply`, formData)
-    ElMessage({ type: 'confirm', message: '댓글이 등록되었습니다' })
+    ElMessage({ type: 'success', message: '댓글이 등록되었습니다' })
     router.go(0)
   }
   catch {
@@ -102,10 +105,11 @@ onMounted(async () => {
   if (!session.user_id)
     await session.checkLogin()
   userId.value = session.user_id
+  console.log(userId.value)
   await getPost()
 })
 onBeforeRouteLeave((to, from, next) => {
-  if (reReplyContents.value !== '' || replyContents.value !== '') {
+  if (guard && (reReplyContents.value !== '' || replyContents.value !== '')) {
     ElMessageBox.confirm(
       '지금 이동하시면 정보를 잃게 됩니다. 이동하시겠습니까?',
       'Warning',
@@ -120,6 +124,7 @@ onBeforeRouteLeave((to, from, next) => {
       })
       .catch(() => next(false))
   }
+  else { next() }
 })
 </script>
 
@@ -183,3 +188,8 @@ onBeforeRouteLeave((to, from, next) => {
 </template>
 
 <style lang="scss"></style>
+
+<route lang="yaml">
+meta:
+  layout: onlyheader
+</route>

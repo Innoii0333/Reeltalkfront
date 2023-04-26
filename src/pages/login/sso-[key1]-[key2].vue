@@ -17,6 +17,7 @@ const sendDataToParent = async (data) => {
 onMounted(async () => {
   const token = [key1, key2]
   session.initToken(token)
+  ElMessage({ type: 'info', message: 'checking the session' })
   await sendDataToParent(token)
   window.addEventListener('message', async (event) => {
     if (event.data.message) {
@@ -26,7 +27,7 @@ onMounted(async () => {
           window.close()
           break
         case 'authenticated':
-          ElMessage({ type: 'confirm', message: '로그인 되었습니다' })
+          ElMessage({ type: 'success', message: '로그인 되었습니다' })
           window.close()
           break
         default: break
