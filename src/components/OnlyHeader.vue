@@ -5,14 +5,13 @@ const openLogin = () => {
    `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
   window.addEventListener('message', async (event) => {
     if (event.origin !== window.location.origin)
-      return // 보안을 위한 체크
+      return
     if (event.source !== loginWindow)
       return
     if (event.data) {
       session.initToken([event.data[0], event.data[1]])
       try {
         await session.getSession()
-        console.log(session.user_id, session.user_name)
         loginWindow?.postMessage({ message: 'authenticated' })
       }
       catch {
@@ -42,42 +41,44 @@ onMounted(() => {
         Sign up
       </button>
     </div>
-    <a href="/main" class="logo"><img
-      alt="RT logo"
-      style="width: 150px"
-      src="./img/logo2.png"
-    >
+
+    <a href="/main" class="block w-200px">
+      <img
+        alt="RT logo"
+        style="width: 200px"
+        src="./img/logo2.png"
+      >
     </a>
 
     <div id="menu" class="absolute w-full bottom-2 mb-2 px-5 text-center justify-center flex">
-      <RouterLink to="/movielist/movie" class="min-w-a mx-a color-white">
+      <RouterLink to="/menu/movie" class="min-w-a mx-a color-white">
         Movie
       </RouterLink>
-      <RouterLink to="/movielist/action" class="min-w-a mx-a color-white">
+      <RouterLink to="/menu/action" class="min-w-a mx-a color-white">
         Action
       </RouterLink>
-      <RouterLink to="/movielist/drama" class="min-w-a mx-a color-white">
+      <RouterLink to="/menu/drama" class="min-w-a mx-a color-white">
         Drama
       </RouterLink>
-      <RouterLink to="/movielist/romance" class="min-w-a mx-a color-white">
+      <RouterLink to="/menu/romance" class="min-w-a mx-a color-white">
         Romance
       </RouterLink>
-      <RouterLink to="/movielist/comedy" class="min-w-a mx-a color-white">
+      <RouterLink to="/menu/comedy" class="min-w-a mx-a color-white">
         Comedy
       </RouterLink>
-      <RouterLink to="/movielist/ani" class="min-w-a mx-a color-white">
+      <RouterLink to="/menu/ani" class="min-w-a mx-a color-white">
         Ani
       </RouterLink>
-      <RouterLink to="/movielist/horror" class="min-w-a mx-a color-white">
+      <RouterLink to="/menu/horror" class="min-w-a mx-a color-white">
         Horror
       </RouterLink>
-      <RouterLink to="/movielist/sf" class="min-w-a mx-a color-white">
+      <RouterLink to="/menu/sf" class="min-w-a mx-a color-white">
         SF
       </RouterLink>
-      <RouterLink to="/movielist/fantasy" class="min-w-a mx-a color-white">
+      <RouterLink to="/menu/fantasy" class="min-w-a mx-a color-white">
         Fantasy
       </RouterLink>
-      <RouterLink to="/movielist/etc" class="min-w-a mx-a color-white">
+      <RouterLink to="/menu/etc" class="min-w-a mx-a color-white">
         Etc
       </RouterLink>
     </div>

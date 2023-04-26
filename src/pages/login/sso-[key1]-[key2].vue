@@ -1,23 +1,16 @@
 <script setup>
 import axios from 'axios'
+const props = defineProps({
+  key1: { type: String, required: true },
+  key2: { type: String, required: true },
+})
 const route = useRoute()
 const router = useRouter()
 const session = useSessionStore()
 const key1 = route.params.key1
 const key2 = route.params.key2
 const isLoading = ref(false)
-// const requestSession = async () => {
-//   try {
-//     const res = await axios.get(`/api/session/${key1}/${key2}`)
-//     const userToken = res.data.token_id
-//     useSessionStore().setToken(userToken)
-//     router.push('/main')
-//   }
-//   catch (e) {
-//     console.error(e)
-//     router.push('/login')
-//   }
-// }
+
 const sendDataToParent = async (data) => {
   // 부모 창의 함수 호출
   window.opener.postMessage(data, '*')
@@ -35,10 +28,11 @@ onMounted(async () => {
     if (event.data.message) {
       switch (event.data.message) {
         case 'invalid-session':
-          alert('session checking failed')
+          ElMessage({ type: 'error', message: 'session checking failed' })
           finishSession()
           break
         case 'authenticated':
+          ElMessage({ type: 'confirm', message: '로그인 되었습니다' })
           finishSession()
           break
         default: break

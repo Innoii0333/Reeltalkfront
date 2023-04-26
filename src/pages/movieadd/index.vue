@@ -12,23 +12,24 @@ const goBack = () => {
   router.back()
 }
 const getMovie = async () => {
+  let i = 0
   try {
     const res = await axios.get(
       `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&listCount=100&ServiceKey=0M1CRMOD0W2RFMSLVG1G&title=${keyword.value}`,
     )
-    // const res = await axios.get('http://localhost:3000/kmdbResult')
     searchInfo.value = res.data.Data[0].Result
     for (const titles of searchInfo.value) {
       const poster = titles.posters
       titles.posters = poster.replace(/\|.*/, '')
       const title = titles.title
       titles.title = title.replace(/\s!HS\s/g, '').replace(/\s!HE\s/g, '').trim()
+      i++
     }
+    ElMessage({ type: 'info', message: `${i}개의 결과가 검색되었습니다` })
   }
   catch (e) {
-    // 서버 전송 실패의 처리
     console.error('서버 요청 실패:', e)
-    alert('영화 api 조회에 실패하였습니다 다시 시도해 보세요')
+    ElMessage({ type: 'error', message: '영화 조회에 실패하였습니다 다시 시도해 보세요' })
   }
 }
 const handleCardActive = (index) => {
@@ -55,17 +56,17 @@ const submitMovie = async () => {
   formData.append('poster', movieInfo.value.posters)
   try {
     const res = await axios.post('/api/movieadd', formData, { validateStatus: false })
+    ElMessage({ type: 'confirm', message: '영화가 DB에 등록되었습니다' })
     router.push('/main')
   }
   catch (e) {
-    // 서버 전송 실패의 처리
     console.error('서버 요청 실패:', e)
-    alert('영화 등록에 실패하였습니다 다시 시도해 보세요')
+    ElMessage({ type: 'error', message: '영화 등록에 실패하였습니다 다시 시도해 보세요' })
   }
 }
 onMounted(() => {
-  if (!session.user_id)
-    goBack()
+  // if (!session.user_id)
+  //   goBack()
 })
 </script>
 

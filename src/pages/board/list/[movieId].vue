@@ -1,5 +1,8 @@
 <script setup>
 import axios from 'axios'
+const props = defineProps({
+  movieId: { type: String, required: true },
+})
 const tableData = ref([])
 const route = useRoute()
 const router = useRouter()
@@ -17,15 +20,23 @@ const release_date = ref('')
 const grade = ref('')
 const star_avg_rate = ref('')
 const poster_url = ref('/src/components/img/alt.png')
+const now = new Date()
+const formedDate = ref(null)
 
 const inqueryPost = async () => {
   try {
     const res = await axios.get(`/api/movie/${movie_id}/post`)
-    tableData.value = await res.data
+    tableData.value = res.data.map((item) => {
+      const date = new Date(item.create_at)
+      formedDate.value = now.toDateString() !== date.toDateString()
+        ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
+        : `${date.getHours()}:${date.getMinutes()}`
+      return { ...item, create_at: formedDate }
+    })
     console.log(tableData.value)
   }
   catch (e) {
-    alert('게시물 정보를 불러올 수 없습니다')
+    ElMessage({ type: 'error', message: '게시물 정보를 불러올 수 없습니다' })
     console.error(e)
   }
 }
@@ -43,7 +54,7 @@ const getMovie = async () => {
   }
   catch (e) {
     console.error(e)
-    //   alert('영화 정보를 찾을 수 없습니다')
+    ElMessage({ type: 'error', message: '영화 정보를 찾을 수 없습니다' })
     //   router.push('/main')
   }
   await inqueryPost()

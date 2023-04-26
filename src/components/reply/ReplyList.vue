@@ -1,6 +1,9 @@
 <script setup>
 import axios from 'axios'
 const props = defineProps({
+  modelValue: {
+    type: String,
+  },
   movieId: {
     type: String,
   },
@@ -36,39 +39,54 @@ const getReplyList = async () => {
     replyList.value = res.data
     triggerRef(replyList)
   }
-  catch (e) {
-    console.error(e)
-    alert('댓글 정보를 불러오지 못했습니다')
+  catch {
+    ElMessage({ type: 'error', message: '댓글 정보를 불러오지 못했습니다' })
   }
 }
 const modifyReply = async (idx) => {
-  const formData = new FormData()
-  formData.append('user_id', props.userId)
-  formData.append('content', changedReply)
   try {
-    const res = await axios.put(
+    const confirmBox = await ElMessageBox.confirm(
+      '댓글을 수정하시겠습니까?',
+      'Warning',
+      { confirmButtonText: '네', cancelButtonText: '아니오', type: 'warning' })
+    try {
+      const formData = new FormData()
+      formData.append('user_id', props.userId)
+      formData.append('reply_content', changedReply.value)
+      const res = await axios.put(
       `/api/movie/${props.movieId}/post/${props.postId}/reply/${replyList.value[idx].reply_id}`,
       formData)
-    changedReply.value = ''
+      toggleModifyReply(idx)
+    }
+    catch {
+      ElMessage({ type: 'error', message: '댓글 수정에 실패했습니다' })
+    }
+    await getReplyList()
   }
-  catch (e) {
-    console.error(e)
-    alert('댓글 수정에 실패했습니다')
+  catch {
+    ElMessage({ type: 'info', message: '댓글을 수정하지 않았습니다' })
   }
-  await getReplyList()
 }
 const deleteReply = async (index) => {
   try {
-    const res = await axios.delete(
-      `/api/movie/${props.movieId}/post/${props.postId}/reply/${replyList.value[index].reply_id}`)
-    if (res.data === false)
-      throw new Error(e)
+    const confirmBox = await ElMessageBox.confirm(
+      '댓글을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다',
+      'Warning',
+      { confirmButtonText: '네', cancelButtonText: '아니오', type: 'warning' })
+    try {
+      const res = await axios.delete(
+        `/api/movie/${props.movieId}/post/${props.postId}/reply/${replyList.value[index].reply_id}`)
+      if (res.data === false)
+        throw new Error(e)
+    }
+    catch {
+      ElMessage({ type: 'error', message: '댓글이 삭제되지 않았습니다 대댓글이 달린 경우 삭제할 수 없습니다' })
+    }
+    await getReplyList()
   }
-  catch (e) {
-    console.error(e)
-    alert('댓글을 삭제하지 못했습니다. 대댓글이 달린 경우 삭제할 수 없습니다.')
+  catch {
+    ElMessage({ type: 'info', message: '댓글 삭제를 취소했습니다' })
   }
-  await getReplyList()
 }
 const reReplySubmit = (pReplyId) => {
   emits('reReplySubmit', pReplyId)
@@ -93,7 +111,10 @@ watch(() => reReply.value, (newValue) => {
       </li>
       <li v-for="(item, index) in replyList" v-else :key="index" class="ml-3 px-2 inline-block">
         <div v-if="showModifyReply !== index" class="flex">
-          <img v-if="item?.depth === 2" class="ml-1 pl-1 w-5.4 justify-center mt-1.8" inline-block src="/src/components/img/rep1.png">
+          <img
+            v-if="item?.depth === 2" class="ml-1 pl-1 w-5.4 justify-center mt-1.8" inline-block
+            src="/src/components/img/rep1.png"
+          >
           <span class="basis-15 px-2 text-left">
             {{ item?.user_id }}
           </span>
@@ -116,7 +137,10 @@ watch(() => reReply.value, (newValue) => {
           </span>
         </div>
         <div v-else-if="showModifyReply === index" class="inline-block flex justify-center items-center">
-          <textarea v-model="changedReply" class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-xl max-w-2xl text-3 leading-normal" />
+          <textarea
+            v-model="changedReply"
+            class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-xl max-w-2xl text-3 leading-normal"
+          />
           <el-button color="#151AA3" class="text-white bg-rtblue ml-2 mr-0" @click="modifyReply(index)">
             수정
           </el-button>
@@ -138,5 +162,4 @@ watch(() => reReply.value, (newValue) => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-auto h-auto pt-20 text-center items-center justify-center">
+  <div class="w-auto max-w-5xl h-auto pt-20 text-center items-center justify-center">
     <p class="my-5">
       Google 계정으로 로그인해 주세요
     </p>

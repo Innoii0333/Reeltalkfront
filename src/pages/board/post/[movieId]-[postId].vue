@@ -1,5 +1,10 @@
 <script setup>
 import axios from 'axios'
+
+const props = defineProps({
+  movieId: { type: String, required: true },
+  postId: { type: String },
+})
 const session = useSessionStore()
 const route = useRoute()
 const router = useRouter()
@@ -15,7 +20,11 @@ const view_count = ref(0)
 const comment_count = ref(0)
 const replyContents = ref(null)
 const reReplyContents = ref(null)
-const userId = ref('')
+const userId = ref('userid1')
+const now = new Date()
+const formedDate = ref(null)
+const postuserId = ref('')
+
 const getPost = async () => {
   try {
     const res = await axios.get(
@@ -25,11 +34,16 @@ const getPost = async () => {
     title.value = res.data.movie_title
     content.value = res.data.content
     post_title.value = res.data.post_title
-    create_at.value = res.data.create_at
+    const date = new Date(res.data.create_at)
+    formedDate.value = now.toDateString() !== date.toDateString()
+      ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
+      : `${date.getHours()}:${date.getMinutes()}`
+    create_at.value = formedDate.value
     star_rate.value = res.data.star_rate
     view_count.value = res.data.view_count
     comment_count.value = res.data.comment_count
     postusername.value = res.data.user_name
+    postuserId.value = res.data.user_id
     // postusername.value = res.data.username
     // post_title.value = res.data.postTitle
     // create_at.value = res.data.createAt
@@ -39,31 +53,33 @@ const getPost = async () => {
   }
   catch (e) {
     console.error(e)
-    alert('게시물 정보가 없습니다')
+    ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
+    router.push(`board/list/${movie_id}`).catch(() => {})
   }
 }
 const modifyPost = () => {
-  // vue router를 활용해서 수정 페이지로 이동
   router.push({
     path: `/board/postedit/${movie_id}`,
     query: { postId: post_id },
-  })
+  }).catch(() => {})
 }
 const deletePost = async () => {
   if (comment_count.value !== 0) {
-    alert('댓글이 달린 게시물은 삭제할 수 없습니다')
-    return
+    ElMessage({ type: 'error', message: '댓글이 달린 게시물은 삭제할 수 없습니다' })
   }
-  await axios.delete(`/api/movie/${movie_id}/post/${post_id}`)
-    .then(() => {
-      // 성공적으로 서버로 전송된 경우의 처리
-      router.push(`/board/list/${movie_id}`)
-    })
-    .catch((e) => {
-      // 서버 전송 실패의 처리
-      console.error('서버 요청 실패:', e)
-      alert('게시물 삭제에 실패하였습니다 다시 시도해 보세요')
-    })
+  else if (userId.value !== postuserId.value) {
+    ElMessage({ type: 'error', message: '삭제할 권한이 없습니다' })
+  }
+  else {
+    await axios.delete(`/api/movie/${movie_id}/post/${post_id}`)
+      .then(() => {
+        ElMessage({ type: 'confirm', message: '게시물이 삭제되었습니다' })
+        router.push(`/board/list/${movie_id}`)
+      })
+      .catch(() => {
+        ElMessage({ type: 'error', message: '게시물 삭제에 실패하였습니다 다시 시도해 보세요' })
+      })
+  }
 }
 const submitReply = async (pReplyId) => {
   const formData = new FormData()
@@ -77,21 +93,35 @@ const submitReply = async (pReplyId) => {
   }
   try {
     const res = await axios.post(`/api/movie/${movie_id}/post/${post_id}/reply`, formData)
-    alert('댓글이 등록되었습니다')
-    replyContents.value = null
-    reReplyContents.value = null
-    triggerRef(userId)
+    ElMessage({ type: 'confirm', message: '댓글이 등록되었습니다' })
+    router.go(0)
   }
-  catch (e) {
-    console.error(e)
-    alert('댓글 작성에 실패했습니다')
+  catch {
+    ElMessage({ type: 'error', message: '댓글 등록에 실패했습니다' })
   }
 }
 onMounted(async () => {
-  if (!session.user_id)
-    await session.checkLogin()
-  userId.value = session.user_id
+  // if (!session.user_id)
+  //   await session.checkLogin()
+  // userId.value = session.user_id
   await getPost()
+})
+onBeforeRouteLeave((to, from, next) => {
+  if (reReplyContents.value !== '' || replyContents.value !== '') {
+    ElMessageBox.confirm(
+      '지금 이동하시면 정보를 잃게 됩니다. 이동하시겠습니까?',
+      'Warning',
+      {
+        confirmButtonText: '네',
+        cancelButtonText: '아니오',
+        type: 'warning',
+      })
+      .then(() => {
+        ElMessage({ type: 'info', message: '페이지를 이동합니다' })
+        next()
+      })
+      .catch(() => next(false))
+  }
 })
 </script>
 
