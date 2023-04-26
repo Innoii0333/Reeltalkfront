@@ -45,7 +45,8 @@ const getMovies = async (n) => {
         const date = new Date(item.release_date)
         newDate = `${date.getFullYear().toString()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
       }
-      return { ...item, release_date: newDate, category_id: categories }
+      const imageUrl = `https://reeltalks.p-e.kr/images/${item.movie_id}.png`
+      return { ...item, release_date: newDate, category_id: categories, poster_url: imageUrl }
     })
     tableData.value = tableData.value.concat(res1)
     titleSearch()
@@ -101,20 +102,20 @@ onBeforeUnmount(() => {
   <hr class="border-rtblue my-2">
   <!-- 카드 요소를 이용한 데이터 출력 및 infinite scrolling -->
   <div>
-    <el-row class="min-h-sm" :gutter="20">
+    <el-row class="min-h-xl" :gutter="20">
       <el-col
         v-for="(movieCard, index) in tableData"
         :key="index"
         class="mb-8"
         :span="6"
       >
-        <el-card :body-style="{ padding: '3px' }" @click="goMovieBoard(movieCard.movie_id)">
+        <el-card :body-style="{ padding: '3px', height: '100%' }" @click="goMovieBoard(movieCard.movie_id)">
           <button>
             <el-image
               :src="movieCard.poster_url" class="object-cover"
               @error="movieCard.poster_url = '/src/components/img/alt.png'"
             />
-            <div class="text-left text-xs h-20">
+            <div class="text-left text-xs">
               <p> {{ movieCard.title }} </p>
               <p> {{ movieCard.release_date }} </p>
               <p> {{ movieCard.star_avg_rate }}</p>
@@ -141,5 +142,5 @@ input.border-rtgray{
 <route lang="yaml">
 meta:
   layout: onlyheader
-  </route>
+    </route>
 

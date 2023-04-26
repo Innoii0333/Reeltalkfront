@@ -67,20 +67,34 @@ const submitFormOpen = () => {
     })
 }
 const getPost = async () => {
-  try {
-    const res = await axios.get(
+  if (post_id) {
+    try {
+      const res = await axios.get(
       `/api/movie/${movie_id}/post/${post_id}`,
-    )
-    title.value = res.data.movie_title
-    content.value = res.data.content
-    post_title.value = res.data.post_title
-    star_rate.value = res.data.star_rate
-    postusername.value = res.data.user_name
+      )
+      title.value = res.data.movie_title
+      content.value = res.data.content
+      post_title.value = res.data.post_title
+      star_rate.value = res.data.star_rate
+      postusername.value = res.data.user_name
+    }
+    catch {
+      ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
+      guard = false
+      router.back()
+    }
   }
-  catch {
-    ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
-    guard = false
-    router.back()
+  else {
+    try {
+      const res = await axios.get(
+        `/api/movie/${movie_id}`,
+      )
+      title.value = res.data.title
+    }
+    catch (e) {
+      console.error(e)
+      ElMessage({ type: 'error', message: '영화에 대한 정보가 없습니다' })
+    }
   }
 }
 onMounted(async () => {
@@ -91,8 +105,7 @@ onMounted(async () => {
     console.log(user_id.value)
     // const authResponse = await session.checkAuth()
     // console.log(authResponse)
-    if (post_id)
-      await getPost()
+    await getPost()
     if (postusername.value && postusername.value !== user_id.value) {
       guard = false
       router.push(`/board/list/${movie_id}`)

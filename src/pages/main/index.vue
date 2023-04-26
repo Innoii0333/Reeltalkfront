@@ -164,7 +164,7 @@ onMounted(async () => await getMainPageData())
         <!-- 핫 포스트 템플릿 -->
         <ul style="text-align: left; padding-left: 30px;">
           <li v-for="(item, index) in hotPostList" :key="item.post_id" style="margin-top: 22px;">
-            <router-link :to="{ path: `/board/post/${item.movie_id}/${item.post_Title}` }">
+            <router-link :to="{ path: `/board/post/${item.movie_id}/${item.post_id}` }">
               {{ parseInt(index) + 1 }}. {{ item.post_Title }}
             </router-link>
           </li>
@@ -255,4 +255,4 @@ onMounted(async () => await getMainPageData())
 <route lang="yaml">
 meta:
   layout: home
-</route>
+    </route>
