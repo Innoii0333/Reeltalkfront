@@ -104,7 +104,7 @@ onBeforeUnmount(() => {
   <div>
     <el-row class="min-h-xl" :gutter="20">
       <el-col
-        v-for="(movieCard, index) in tableData"
+        v-for="(movieCard, index) in filteredTable"
         :key="index"
         class="mb-8"
         :span="6"
