@@ -9,6 +9,11 @@ import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
 
+const checkLogin = (to: any) => {
+  if (useSessionStore().user_id)
+    return { name: 'Error' }
+  else return to
+}
 const routes = setupLayouts(generatedRoutes)
 routes.push(
   {
@@ -27,6 +32,21 @@ routes.push(
       key1: route.params.key1,
       key2: route.params.key2,
     }),
+  },
+  {
+    path: '/error',
+    name: 'Error',
+    component: () => import('./pages/error.vue'),
+  },
+  {
+    path: '/movieadd',
+    component: () => import('./pages/movieadd/index.vue'),
+    beforeEnter: to => checkLogin(to),
+  },
+  {
+    path: '/board/postedit',
+    component: () => import('./pages/movieadd/index.vue'),
+    beforeEnter: to => checkLogin(to),
   },
 )
 

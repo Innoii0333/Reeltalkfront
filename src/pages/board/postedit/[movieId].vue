@@ -11,7 +11,7 @@ const router = useRouter()
 const route = useRoute()
 const post_title = ref('')
 const post_id = route.query.postId ? route.query.postId : null
-const title = ref('movietitle')
+const title = ref('')
 const star_rate = ref(0)
 const user_id = ref('')
 const postusername = ref(null)
@@ -20,7 +20,10 @@ const movie_id = route.params.movieId
 let guard = true
 
 const goBack = () => {
-  router.push(`/board/list/${movie_id}`)
+  if (post_id)
+    router.push(`/board/post/${movie_id}/${post_id}`)
+  else
+    router.push(`/board/list/${movie_id}`)
 }
 const submitForm = () => {
   const formData = new FormData()
@@ -152,7 +155,7 @@ onBeforeRouteLeave((to, from, next) => {
     v-model="post_title" type="text" placeholder="제목을 입력하세요"
     class="w-full px-2 py-2 my-5 text-16px font-bold outline"
   ><br>
-  <TextEditor v-model="content" @update:model-value="() => {}" />
+  <TextEditor v-if="title !== ''" v-model="content" @update:model-value="() => {}" />
   <p class="w-full text-left mx-auto text-rtred">
     별점 :
     <el-rate v-model="star_rate" class="mx-1" show-score :colors="['#B5141C', '#B5141C', '#B5141C']" allow-half />

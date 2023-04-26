@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const session = useSessionStore()
-const isLoggedIn = ref(false)
 const openLogin = () => {
   const loginWindow = window.open('/login', 'loginWindow',
    `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
@@ -34,13 +33,18 @@ onMounted(async () => {
 
 <template>
   <div class="background relative">
-    <div style="color: white; margin-top: 5px; float: right">
-      <button v-if="!isLoggedIn" class="menu" @click="openLogin">
+    <div v-if="!session.isLoggedIn" style="color: white; margin-top: 5px; margin-right:10px; float: right">
+      <button class="menu" @click="openLogin">
         Sign in
       </button>
       <span class="mx-1">|</span>
       <button class="menu" style="margin-right:10px" @click="openSignup">
         Sign up
+      </button>
+    </div>
+    <div v-else style="color: white; margin-top: 5px; float: right">
+      <button class="menu" @click="session.logout()">
+        Logout
       </button>
     </div>
 

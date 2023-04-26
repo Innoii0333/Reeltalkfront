@@ -24,21 +24,26 @@ const openSignup = () => {
   window.open('/signup', 'signupWindow',
   `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
 }
-onMounted(() => {
-  session.checkLogin()
+onMounted(async () => {
+  await session.checkLogin()
 })
 </script>
 
 <!-- css -->
 <template>
   <div class="background relative">
-    <div style="color: white; margin-top: 5px; float: right">
+    <div v-if="!session.isLoggedIn" style="color: white; margin-top: 5px; float: right">
       <button class="menu" @click="openLogin">
         Sign in
       </button>
       <span class="mx-1">|</span>
       <button class="menu" style="margin-right:10px" @click="openSignup">
         Sign up
+      </button>
+    </div>
+    <div v-else style="color: white; margin-top: 5px; margin-right:10px; float: right">
+      <button class="menu" @click="session.logout()">
+        Logout
       </button>
     </div>
 
