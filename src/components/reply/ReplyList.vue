@@ -124,7 +124,7 @@ watch(() => reReply.value, (newValue) => {
             src="/src/components/img/rep1.png"
           >
           <span class="basis-15 px-2 text-left">
-            {{ item?.user_id }}
+            {{ item?.user_name }}
           </span>
           <span class="flex-1 mx-5 max-w-2xl text-left">
             {{ item?.reply_contents }}
