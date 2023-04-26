@@ -19,8 +19,8 @@ const create_at = ref('')
 const star_rate = ref(null)
 const view_count = ref(0)
 const comment_count = ref(0)
-const replyContents = ref(null)
-const reReplyContents = ref(null)
+const replyContents = ref('')
+const reReplyContents = ref('')
 const userId = ref('')
 const now = new Date()
 const formedDate = ref(null)
@@ -38,7 +38,7 @@ const getPost = async () => {
     const date = new Date(res.data.create_at)
     formedDate.value = now.toDateString() !== date.toDateString()
       ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
-      : `${date.getHours()}:${date.getMinutes()}`
+      : `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
     create_at.value = formedDate.value
     star_rate.value = res.data.star_rate
     view_count.value = res.data.view_count
@@ -129,8 +129,9 @@ onBeforeRouteLeave((to, from, next) => {
 </script>
 
 <template>
-  <div>
-    <div class="text-5 ml-3 px-auto text-left">
+  <only-header />
+  <div class="max-w-7xl min-w-2xl mx-5">
+    <div class="text-5 ml-3 my-5 px-auto text-left">
       {{ title }}
     </div>
     <hr class="border-rtblue my-2 border-2">
@@ -144,7 +145,7 @@ onBeforeRouteLeave((to, from, next) => {
             {{ post_title }}
           </th>
         </tr>
-        <tr class="text-10px text-center px-auto h-5">
+        <tr class="text-12px text-center px-auto h-5">
           <td class="w-30">
             {{ postusername }}
           </td>
@@ -177,7 +178,7 @@ onBeforeRouteLeave((to, from, next) => {
         </el-button>
       </div>
     </div>
-    <div>
+    <div class="text-sm">
       <reply-reply-edit v-model="replyContents" @reply-submit="submitReply" />
       <reply-reply-list
         v-model="reReplyContents" :movie-id="movie_id" :post-id="post_id" :user-id="userId"
@@ -187,9 +188,8 @@ onBeforeRouteLeave((to, from, next) => {
   </div>
 </template>
 
-<style lang="scss"></style>
-
 <route lang="yaml">
 meta:
-  layout: onlyheader
-</route>
+  layout: bare
+    </route>
+

@@ -30,8 +30,8 @@ const inqueryPost = async () => {
       const now = new Date()
       formedDate.value = now.toDateString() !== date.toDateString()
         ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
-        : `${date.getHours()}:${date.getMinutes()}`
-      return { ...item, create_at: formedDate }
+        : `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+      return { ...item, create_at: formedDate.value }
     })
     // console.log(tableData.value)
   }
@@ -53,7 +53,7 @@ const getMovie = async () => {
     if (data.plot)
       plot.value = data.plot.slice(0, 50) + (data.plot.length > 50 ? '...' : '')
     star_avg_rate.value = data.star_avg_rate?.toFixed(1)
-    poster_url.value = `/app/web/images/${movie_id}.png` // ?
+    poster_url.value = `reeltalks.p-e.kr/images/${movie_id}.png` // ?
   }
   catch (e) {
     console.error(e)
@@ -77,7 +77,7 @@ const titleSearch = () => {
   else {
     const lowerCaseKeyword = keyword.value.toLowerCase()
     filteredPosts.value = tableData.value.filter(post =>
-      post.postTitle.toLowerCase().includes(lowerCaseKeyword),
+      post.post_title.toLowerCase().includes(lowerCaseKeyword),
     )
   }
 }
@@ -118,21 +118,21 @@ const goPostEdit = () => {
 }
 const goToCategory = (genre) => {
   switch (genre) {
-    case '액션': router.push('/movielist/action')
+    case '#액션': router.push('/movielist/action')
       break
-    case '멜로/로맨스': router.push('/movielist/romance')
+    case '#멜로/로맨스': router.push('/movielist/romance')
       break
-    case '애니': router.push('/movielist/ani')
+    case '#애니': router.push('/movielist/ani')
       break
-    case '드라마': router.push('/movielist/drama')
+    case '#드라마': router.push('/movielist/drama')
       break
-    case '호러': router.push('/movielist/horror')
+    case '#공포': router.push('/movielist/horror')
       break
-    case 'SF': router.push('/movielist/sf')
+    case '#SF': router.push('/movielist/sf')
       break
-    case '판타지': router.push('/movielist/fantasy')
+    case '#판타지': router.push('/movielist/fantasy')
       break
-    case '코메디': router.push('/movielist/comedy')
+    case '#코메디': router.push('/movielist/comedy')
       break
     default :router.push('/movielist/etc')
   }
@@ -156,7 +156,7 @@ onMounted(async () => {
     <table class="my-10 table-fixed items-center">
       <tr>
         <td class="min-w-xl text-right items-end pr-2 mx-auto">
-          <img :src="poster_url" class="object-fill inline-block px-5" @error="poster_url.value = '/src/components/img/alt.png' ">
+          <img :src="poster_url" class="object-fill inline-block px-5" @error="poster_url = '/src/components/img/alt.png' ">
         </td>
         <td class="min-w-xl mx-5 px-5 text-left">
           <ul>

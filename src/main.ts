@@ -18,6 +18,7 @@ routes.push(
       movieId: route.params.movieId,
       postId: route.params.postId,
     }),
+    meta: { layout: 'bare' },
   },
   {
     path: '/login/sso/:key1/:key2',

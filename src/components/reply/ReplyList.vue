@@ -36,7 +36,14 @@ const toggleModifyReply = (index) => {
 const getReplyList = async () => {
   try {
     const res = await axios.get(`/api/movie/${props.movieId}/post/${props.postId}/reply`)
-    replyList.value = res.data
+    replyList.value = res.data.map((item) => {
+      const date = new Date(item.create_at)
+      const now = new Date()
+      const formedDate = now.toDateString() !== date.toDateString()
+        ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
+        : `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+      return { ...item, create_at: formedDate }
+    })
   }
   catch {
     ElMessage({ type: 'error', message: '댓글 정보를 불러오지 못했습니다' })
@@ -110,10 +117,10 @@ watch(() => reReply.value, (newValue) => {
       <li v-if="replyList.length === 0" class="ml-3 px-2 inline-block">
         등록된 댓글이 없습니다
       </li>
-      <li v-for="(item, index) in replyList" v-else :key="index" class="ml-3 px-2 inline-block">
+      <li v-for="(item, index) in replyList" v-else :key="index" class="ml-3 px-2 my-1 inline-block">
         <div v-if="showModifyReply !== index" class="flex">
           <img
-            v-if="item?.depth === 2" class="ml-1 pl-1 w-5.4 justify-center mt-1.8" inline-block
+            v-if="item?.depth === 2" class="ml-1 pl-1 w-5.4 justify-center mt-1.8 inline-block"
             src="/src/components/img/rep1.png"
           >
           <span class="basis-15 px-2 text-left">
@@ -140,7 +147,7 @@ watch(() => reReply.value, (newValue) => {
         <div v-else-if="showModifyReply === index" class="inline-block flex justify-center items-center">
           <textarea
             v-model="changedReply"
-            class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-xl max-w-2xl text-3 leading-normal"
+            class="border-0.5 border-black px-1 py-1 my-2 mr-0 ml-auto min-w-xl max-w-2xl text-3 leading-normal inline"
           />
           <el-button color="#151AA3" class="text-white bg-rtblue ml-2 mr-0" @click="modifyReply(index)">
             수정
@@ -149,18 +156,18 @@ watch(() => reReply.value, (newValue) => {
             취소
           </el-button>
         </div>
-        <ReplyReplyEdit
-          v-if="showReReplyEdit === index" v-model="reReply" class="absolute mx-auto"
-          @reply-submit="reReplySubmit(item?.reply_id)"
-        >
-          <span class="leading-4.5">
-            대댓글 <br>
-            등록
-          </span>
-        </ReplyReplyEdit>
+        <div v-if="showReReplyEdit === index" class="inline-block ml--3 max-w-41rem mx-auto">
+          <ReplyReplyEdit
+            v-model="reReply"
+            @reply-submit="reReplySubmit(item?.reply_id)"
+          >
+            <span class="leading-4.5">
+              대댓글 <br>
+              등록
+            </span>
+          </ReplyReplyEdit>
+        </div>
       </li>
     </ul>
   </div>
 </template>
-
-<style scoped></style>
