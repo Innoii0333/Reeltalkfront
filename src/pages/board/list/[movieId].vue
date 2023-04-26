@@ -53,7 +53,7 @@ const getMovie = async () => {
     if (data.plot)
       plot.value = data.plot.slice(0, 50) + (data.plot.length > 50 ? '...' : '')
     star_avg_rate.value = data.star_avg_rate?.toFixed(1)
-    poster_url.value = `/images/${movie_id}.png` // ?
+    poster_url.value = `/app/web/images/${movie_id}.png` // ?
   }
   catch (e) {
     console.error(e)
