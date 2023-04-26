@@ -13,14 +13,13 @@ const pageSizeOptions = [10, 20, 30]
 const pageSize = ref(pageSizeOptions[0])
 const currentPage = ref(1)
 const filteredPosts = ref(tableData.value)
-const plot = ref('')
+const plot = ref('줄거리가 없습니다')
 const director_nm = ref('')
 const category_id = ref('')
 const release_date = ref('')
 const grade = ref('')
 const star_avg_rate = ref('')
 const poster_url = ref('/src/components/img/alt.png')
-const now = new Date()
 const formedDate = ref(null)
 
 const inqueryPost = async () => {
@@ -28,12 +27,13 @@ const inqueryPost = async () => {
     const res = await axios.get(`/api/movie/${movie_id}/post`)
     tableData.value = res.data.map((item) => {
       const date = new Date(item.create_at)
+      const now = new Date()
       formedDate.value = now.toDateString() !== date.toDateString()
         ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
-        : `${date.getHours()}:${date.getMinutes()}`
-      return { ...item, create_at: formedDate }
+        : `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+      return { ...item, create_at: formedDate.value }
     })
-    console.log(tableData.value)
+    // console.log(tableData.value)
   }
   catch (e) {
     ElMessage({ type: 'error', message: '게시물 정보를 불러올 수 없습니다' })
@@ -46,16 +46,19 @@ const getMovie = async () => {
     const data = res.data
     movie_name.value = data.title
     director_nm.value = data.director_nm
-    category_id.value = data.category_id.split(', ')// parse해서 array로 만들고 v-for, 조건 일치하는지 확인 필요함, 클릭시 각 카테고리 이동?
-    release_date.value = data.release_date
+    category_id.value = data.category_id.split(' ')// parse해서 array로 만들고 v-for, 조건 일치하는지 확인 필요함, 클릭시 각 카테고리 이동?
+    const date = new Date(data.release_date)
+    release_date.value = `${date.getFullYear().toString()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
     grade.value = data.grade
-    star_avg_rate.value = data.star_avg_rate
-    poster_url.value = `/app/web/images/${movie_id}.png` // ?
+    if (data.plot)
+      plot.value = data.plot.slice(0, 50) + (data.plot.length > 50 ? '...' : '')
+    star_avg_rate.value = data.star_avg_rate?.toFixed(1)
+    poster_url.value = `reeltalks.p-e.kr/images/${movie_id}.png` // ?
   }
   catch (e) {
     console.error(e)
     ElMessage({ type: 'error', message: '영화 정보를 찾을 수 없습니다' })
-    //   router.push('/main')
+    router.replace('/main')
   }
   await inqueryPost()
 }
@@ -74,7 +77,7 @@ const titleSearch = () => {
   else {
     const lowerCaseKeyword = keyword.value.toLowerCase()
     filteredPosts.value = tableData.value.filter(post =>
-      post.postTitle.toLowerCase().includes(lowerCaseKeyword),
+      post.post_title.toLowerCase().includes(lowerCaseKeyword),
     )
   }
 }
@@ -115,21 +118,21 @@ const goPostEdit = () => {
 }
 const goToCategory = (genre) => {
   switch (genre) {
-    case '액션': router.push('/movielist/action')
+    case '#액션': router.push('/movielist/action')
       break
-    case '멜로/로맨스': router.push('/movielist/romance')
+    case '#멜로/로맨스': router.push('/movielist/romance')
       break
-    case '애니': router.push('/movielist/ani')
+    case '#애니': router.push('/movielist/ani')
       break
-    case '드라마': router.push('/movielist/drama')
+    case '#드라마': router.push('/movielist/drama')
       break
-    case '호러': router.push('/movielist/horror')
+    case '#공포': router.push('/movielist/horror')
       break
-    case 'SF': router.push('/movielist/sf')
+    case '#SF': router.push('/movielist/sf')
       break
-    case '판타지': router.push('/movielist/fantasy')
+    case '#판타지': router.push('/movielist/fantasy')
       break
-    case '코메디': router.push('/movielist/comedy')
+    case '#코메디': router.push('/movielist/comedy')
       break
     default :router.push('/movielist/etc')
   }
@@ -138,6 +141,7 @@ const goToCategory = (genre) => {
 onMounted(async () => {
   await getMovie()
   filteredPosts.value = tableData.value
+  console.log(useSessionStore().user_id)
 })
 </script>
 
@@ -149,22 +153,22 @@ onMounted(async () => {
   </div>
   <hr class="border-rtblue my-2 border-2">
   <div>
-    <table class="my-10 table-fixed">
+    <table class="my-10 table-fixed items-center">
       <tr>
-        <td class="w-180 text-center">
-          <img :src="poster_url" class="object-fill" @error="poster_url.value = '/src/components/img/alt.png' ">
+        <td class="min-w-xl text-right items-end pr-2 mx-auto">
+          <img :src="poster_url" class="object-fill inline-block px-5" @error="poster_url = '/src/components/img/alt.png' ">
         </td>
-        <td class="w-100% text-center">
+        <td class="min-w-xl mx-5 px-5 text-left">
           <ul>
             <li>
               {{ movie_name }}에 관한 내용을 다루는 게시판입니다
             </li>
-            <li> {{ plot }}  </li>
-            <li> {{ director_nm }}  </li>
-            <li> <span v-for="(categories, i) in category_id" :key="i" class="hover:underline-solid" @click="goToCategory(categories)">#{{ categories }} </span> </li>
-            <li> {{ grade }} </li>
-            <li> {{ release_date }}  </li>
-            <li> {{ star_avg_rate }}  </li>
+            <li> 줄거리: {{ plot }}  </li>
+            <li> 감독: {{ director_nm }}  </li>
+            <li> <span v-for="(categories, i) in category_id" :key="i" class="hover:underline-solid" @click="goToCategory(categories)">{{ categories }}&nbsp;</span> </li>
+            <li> 등급: {{ grade }} </li>
+            <li> 개봉일: {{ release_date }}  </li>
+            <li> Reeltalks 평점: {{ star_avg_rate }}  </li>
           </ul>
         </td>
       </tr>

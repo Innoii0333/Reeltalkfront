@@ -29,15 +29,7 @@ const openSignup = () => {
 }
 onMounted(async () => {
   await session.checkLogin()
-  console.log (session.checkLogin())
-  console.log (session.isLoggedIn)
 })
-
-// const router = useRouter()
-// const getUser = () => {
-//   // console.log(session.user_id, session.user_name)
-//   router.push('/chat')
-// }
 </script>
 
 <template>
@@ -107,19 +99,5 @@ onMounted(async () => {
 }
 .logo {
   padding-left: 50px;
-}
-#menu {
-  position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  margin-top: 280px;
-  font-size: 20px;
-}
-
-#menu a {
-  color: white;
-  margin: 0 33px;
 }
 </style>

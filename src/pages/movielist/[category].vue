@@ -7,11 +7,11 @@ const route = useRoute()
 const router = useRouter()
 const category = route.params.category
 const tableData = ref([])
-const filteredMovies = ref([])
 const keyword = ref('')
 const isLoading = ref(0)
 const pages = ref(1)
 const intersectionTarget = ref(null)
+const filteredTable = ref([])
 let observer = null
 
 const options = {
@@ -20,16 +20,36 @@ const options = {
   threshold: 0.3,
 }
 
+const titleSearch = () => {
+  if (keyword.value === '') { filteredTable.value = tableData.value }
+  else {
+    const lowerCaseKeyword = keyword.value.toLowerCase()
+    filteredTable.value = tableData.value.filter(movie =>
+      movie.title.toLowerCase().includes(lowerCaseKeyword),
+    )
+  }
+}
 const getMovies = async (n) => {
   isLoading.value = 1
   try {
     const res = await axios.get('/api/movieList', {
       params: {
-        category: route.params.category,
-        page: n,
+        category_id: category,
+        curPage: n,
       },
     })
-    tableData.value = tableData.value.concat(res)
+    const res1 = res.data.map((item) => {
+      const categories = item.category_id.split(' ')
+      let newDate = ''
+      if (item.release_date) {
+        const date = new Date(item.release_date)
+        newDate = `${date.getFullYear().toString()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+      }
+      const imageUrl = `https://reeltalks.p-e.kr/images/${item.movie_id}.png`
+      return { ...item, release_date: newDate, category_id: categories, poster_url: imageUrl }
+    })
+    tableData.value = tableData.value.concat(res1)
+    titleSearch()
     isLoading.value = 0
     if (res.data.length === 0)
       isLoading.value = -1
@@ -49,15 +69,7 @@ const handleIntersect = async (entries, observer) => {
   if (isLoading.value === 0)
     observer.observe(intersectionTarget.value)
 }
-const titleSearch = () => {
-  if (keyword.value === '') { filteredMovies.value = tableData.value }
-  else {
-    const lowerCaseKeyword = keyword.value.toLowerCase()
-    filteredMovies.value = tableData.value.filter(movie =>
-      movie.title.toLowerCase().includes(lowerCaseKeyword),
-    )
-  }
-}
+
 const goMovieBoard = (movieId) => {
   router.push(`/board/list/${movieId}`)
 }
@@ -90,14 +102,14 @@ onBeforeUnmount(() => {
   <hr class="border-rtblue my-2">
   <!-- 카드 요소를 이용한 데이터 출력 및 infinite scrolling -->
   <div>
-    <el-row class="min-h-sm" :gutter="20">
+    <el-row class="min-h-xl" :gutter="20">
       <el-col
-        v-for="(movieCard, index) in filteredMovies"
+        v-for="(movieCard, index) in filteredTable"
         :key="index"
         class="mb-8"
         :span="6"
       >
-        <el-card :body-style="{ padding: '3px' }" @click="goMovieBoard(movieCard.movie_id)">
+        <el-card :body-style="{ padding: '3px', height: '100%' }" @click="goMovieBoard(movieCard.movie_id)">
           <button>
             <el-image
               :src="movieCard.poster_url" class="object-cover"
@@ -107,7 +119,7 @@ onBeforeUnmount(() => {
               <p> {{ movieCard.title }} </p>
               <p> {{ movieCard.release_date }} </p>
               <p> {{ movieCard.star_avg_rate }}</p>
-              <p> <span v-for="{ exCategory, idx } in movieCard.category_id" :key="idx">#{{ exCategory }}</span></p>
+              <p> <span v-for="(exCategory, idx) in movieCard.category_id" :key="idx">{{ exCategory }}&nbsp;</span></p>
             </div>
           </button>
         </el-card>
@@ -130,5 +142,5 @@ input.border-rtgray{
 <route lang="yaml">
 meta:
   layout: onlyheader
-  </route>
+    </route>
 

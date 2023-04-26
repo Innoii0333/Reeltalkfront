@@ -33,7 +33,7 @@ function openNewWindow() {
 
 function handleImageClick(item) {
   router.push(`/board/list/${item.movie_id}`)
-  console.log(`Clicked on ${item.movie_id}`)
+  // console.log(`Clicked on ${item.movie_id}`)
 }
 
 const getMainPageData = async () => {
@@ -50,14 +50,14 @@ const getMainPageData = async () => {
     })
     // hot movie list
     const hotMovieResult = await axios.get('/api/hotMovie/7')
-    console.log('hot Movie : ', hotMovieResult)
+    //   console.log('hot Movie : ', hotMovieResult)
     hotMovieData.value = hotMovieResult.data
     const sortedHotMovies = hotMovieData.value?.sort((a, b) => b.postCount - a.postCount).slice(0, 5)
     hotMovieList.value = sortedHotMovies.length > 0 ? sortedHotMovies : [hotMovieData.value[0]]
 
     // hot post list
     const hotPostResult = await axios.get('/api/hotPost/7')
-    console.log('hot Post : ', hotPostResult)
+    //   console.log('hot Post : ', hotPostResult)
     const hotPostData = hotPostResult.data
     const sortedHotPosts = hotPostData.sort((a, b) => b.replyCount - a.replyCount).slice(0, 5)
     hotPostList.value = sortedHotPosts.length > 0 ? sortedHotPosts : [hotPostData[0]]
@@ -67,42 +67,30 @@ const getMainPageData = async () => {
     const replyResult = await axios.get('/api/statisticsReply/30')
     const genreResult = await axios.get('/api/statisticsGenre/30')
 
-    watch(data2, (newVal) => {
-      console.log('data2 length:', newVal.length)
-    })
-
-    watch(data3, (newVal) => {
-      console.log('data3 length:', newVal.length)
-    })
-
     if (postResult.data.length === 0) {
-      console.log('현재 등록된 게시물이 없습니다')
+      ElMessage({ type: 'error', message: '인기 영화에 대한 통계 데이터가 없습니다' })
     }
     else {
-      console.log('Post Result:', postResult.data)
+      //     console.log('Post Result:', postResult.data)
       labels1.value = postResult.data.map(item => item.stat_name)
       data1.value = postResult.data.map(item => item.stat_count)
-      console.log(labels1, data1)
+      //      console.log(labels1, data1)
     }
 
     if (replyResult.data.length === 0) {
-      console.log('현재 등록된 댓글이 없습니다')
+      ElMessage({ type: 'error', message: '인기 게시물에 대한 통계 데이터가 없습니다' })
     }
     else {
-      console.log('Reply Result:', replyResult.data)
       labels2.value = replyResult.data.map(item => item.stat_name)
       data2.value = replyResult.data.map(item => item.stat_count)
-      console.log(labels2, data2)
     }
 
     if (genreResult.data.length === 0) {
-      console.log('현재 등록된 장르가 없습니다')
+      ElMessage({ type: 'error', message: '인기 장르에 대한 통계 데이터가 없습니다' })
     }
     else {
-      console.log('Genre Result:', genreResult.data)
       labels3.value = genreResult.data.map(item => item.stat_name)
       data3.value = genreResult.data.map(item => item.stat_count)
-      console.log(labels3, data3)
     }
   }
   catch (e) {
@@ -181,7 +169,7 @@ onMounted(async () => await getMainPageData())
         <!-- 핫 포스트 템플릿 -->
         <ul style="text-align: left; padding-left: 30px;">
           <li v-for="(item, index) in hotPostList" :key="item.post_id" style="margin-top: 22px;">
-            <router-link :to="{ path: `/board/post/${item.movie_id}/${item.post_Title}` }">
+            <router-link :to="{ path: `/board/post/${item.movie_id}/${item.post_id}` }">
               {{ parseInt(index) + 1 }}. {{ item.post_Title }}
             </router-link>
           </li>
@@ -223,7 +211,6 @@ onMounted(async () => await getMainPageData())
       <PieChart :labels="labels3" :data="data3" />
     </div>
   </div>
-  <RouterView />
 </template>
 
 <style lang="scss">
@@ -269,3 +256,8 @@ onMounted(async () => await getMainPageData())
   margin-right: 30px;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  layout: home
+    </route>

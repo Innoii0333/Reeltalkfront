@@ -13,16 +13,15 @@ const routes = setupLayouts(generatedRoutes)
 routes.push(
   {
     path: '/board/post/:movieId/:postId',
-    name: 'postindex',
     component: () => import('./pages/board/post/[movieId]-[postId].vue'),
     props: route => ({
       movieId: route.params.movieId,
       postId: route.params.postId,
     }),
+    meta: { layout: 'bare' },
   },
   {
     path: '/login/sso/:key1/:key2',
-    name: 'sso',
     component: () => import('./pages/login/sso-[key1]-[key2].vue'),
     props: route => ({
       key1: route.params.key1,
