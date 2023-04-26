@@ -13,15 +13,20 @@ const data3 = ref([])
 const hotMovieData = ref([])
 
 function openNewWindow() {
-  const windowFeatures = {
-    width: 600,
-    height: 900,
-    left: (window.screen.width - 600) / 2,
-    top: (window.screen.height - 900) / 2,
-  }
-  const newWindow = window.open('/chat', '_blank', Object.entries(windowFeatures).map(e => `${e[0]}=${e[1]}`).join(','))
-  if (newWindow)
-    newWindow.focus()
+  // const windowFeatures = {
+  //   width: 600,
+  //   height: 900,
+  //   left: (window.screen.width - 600) / 2,
+  //   top: (window.screen.height - 900) / 2,
+  // }
+  // const newWindow = window.open('/chat', '_blank', Object.entries(windowFeatures).map(e => `${e[0]}=${e[1]}`).join(','))
+  // if (newWindow)
+  //   newWindow.focus()
+  router.push('/chat').then(() => {
+    console.log('Navigated to /chat')
+  }).catch((err) => {
+    console.log('Error navigating to /chat:', err)
+  })
 }
 
 // 통계 입력 부분

@@ -9,12 +9,20 @@ server.on('connection', (socket) => {
   // 클라이언트로부터 메시지를 받았을 때의 이벤트 리스너
   socket.on('message', (message) => {
     console.log(`클라이언트로부터 받은 메시지: ${message}`)
+    const parsedMessage = JSON.parse(message)
+    parsedMessage.isMine = false
+
     // 접속한 모든 클라이언트 들에게 메시지를 전송
     server.clients.forEach((client) => {
-      client.send(message.toString())
+      // 메시지를 보낸 클라이언트가 아닌 경우에만 메시지를 전송
+      if (client !== socket) {
+        client.send(JSON.stringify(parsedMessage))
+      }
+      else {
+        parsedMessage.isMine = true
+        client.send(JSON.stringify(parsedMessage))
+      }
     })
-
-    // socket.send(message)
   })
 
   // 클라이언트와의 연결이 종료되었을 때의 이벤트 리스너
