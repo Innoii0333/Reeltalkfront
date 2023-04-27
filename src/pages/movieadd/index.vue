@@ -6,7 +6,7 @@ const searchInfo = ref(null)
 const movieInfo = ref(null)
 const keyword = ref('')
 const isActive = ref(false)
-const ADMIN_ID = 'admin'
+const ADMIN_ID = ['hin2520', 'susu4334', 'alsdnr0501', 'you3849', 'wonffo24', 'juseon5469', 'lsangm0513']
 
 const goBack = () => {
   router.push('/error')
@@ -65,7 +65,7 @@ const submitMovie = async () => {
   }
 }
 onMounted(() => {
-  if (session.user_id === ('' || 'userid1'))
+  if (!ADMIN_ID.includes(session.user_id))
     goBack()
 })
 </script>

@@ -80,7 +80,6 @@ const getPost = async () => {
       post_title.value = res.data.post_title
       star_rate.value = res.data.star_rate
       postusername.value = res.data.user_name
-      console.log(postusername)
     }
     catch {
       ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
@@ -105,7 +104,6 @@ onMounted(async () => {
     if (user_id.value === ('userid1' || ''))
       await session.checkLogin()
     user_id.value = session.user_id
-    // const authResponse = await session.checkAuth()
     if (!user_id.value || user_id.value === ('userid1' || ''))
       throw new Error ('expired session')
     await getPost()

@@ -4,7 +4,7 @@ const STORAGE_KEY1 = 'Reeltalks_session_keyset1'
 const STORAGE_KEY2 = 'Reeltalks_session_keyset2'
 
 export const useSessionStore = defineStore('session', () => {
-  const token = ref([''])
+  const token = ref(['', ''])
   const user_id = ref('userid1')
   const user_name = ref('userid1')
   const isLoggedIn = ref(false)
@@ -22,6 +22,8 @@ export const useSessionStore = defineStore('session', () => {
   }
 
   const getSession = async () => {
+    if (!token.value[1])
+      return
     try {
       const res = await fetch(`/api/session/${token.value[0]}/${token.value[1]}`, {
         method: 'POST',

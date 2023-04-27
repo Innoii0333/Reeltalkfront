@@ -14,7 +14,7 @@ const goBack = () => {
 }
 
 const userNameCheck = async () => {
-  if (user_name.value === '' || user_name.value.length > 10) {
+  if (user_name.value === '' || user_name.value.length > 10 || !/^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]*$/.test(user_name.value)) {
     nameResult.value = '한글 영문 숫자를 조합해 10자 이내로 입력해주세요'
     return
   }
