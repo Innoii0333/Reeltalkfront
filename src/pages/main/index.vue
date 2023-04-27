@@ -76,6 +76,9 @@ const getMainPageData = async () => {
     ElMessage({ type: 'error', message: '서버 데이터를 불러오는 데에 실패했습니다' })
   }
 }
+const goPost = (movieId, postId) => {
+  router.push({ name: 'MoviePost', params: { movieId, postId } })
+}
 
 onMounted(async () => await getMainPageData())
 </script>
@@ -152,10 +155,10 @@ onMounted(async () => await getMainPageData())
       <div>
         <!-- 핫 포스트 템플릿 -->
         <ul style="text-align: left; padding-left: 30px;">
-          <li v-for="(item, index) in hotPostList" :key="item.post_id" style="margin-top: 22px;">
-            <router-link :to="{ path: `/board/post/${item.movie_id}/${item.post_id}` }">
+          <li v-for="(item, index) in hotPostList" :key="index" style="margin-top: 22px;">
+            <button @click="goPost(item.movie_Id, item.post_Id)">
               {{ parseInt(index) + 1 }}. {{ item.post_Title }}
-            </router-link>
+            </button>
           </li>
         </ul>
         <div v-if="!hotPostList || hotPostList.length === 0" style="text-align: center;">
@@ -202,6 +205,7 @@ onMounted(async () => await getMainPageData())
   position: relative;
   display: inline-block;
 }
+.el-carousel__container{height:400px}
 
 .carousel-item-text {
   position: absolute;

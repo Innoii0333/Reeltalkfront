@@ -9,7 +9,7 @@ const isActive = ref(false)
 const ADMIN_ID = 'admin'
 
 const goBack = () => {
-  router.back()
+  router.push('/error')
 }
 const getMovie = async () => {
   let i = 0
@@ -65,7 +65,7 @@ const submitMovie = async () => {
   }
 }
 onMounted(() => {
-  if (!session.user_id)
+  if (session.user_id === ('' || 'userid1'))
     goBack()
 })
 </script>

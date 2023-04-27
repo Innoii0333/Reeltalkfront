@@ -10,7 +10,7 @@ import './styles/main.css'
 import 'uno.css'
 
 const checkLogin = (to: any) => {
-  if (useSessionStore().user_id)
+  if (useSessionStore().user_id === ('userid1' || ''))
     return { name: 'Error' }
   else return to
 }
@@ -18,6 +18,7 @@ const routes = setupLayouts(generatedRoutes)
 routes.push(
   {
     path: '/board/post/:movieId/:postId',
+    name: 'MoviePost',
     component: () => import('./pages/board/post/[movieId]-[postId].vue'),
     props: route => ({
       movieId: route.params.movieId,
@@ -43,8 +44,9 @@ routes.push(
     beforeEnter: to => checkLogin(to),
   },
   {
-    path: '/board/postedit',
-    component: () => import('./pages/movieadd/index.vue'),
+    path: '/board/postedit/:movieId',
+    component: () => import('./pages/board/postedit/[movieId].vue'),
+    props: route => ({ movieId: route.params.movieId }),
     beforeEnter: to => checkLogin(to),
   },
 )
