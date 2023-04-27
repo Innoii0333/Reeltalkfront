@@ -86,7 +86,10 @@ onMounted(async () => await getMainPageData())
 <template>
   <div style="display: flex; flex-direction: column;">
     <ElCarousel :interval="4000" arrow="always">
-      <ElCarouselItem v-for="(boxOffices, boxOfficeOrder) in boxOfficeList" :key="boxOfficeOrder" style="display: flex; flex-direction: column; min-height: 400px;" @click="handleImageClick(boxOffices)">
+      <ElCarouselItem
+        v-for="(boxOffices, boxOfficeOrder) in boxOfficeList" :key="boxOfficeOrder"
+        style="display: flex; flex-direction: column; min-height: 400px;" @click="handleImageClick(boxOffices)"
+      >
         <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: auto;">
           <img
             :src="boxOffices.imageLink" alt="item.description"
@@ -205,7 +208,10 @@ onMounted(async () => await getMainPageData())
   position: relative;
   display: inline-block;
 }
-.el-carousel__container{height:400px}
+
+.el-carousel__container {
+  height: 400px;
+}
 
 .carousel-item-text {
   position: absolute;
@@ -224,7 +230,8 @@ onMounted(async () => await getMainPageData())
   padding: 80px 80px;
   font-size: 30px;
 }
-.piechart{
+
+.piechart {
   display: flex;
   justify-content: center;
   align-items: center;

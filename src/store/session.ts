@@ -55,7 +55,7 @@ export const useSessionStore = defineStore('session', () => {
     else return false
   }
   const checkLogin = async () => {
-    if (user_id.value === 'userid1' || user_name.value === 'userid1') {
+    if (user_id.value === ('userid1' || '') || user_name.value === ('userid1' || '')) {
       if (!token.value[1])
         setToken()
       try {

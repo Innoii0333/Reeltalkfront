@@ -80,6 +80,7 @@ const getPost = async () => {
       post_title.value = res.data.post_title
       star_rate.value = res.data.star_rate
       postusername.value = res.data.user_name
+      console.log(postusername)
     }
     catch {
       ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
@@ -101,12 +102,14 @@ const getPost = async () => {
 }
 onMounted(async () => {
   try {
-    if (session.user_id === 'userid1')
+    if (user_id.value === ('userid1' || ''))
       await session.checkLogin()
     user_id.value = session.user_id
     // const authResponse = await session.checkAuth()
+    if (!user_id.value || user_id.value === ('userid1' || ''))
+      throw new Error ('expired session')
     await getPost()
-    if (postusername.value && postusername.value !== user_id.value) {
+    if (postusername.value && postusername.value !== session.user_name) {
       guard = false
       ElMessage({ type: 'error', message: '권한이 없습니다' })
       router.push(`/board/list/${movie_id}`)

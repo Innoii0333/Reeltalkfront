@@ -9,10 +9,10 @@ import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
 
-const checkLogin = (to: any) => {
+const checkLogin = (to: any, next: any) => {
   if (useSessionStore().user_id === ('userid1' || ''))
-    return { name: 'Error' }
-  else return to
+    next({ name: 'Error' })
+  else next(to)
 }
 const routes = setupLayouts(generatedRoutes)
 routes.push(
@@ -41,13 +41,13 @@ routes.push(
   {
     path: '/movieadd',
     component: () => import('./pages/movieadd/index.vue'),
-    beforeEnter: to => checkLogin(to),
+    beforeEnter: (to, next) => checkLogin(to, next),
   },
   {
     path: '/board/postedit/:movieId',
     component: () => import('./pages/board/postedit/[movieId].vue'),
     props: route => ({ movieId: route.params.movieId }),
-    beforeEnter: to => checkLogin(to),
+    beforeEnter: (to, next) => checkLogin(to, next),
   },
 )
 
