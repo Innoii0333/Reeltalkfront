@@ -74,20 +74,21 @@ const scrollToBottom = () => {
 onMounted(() => {
   socket = new WebSocket('ws://localhost:8079')
   open()
-})
-socket.onmessage = (event) => {
-  try {
-    const message = JSON.parse(event.data)
-    if (message.nickname !== nickname.value) {
-      message.isMine = false
-      messages.value.push(message)
+  socket.onmessage = (event) => {
+    try {
+      const message = JSON.parse(event.data)
+      if (message.nickname !== nickname.value) {
+        message.isMine = false
+        messages.value.push(message)
+      }
+      scrollToBottom()
     }
-    scrollToBottom()
+    catch (error) {
+      console.error('Received non-JSON message:', event.data)
+    }
   }
-  catch (error) {
-    console.error('Received non-JSON message:', event.data)
-  }
-}
+})
+
 onUnmounted(() => {
   socket.close()
 })
