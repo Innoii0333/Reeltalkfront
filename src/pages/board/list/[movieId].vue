@@ -33,11 +33,10 @@ const inqueryPost = async () => {
         : `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
       return { ...item, create_at: formedDate.value }
     })
-    // console.log(tableData.value)
+
   }
-  catch (e) {
+  catch {
     ElMessage({ type: 'error', message: '게시물 정보를 불러올 수 없습니다' })
-    console.error(e)
   }
 }
 const getMovie = async () => {
@@ -55,8 +54,7 @@ const getMovie = async () => {
     star_avg_rate.value = data.star_avg_rate?.toFixed(1)
     poster_url.value = `reeltalks.p-e.kr/images/${movie_id}.png` // ?
   }
-  catch (e) {
-    console.error(e)
+  catch {
     ElMessage({ type: 'error', message: '영화 정보를 찾을 수 없습니다' })
     router.replace('/main')
   }

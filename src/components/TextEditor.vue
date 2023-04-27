@@ -2,13 +2,13 @@
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document'
 import CKEditor from '@ckeditor/ckeditor5-vue'
 import '@ckeditor/ckeditor5-build-decoupled-document/build/translations/ko'
+
 const props = defineProps({
   modelValue: {
     type: String,
   },
 })
 const emits = defineEmits(['update:modelValue'])
-// Use the <ckeditor> component in this view.
 const editor = DecoupledEditor
 const editorData = ref('')
 const CkEditor = CKEditor.component
@@ -19,12 +19,11 @@ const onEditorReady = (editor) => {
   editor.ui.getEditableElement().parentElement.insertBefore(
     editor.ui.view.toolbar.element,
     editor.ui.getEditableElement())
+  if (props.modelValue !== '')
+    editor.setData(props.modelValue)
   editorData.value = editor.getData()
 }
-onMounted(async () => {
-  if (props.value !== '')
-    editorData.value = props.modelValue
-})
+
 watch(() => editorData.value, () => { emits('update:modelValue', editorData.value) })
 </script>
 

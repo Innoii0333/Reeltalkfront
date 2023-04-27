@@ -13,27 +13,16 @@ const data3 = ref([])
 const hotMovieData = ref([])
 
 function openNewWindow() {
-  // const windowFeatures = {
-  //   width: 600,
-  //   height: 900,
-  //   left: (window.screen.width - 600) / 2,
-  //   top: (window.screen.height - 900) / 2,
-  // }
-  // const newWindow = window.open('/chat', '_blank', Object.entries(windowFeatures).map(e => `${e[0]}=${e[1]}`).join(','))
-  // if (newWindow)
-  //   newWindow.focus()
   router.push('/chat').then(() => {
-    console.log('Navigated to /chat')
-  }).catch((err) => {
-    console.log('Error navigating to /chat:', err)
+    ElMessage({ type: 'infor', message: '대화방으로 이동합니다' })
+  }).catch(() => {
+    ElMessage({ type: 'error', message: '대화방 입장에 실패했습니다' })
   })
 }
 
 // 통계 입력 부분
-
 function handleImageClick(item) {
   router.push(`/board/list/${item.movie_id}`)
-  // console.log(`Clicked on ${item.movie_id}`)
 }
 
 const getMainPageData = async () => {
@@ -42,27 +31,19 @@ const getMainPageData = async () => {
 
     // box office list
     boxOfficeList.value = result.data.boxOffice
-    console.log('Box Office List:', boxOfficeList.value)
 
-    // Log image URLs
-    boxOfficeList.value.forEach((boxOffice) => {
-      console.log('Image URL:', boxOffice.imageLink)
-    })
     // hot movie list
     const hotMovieResult = await axios.get('/api/hotMovie/7')
-    //   console.log('hot Movie : ', hotMovieResult)
     hotMovieData.value = hotMovieResult.data
     const sortedHotMovies = hotMovieData.value?.sort((a, b) => b.postCount - a.postCount).slice(0, 5)
     hotMovieList.value = sortedHotMovies.length > 0 ? sortedHotMovies : [hotMovieData.value[0]]
 
     // hot post list
     const hotPostResult = await axios.get('/api/hotPost/7')
-    //   console.log('hot Post : ', hotPostResult)
     const hotPostData = hotPostResult.data
     const sortedHotPosts = hotPostData.sort((a, b) => b.replyCount - a.replyCount).slice(0, 5)
     hotPostList.value = sortedHotPosts.length > 0 ? sortedHotPosts : [hotPostData[0]]
 
-    // 통계 데이터 가져오기
     const postResult = await axios.get('/api/statisticsPost/7')
     const replyResult = await axios.get('/api/statisticsReply/30')
     const genreResult = await axios.get('/api/statisticsGenre/30')
@@ -71,10 +52,8 @@ const getMainPageData = async () => {
       ElMessage({ type: 'error', message: '인기 영화에 대한 통계 데이터가 없습니다' })
     }
     else {
-      //     console.log('Post Result:', postResult.data)
       labels1.value = postResult.data.map(item => item.stat_name)
       data1.value = postResult.data.map(item => item.stat_count)
-      //      console.log(labels1, data1)
     }
 
     if (replyResult.data.length === 0) {
@@ -94,7 +73,7 @@ const getMainPageData = async () => {
     }
   }
   catch (e) {
-    console.error(e)
+    ElMessage({ type: 'error', message: '서버 데이터를 불러오는 데에 실패했습니다' })
   }
 }
 

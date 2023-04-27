@@ -16,7 +16,6 @@ const sendDataToParent = async (data) => {
 
 onMounted(async () => {
   const token = [key1, key2]
-  session.initToken(token)
   ElMessage({ type: 'info', message: 'checking the session' })
   await sendDataToParent(token)
   window.addEventListener('message', async (event) => {

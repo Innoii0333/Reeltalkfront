@@ -54,8 +54,7 @@ const getMovies = async (n) => {
     if (res.data.length === 0)
       isLoading.value = -1
   }
-  catch (e) {
-    console.error(e)
+  catch {
     ElMessage({ type: 'error', message: '영화 목록 조회에 실패하였습니다' })
     isLoading.value = -1
   }
