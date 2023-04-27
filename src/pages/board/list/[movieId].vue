@@ -33,6 +33,7 @@ const inqueryPost = async () => {
         : `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
       return { ...item, create_at: formedDate.value }
     })
+
   }
   catch {
     ElMessage({ type: 'error', message: '게시물 정보를 불러올 수 없습니다' })
@@ -138,6 +139,7 @@ const goToCategory = (genre) => {
 onMounted(async () => {
   await getMovie()
   filteredPosts.value = tableData.value
+  console.log(useSessionStore().user_id)
 })
 </script>
 

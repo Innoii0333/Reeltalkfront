@@ -104,6 +104,7 @@ onMounted(async () => {
   if (!session.user_id)
     await session.checkLogin()
   userId.value = session.user_id
+
   await getPost()
 })
 onBeforeRouteLeave((to, from, next) => {
