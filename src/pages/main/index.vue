@@ -85,7 +85,12 @@ onMounted(async () => await getMainPageData())
     <ElCarousel :interval="4000" arrow="always">
       <ElCarouselItem v-for="(boxOffices, boxOfficeOrder) in boxOfficeList" :key="boxOfficeOrder" style="display: flex; flex-direction: column; min-height: 400px;" @click="handleImageClick(boxOffices)">
         <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: auto;">
-          <img :src="boxOffices.imageLink" alt="item.description" style="width: auto; height: auto; max-width: 100%; max-height: 100%;" :style="{ 'width': '200px', 'height': '300px', 'object-fit': 'cover' }" @error="boxOffices.imageLink = 'https://reeltalks.p-e.kr/images/noimage.png'">
+          <img
+            :src="boxOffices.imageLink" alt="item.description"
+            style="width: auto; height: auto; max-width: 100%; max-height: 100%;"
+            :style="{ 'width': '200px', 'height': '300px', 'object-fit': 'cover' }"
+            @error="boxOffices.imageLink = 'https://reeltalks.p-e.kr/images/noimage.png'"
+          >
         </div>
         <div>
           제 목 : {{ boxOffices.title }}
