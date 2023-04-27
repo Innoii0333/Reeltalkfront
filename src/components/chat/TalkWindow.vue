@@ -72,7 +72,7 @@ const scrollToBottom = () => {
 }
 
 onMounted(() => {
-  socket = new WebSocket('ws://localhost:8079')
+  socket = new WebSocket('wss://reeltalk.p-e.kr:8079')
   open()
   socket.onmessage = (event) => {
     try {
@@ -110,7 +110,7 @@ onUnmounted(() => {
       </el-main>
       <el-footer class="input-area">
         <el-input v-model="inputMessage" type="text" placeholder="메시지를 입력하세요" class="input-message" @keyup.enter="sendMessage" />
-        <el-button type="primary" class="send-button" @click="sendMessage">
+        <el-button color="#151AA3" class="bg-rtblue text-white" @click="sendMessage">
           전송
         </el-button>
       </el-footer>

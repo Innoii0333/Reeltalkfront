@@ -1,3 +1,7 @@
+<script setup>
+
+</script>
+
 <template>
   <div class="chat">
     <el-container direction="vertical" class="chat-container">

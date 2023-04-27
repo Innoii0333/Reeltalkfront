@@ -101,7 +101,7 @@ const submitReply = async (pReplyId) => {
   }
 }
 onMounted(async () => {
-  if (!session.user_id)
+  if (session.user_id === 'userid1')
     await session.checkLogin()
   userId.value = session.user_id
 

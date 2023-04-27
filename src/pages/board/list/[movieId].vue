@@ -51,7 +51,7 @@ const getMovie = async () => {
     if (data.plot)
       plot.value = data.plot.slice(0, 50) + (data.plot.length > 50 ? '...' : '')
     star_avg_rate.value = data.star_avg_rate?.toFixed(1)
-    poster_url.value = `reeltalks.p-e.kr/images/${movie_id}.png` // ?
+    poster_url.value = `https://reeltalks.p-e.kr/images/${movie_id}.png` // ?
   }
   catch {
     ElMessage({ type: 'error', message: '영화 정보를 찾을 수 없습니다' })

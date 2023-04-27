@@ -101,13 +101,14 @@ const getPost = async () => {
 }
 onMounted(async () => {
   try {
-    if (!session.user_id)
+    if (session.user_id === 'userid1')
       await session.checkLogin()
     user_id.value = session.user_id
     // const authResponse = await session.checkAuth()
     await getPost()
     if (postusername.value && postusername.value !== user_id.value) {
       guard = false
+      ElMessage({ type: 'error', message: '권한이 없습니다' })
       router.push(`/board/list/${movie_id}`)
     }
   }

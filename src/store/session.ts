@@ -53,8 +53,7 @@ export const useSessionStore = defineStore('session', () => {
     else return false
   }
   const checkLogin = async () => {
-    if ((localStorage.getItem(STORAGE_KEY1) && localStorage.getItem(STORAGE_KEY2))
-  && (!user_id.value || !user_name.value)) {
+    if (user_id.value === 'userid1' || user_name.value === 'userid1') {
       if (!token.value[1])
         setToken()
       try {
