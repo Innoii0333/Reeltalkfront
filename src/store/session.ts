@@ -5,9 +5,9 @@ const STORAGE_KEY2 = 'Reeltalks_session_keyset2'
 
 export const useSessionStore = defineStore('session', () => {
   const token = ref([''])
-  const user_id = ref('')
-  const user_name = ref('')
-  const isLoggedIn = ref(false)
+  const user_id = ref('userid1')
+  const user_name = ref('userid1')
+  const isLoggedIn = ref(true)
 
   const initToken = (originToken: string[]) => {
     localStorage.STORAGE_KEY1 = originToken[0]
@@ -36,14 +36,21 @@ export const useSessionStore = defineStore('session', () => {
     }
   }
 
+  const logout = () => {
+    user_id.value = ''
+    user_name.value = ''
+    localStorage.removeItem(STORAGE_KEY1)
+    localStorage.removeItem(STORAGE_KEY2)
+    isLoggedIn.value = false
+  }
   const checkAuth = async () => {
     const res = await fetch(`/api/session/auth/${token.value[0]}/${token.value[1]}`, {
       method: 'POST',
     })
     const data = await res.text()
-    if (data === 'false')
-      throw new Error('Session expired or invalid')
-    else return data
+    if (data === 'true')
+      return true
+    else return false
   }
   const checkLogin = async () => {
     if ((localStorage.getItem(STORAGE_KEY1) && localStorage.getItem(STORAGE_KEY2))
@@ -54,12 +61,11 @@ export const useSessionStore = defineStore('session', () => {
         await getSession()
       }
       catch {
-        localStorage.removeItem(STORAGE_KEY1)
-        localStorage.removeItem(STORAGE_KEY2)
+        logout()
       }
     }
     else { return isLoggedIn.value }
   }
 
-  return { user_id, user_name, isLoggedIn, checkLogin, initToken, getSession, checkAuth }
+  return { user_id, user_name, isLoggedIn, checkLogin, initToken, getSession, checkAuth, logout }
 })

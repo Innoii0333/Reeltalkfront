@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const session = useSessionStore()
-const isLoggedIn = ref(false)
 const openLogin = () => {
   const loginWindow = window.open('/login', 'loginWindow',
    `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
@@ -29,26 +28,23 @@ const openSignup = () => {
 }
 onMounted(async () => {
   await session.checkLogin()
-  console.log (session.checkLogin())
-  console.log (session.isLoggedIn)
 })
-
-// const router = useRouter()
-// const getUser = () => {
-//   // console.log(session.user_id, session.user_name)
-//   router.push('/chat')
-// }
 </script>
 
 <template>
   <div class="background relative">
-    <div style="color: white; margin-top: 5px; float: right">
-      <button v-if="!isLoggedIn" class="menu" @click="openLogin">
+    <div v-if="!session.isLoggedIn" style="color: white; margin-top: 5px; margin-right:10px; float: right">
+      <button class="menu" @click="openLogin">
         Sign in
       </button>
       <span class="mx-1">|</span>
       <button class="menu" style="margin-right:10px" @click="openSignup">
         Sign up
+      </button>
+    </div>
+    <div v-else style="color: white; margin-top: 5px; float: right">
+      <button class="menu" @click="session.logout()">
+        Logout
       </button>
     </div>
 
@@ -107,19 +103,5 @@ onMounted(async () => {
 }
 .logo {
   padding-left: 50px;
-}
-#menu {
-  position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  margin-top: 280px;
-  font-size: 20px;
-}
-
-#menu a {
-  color: white;
-  margin: 0 33px;
 }
 </style>

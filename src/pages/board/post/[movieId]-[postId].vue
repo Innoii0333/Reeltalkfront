@@ -1,5 +1,6 @@
 <script setup>
 import axios from 'axios'
+import { onBeforeRouteLeave } from 'vue-router'
 
 const props = defineProps({
   movieId: { type: String, required: true },
@@ -18,18 +19,18 @@ const create_at = ref('')
 const star_rate = ref(null)
 const view_count = ref(0)
 const comment_count = ref(0)
-const replyContents = ref(null)
-const reReplyContents = ref(null)
-const userId = ref('userid1')
+const replyContents = ref('')
+const reReplyContents = ref('')
+const userId = ref('')
 const now = new Date()
 const formedDate = ref(null)
 const postuserId = ref('')
+let guard = true
 
 const getPost = async () => {
   try {
     const res = await axios.get(
       `/api/movie/${movie_id}/post/${post_id}`,
-      // `http://localhost:3000/post?postid=${post_id}`,
     )
     title.value = res.data.movie_title
     content.value = res.data.content
@@ -37,31 +38,25 @@ const getPost = async () => {
     const date = new Date(res.data.create_at)
     formedDate.value = now.toDateString() !== date.toDateString()
       ? `${date.getFullYear().toString().slice(-2)}/${date.getMonth() + 1}/${date.getDate()}`
-      : `${date.getHours()}:${date.getMinutes()}`
+      : `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
     create_at.value = formedDate.value
     star_rate.value = res.data.star_rate
     view_count.value = res.data.view_count
     comment_count.value = res.data.comment_count
     postusername.value = res.data.user_name
     postuserId.value = res.data.user_id
-    // postusername.value = res.data.username
-    // post_title.value = res.data.postTitle
-    // create_at.value = res.data.createAt
-    // star_rate.value = res.data.starrate
-    // view_count.value = res.data.viewCount
-    // comment_count.value = res.data.commentCount
   }
-  catch (e) {
-    console.error(e)
+  catch {
+    guard = false
     ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
-    router.push(`board/list/${movie_id}`).catch(() => {})
+    router.replace(`/board/list/${movie_id}`)
   }
 }
 const modifyPost = () => {
   router.push({
     path: `/board/postedit/${movie_id}`,
     query: { postId: post_id },
-  }).catch(() => {})
+  })
 }
 const deletePost = async () => {
   if (comment_count.value !== 0) {
@@ -73,8 +68,9 @@ const deletePost = async () => {
   else {
     await axios.delete(`/api/movie/${movie_id}/post/${post_id}`)
       .then(() => {
-        ElMessage({ type: 'confirm', message: '게시물이 삭제되었습니다' })
-        router.push(`/board/list/${movie_id}`)
+        ElMessage({ type: 'success', message: '게시물이 삭제되었습니다' })
+        guard = false
+        router.replace(`/board/list/${movie_id}`)
       })
       .catch(() => {
         ElMessage({ type: 'error', message: '게시물 삭제에 실패하였습니다 다시 시도해 보세요' })
@@ -82,6 +78,10 @@ const deletePost = async () => {
   }
 }
 const submitReply = async (pReplyId) => {
+  if (userId.value === '') {
+    ElMessage({ type: 'error', message: '로그인 상태가 아닙니다' })
+    return
+  }
   const formData = new FormData()
   formData.append('user_id', userId.value)
   if (pReplyId) {
@@ -93,7 +93,7 @@ const submitReply = async (pReplyId) => {
   }
   try {
     const res = await axios.post(`/api/movie/${movie_id}/post/${post_id}/reply`, formData)
-    ElMessage({ type: 'confirm', message: '댓글이 등록되었습니다' })
+    ElMessage({ type: 'success', message: '댓글이 등록되었습니다' })
     router.go(0)
   }
   catch {
@@ -101,13 +101,14 @@ const submitReply = async (pReplyId) => {
   }
 }
 onMounted(async () => {
-  // if (!session.user_id)
-  //   await session.checkLogin()
-  // userId.value = session.user_id
+  if (!session.user_id)
+    await session.checkLogin()
+  userId.value = session.user_id
+
   await getPost()
 })
 onBeforeRouteLeave((to, from, next) => {
-  if (reReplyContents.value !== '' || replyContents.value !== '') {
+  if (guard && (reReplyContents.value !== '' || replyContents.value !== '')) {
     ElMessageBox.confirm(
       '지금 이동하시면 정보를 잃게 됩니다. 이동하시겠습니까?',
       'Warning',
@@ -122,12 +123,14 @@ onBeforeRouteLeave((to, from, next) => {
       })
       .catch(() => next(false))
   }
+  else { next() }
 })
 </script>
 
 <template>
-  <div>
-    <div class="text-5 ml-3 px-auto text-left">
+  <only-header />
+  <div class="max-w-7xl min-w-2xl mx-5">
+    <div class="text-5 ml-3 my-5 px-auto text-left">
       {{ title }}
     </div>
     <hr class="border-rtblue my-2 border-2">
@@ -141,7 +144,7 @@ onBeforeRouteLeave((to, from, next) => {
             {{ post_title }}
           </th>
         </tr>
-        <tr class="text-10px text-center px-auto h-5">
+        <tr class="text-12px text-center px-auto h-5">
           <td class="w-30">
             {{ postusername }}
           </td>
@@ -174,7 +177,7 @@ onBeforeRouteLeave((to, from, next) => {
         </el-button>
       </div>
     </div>
-    <div>
+    <div class="text-sm">
       <reply-reply-edit v-model="replyContents" @reply-submit="submitReply" />
       <reply-reply-list
         v-model="reReplyContents" :movie-id="movie_id" :post-id="post_id" :user-id="userId"
@@ -184,4 +187,8 @@ onBeforeRouteLeave((to, from, next) => {
   </div>
 </template>
 
-<style lang="scss"></style>
+<route lang="yaml">
+meta:
+  layout: bare
+    </route>
+

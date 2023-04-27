@@ -3,7 +3,6 @@ import axios from 'axios'
 const props = defineProps({
   userId: { type: String, required: true },
 })
-const router = useRouter()
 const route = useRoute()
 const nameResult = ref('한글 영문 숫자를 조합해 10자 이내로 입력해주세요')
 const user_name = ref('')
@@ -41,7 +40,7 @@ const submitSignup = async () => {
 
   try {
     await axios.post('/api/signup', formData)
-    ElMessage({ type: 'confirm', message: '회원 가입에 성공했습니다' })
+    ElMessage({ type: 'success', message: '회원 가입에 성공했습니다' })
     window.close()
   }
   catch (e) {

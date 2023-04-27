@@ -4,7 +4,7 @@ https://github.com/socketbear/vue-dev-guide
 
 - Reeltalks Frontend 개발 페이지
 
-- 메인 브랜치입니다 기본적으로 작업 수정사항이 모두 반영됩니다. 추후에 protect 예정
+- Master branch -> 개발 상황 통합 및 build
 
 ### Development
 
