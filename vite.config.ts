@@ -37,7 +37,7 @@ export default defineConfig({
         // rewrite: (path) => path.replace(/^\/api/, ''),
       },
       '/chat': {
-        target: 'ws://localhost:8080', // 'ec2-3-34-5-243.ap-northeast-2.compute.amazonaws.com:8078',
+        target: 'ws://localhost:8079', // 'ec2-3-34-5-243.ap-northeast-2.compute.amazonaws.com:8078',
         ws: true,
         rewrite: path => path.replace(/^\/chat/, ''),
       },

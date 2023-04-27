@@ -104,7 +104,7 @@ onMounted(async () => {
   observer.observe(intersectionTarget.value)
   console.log(observer)
 })
-onUnmounted(() => {
+onBeforeUnmount(() => {
   observer.unobserve(intersectionTarget.value)
 })
 </script>
