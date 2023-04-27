@@ -40,15 +40,11 @@ const open = () => {
       })
     })
 }
-onMounted(() => {
-  open()
-})
 // // 타임스태프 추가 여기까지
 
 const sendMessage = () => {
   if (inputMessage.value.trim() === '')
     return
-
   const message = {
     nickname: nickname.value,
     text: inputMessage.value.trim(),
@@ -67,11 +63,9 @@ const scrollToBottom = () => {
 
   function updateScroll() {
     const isScrolledToBottom = myDiv.scrollHeight - myDiv.scrollTop === myDiv.clientHeight
-
     if (!isScrolledToBottom)
       myDiv.scrollTop = myDiv.scrollHeight - myDiv.clientHeight
   }
-
   nextTick(() => {
     updateScroll()
   })
@@ -79,22 +73,21 @@ const scrollToBottom = () => {
 
 onMounted(() => {
   socket = new WebSocket('ws://localhost:8079')
-
-  socket.onmessage = (event) => {
-    try {
-      const message = JSON.parse(event.data)
-      if (message.nickname !== nickname.value) {
-        message.isMine = false
-        messages.value.push(message)
-      }
-      scrollToBottom()
-    }
-    catch (error) {
-      console.error('Received non-JSON message:', event.data)
-    }
-  }
+  open()
 })
-
+socket.onmessage = (event) => {
+  try {
+    const message = JSON.parse(event.data)
+    if (message.nickname !== nickname.value) {
+      message.isMine = false
+      messages.value.push(message)
+    }
+    scrollToBottom()
+  }
+  catch (error) {
+    console.error('Received non-JSON message:', event.data)
+  }
+}
 onUnmounted(() => {
   socket.close()
 })
