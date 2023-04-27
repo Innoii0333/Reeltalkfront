@@ -4,14 +4,46 @@ const inputMessage = ref('')
 let socket
 const messageList = ref(null)
 const nickname = ref('')
+// 타임스태프 추가
+const formatTimestamp = (timestamp) => {
+  const date = new Date(timestamp)
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const amPm = hours >= 12 ? '오후' : '오전'
+  const formattedHours = hours % 12 || 12
+  const formattedMinutes = minutes.toString().padStart(2, '0')
+  return `${amPm} ${formattedHours}:${formattedMinutes}`
+}
 
+// 타임스태프 추가 여기부터
+const open = () => {
+  ElMessageBox.prompt('닉네임을 입력해주세요', 'Tip', {
+    confirmButtonText: '확인',
+    cancelButtonText: '취소',
+  })
+    .then(({ value }) => {
+      if (value && value.trim() !== '')
+        nickname.value = value.trim()
+
+      else
+        nickname.value = '익명'
+
+      ElMessage({
+        type: 'success',
+        message: `Your nickname is: ${nickname.value}`,
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Input canceled',
+      })
+    })
+}
 onMounted(() => {
-  const userNickname = prompt('닉네임을 입력해주세요:')
-  if (userNickname && userNickname.trim() !== '')
-    nickname.value = userNickname.trim()
-  else
-    nickname.value = '익명'
+  open()
 })
+// // 타임스태프 추가 여기까지
 
 const sendMessage = () => {
   if (inputMessage.value.trim() === '')
@@ -22,12 +54,27 @@ const sendMessage = () => {
     text: inputMessage.value.trim(),
     id: Date.now(),
     isMine: true,
+    timestamp: new Date().toISOString(), // 타임 스탬프 추가
   }
 
   socket.send(JSON.stringify(message))
   messages.value.push(message)
   inputMessage.value = ''
-  // 메시지를 전송한 후 스크롤을 맨 아래로 이동
+}
+// 여기부터
+const scrollToBottom = () => {
+  const myDiv = document.querySelector('.messages')
+
+  function updateScroll() {
+    const isScrolledToBottom = myDiv.scrollHeight - myDiv.scrollTop === myDiv.clientHeight
+
+    if (!isScrolledToBottom)
+      myDiv.scrollTop = myDiv.scrollHeight - myDiv.clientHeight
+  }
+
+  nextTick(() => {
+    updateScroll()
+  })
 }
 
 onMounted(() => {
@@ -39,10 +86,8 @@ onMounted(() => {
       if (message.nickname !== nickname.value) {
         message.isMine = false
         messages.value.push(message)
-        nextTick(() => { // 스크롤을 맨 아래로 내리기 위해 nextTick을 사용하세요.
-          messageList.value.scrollTop = messageList.value.scrollHeight
-        })
       }
+      scrollToBottom()
     }
     catch (error) {
       console.error('Received non-JSON message:', event.data)
@@ -65,6 +110,7 @@ onUnmounted(() => {
           </div>
           <div class="message-text">
             {{ message.text }}
+            <span class="timestamp">{{ formatTimestamp(message.timestamp) }}</span>
           </div>
         </div>
       </el-main>
@@ -131,5 +177,11 @@ onUnmounted(() => {
 
 .send-button {
   flex-shrink: 0;
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+  color: #888;
 }
 </style>
