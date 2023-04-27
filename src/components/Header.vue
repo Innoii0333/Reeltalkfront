@@ -42,7 +42,7 @@ onMounted(async () => {
         Sign up
       </button>
     </div>
-    <div v-else style="color: white; margin-top: 5px; float: right">
+    <div v-else style="color: white; margin-top: 5px; margin-right:10px; float: right">
       <button class="menu" @click="session.logout()">
         Logout
       </button>

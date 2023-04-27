@@ -10,14 +10,15 @@ export const useSessionStore = defineStore('session', () => {
   const isLoggedIn = ref(false)
 
   const initToken = (originToken: string[]) => {
-    localStorage.STORAGE_KEY1 = originToken[0]
-    localStorage.STORAGE_KEY2 = originToken[1]
+    localStorage.setItem(STORAGE_KEY1, originToken[0])
+    localStorage.setItem(STORAGE_KEY2, originToken[1])
     token.value = originToken
   }
   const setToken = () => {
-    const key1 = localStorage.STORAGE_KEY1
-    const key2 = localStorage.STORAGE_KEY2
-    token.value = [key1, key2]
+    const key1 = localStorage.getItem(STORAGE_KEY1)
+    const key2 = localStorage.getItem(STORAGE_KEY2)
+    if (key1 && key2)
+      token.value = [key1, key2]
   }
 
   const getSession = async () => {
@@ -28,7 +29,8 @@ export const useSessionStore = defineStore('session', () => {
       const data = await res.json()
       user_id.value = data.user_id
       user_name.value = data.user_name
-      isLoggedIn.value = true
+      if (user_id.value && user_id.value !== ('' || 'userid1'))
+        isLoggedIn.value = true
     }
     catch {
       isLoggedIn.value = false
