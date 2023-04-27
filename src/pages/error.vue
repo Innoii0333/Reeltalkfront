@@ -11,7 +11,7 @@ const { t } = useI18n()
     {{ t('unauthorized') }}
     <div>
       <button btn text-sm m="3 t8" @click="router.push('/main')">
-        {{ t('button.back') }}
+        {{ t('button.home') }}
       </button>
     </div>
   </main>
