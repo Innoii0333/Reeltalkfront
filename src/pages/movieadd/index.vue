@@ -103,7 +103,7 @@ onMounted(() => {
             <button>
               <el-image
                 :src="movieCard.posters" class="object-cover h-220px"
-                @error="movieCard.posters = '/src/components/img/alt.png'"
+                @error="movieCard.posters = 'https://reeltalks.p-e.kr/images/noimage.png'"
               />
               <div class="text-left text-xs">
                 <p> {{ movieCard.title }} </p>
