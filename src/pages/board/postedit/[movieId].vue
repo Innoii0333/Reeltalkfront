@@ -94,8 +94,7 @@ const getPost = async () => {
       )
       title.value = res.data.title
     }
-    catch (e) {
-      console.error(e)
+    catch {
       ElMessage({ type: 'error', message: '영화에 대한 정보가 없습니다' })
     }
   }
@@ -105,9 +104,7 @@ onMounted(async () => {
     if (!session.user_id)
       await session.checkLogin()
     user_id.value = session.user_id
-    console.log(user_id.value)
     // const authResponse = await session.checkAuth()
-    // console.log(authResponse)
     await getPost()
     if (postusername.value && postusername.value !== user_id.value) {
       guard = false

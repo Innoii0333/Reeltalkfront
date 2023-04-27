@@ -46,9 +46,8 @@ const getPost = async () => {
     postusername.value = res.data.user_name
     postuserId.value = res.data.user_id
   }
-  catch (e) {
+  catch {
     guard = false
-    console.error(e)
     ElMessage({ type: 'error', message: '게시물 정보가 없습니다' })
     router.replace(`/board/list/${movie_id}`)
   }
@@ -105,7 +104,6 @@ onMounted(async () => {
   if (!session.user_id)
     await session.checkLogin()
   userId.value = session.user_id
-  console.log(userId.value)
   await getPost()
 })
 onBeforeRouteLeave((to, from, next) => {
