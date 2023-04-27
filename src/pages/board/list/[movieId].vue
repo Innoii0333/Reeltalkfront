@@ -33,7 +33,6 @@ const inqueryPost = async () => {
         : `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
       return { ...item, create_at: formedDate.value }
     })
-
   }
   catch {
     ElMessage({ type: 'error', message: '게시물 정보를 불러올 수 없습니다' })
@@ -139,7 +138,6 @@ const goToCategory = (genre) => {
 onMounted(async () => {
   await getMovie()
   filteredPosts.value = tableData.value
-  console.log(useSessionStore().user_id)
 })
 </script>
 
@@ -154,7 +152,7 @@ onMounted(async () => {
     <table class="my-10 table-fixed items-center">
       <tr>
         <td class="min-w-xl text-right items-end pr-2 mx-auto">
-          <img :src="poster_url" class="object-fill inline-block px-5" @error="poster_url = '/src/components/img/alt.png' ">
+          <img :src="poster_url" class="object-fill inline-block px-5" @error="poster_url = 'https://reeltalks.p-e.kr/images/noimage.png' ">
         </td>
         <td class="min-w-xl mx-5 px-5 text-left">
           <ul>

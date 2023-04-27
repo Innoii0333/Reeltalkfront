@@ -23,7 +23,7 @@ const options = {
 const titleSearch = () => {
   if (keyword.value === '') { filteredTable.value = tableData.value }
   else {
-    const lowerCaseKeyword = keyword.value.toLowerCase()
+    const lowerCaseKeyword = keyword.value.toLowerCase().replace(/\s+/g, '')
     filteredTable.value = tableData.value.filter(movie =>
       movie.title.toLowerCase().includes(lowerCaseKeyword),
     )
@@ -40,13 +40,14 @@ const getMovies = async (n) => {
     })
     const res1 = res.data.map((item) => {
       const categories = item.category_id.split(' ')
+      const avgFixed = item.star_avg_rate?.toFixed(1)
       let newDate = ''
       if (item.release_date) {
         const date = new Date(item.release_date)
         newDate = `${date.getFullYear().toString()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
       }
       const imageUrl = `https://reeltalks.p-e.kr/images/${item.movie_id}.png`
-      return { ...item, release_date: newDate, category_id: categories, poster_url: imageUrl }
+      return { ...item, star_avg_rate: avgFixed, release_date: newDate, category_id: categories, poster_url: imageUrl }
     })
     tableData.value = tableData.value.concat(res1)
     titleSearch()
@@ -112,7 +113,7 @@ onBeforeUnmount(() => {
           <button>
             <el-image
               :src="movieCard.poster_url" class="object-cover"
-              @error="movieCard.poster_url = '/src/components/img/alt.png'"
+              @error="movieCard.poster_url = 'https://reeltalks.p-e.kr/images/noimage.png'"
             />
             <div class="text-left text-xs">
               <p> {{ movieCard.title }} </p>
