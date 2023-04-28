@@ -9,7 +9,7 @@ const isActive = ref(false)
 const ADMIN_ID = ['hin2520', 'susu4334', 'alsdnr0501', 'you3849', 'wonffo24', 'juseon5469', 'lsangm0513']
 
 const goBack = () => {
-  router.push('/error')
+  router.replace('/error')
 }
 const getMovie = async () => {
   let i = 0
@@ -64,7 +64,8 @@ const submitMovie = async () => {
     ElMessage({ type: 'error', message: '영화 등록에 실패하였습니다 다시 시도해 보세요' })
   }
 }
-onMounted(() => {
+onMounted(async () => {
+  await session.getSession()
   if (!ADMIN_ID.includes(session.user_id))
     goBack()
 })
