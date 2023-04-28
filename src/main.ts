@@ -22,6 +22,7 @@ routes.push(
   },
   {
     path: '/login/sso/:key1/:key2',
+    name: 'LoginAuth',
     component: () => import('./pages/login/sso-[key1]-[key2].vue'),
     props: route => ({
       key1: route.params.key1,

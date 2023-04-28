@@ -1,7 +1,6 @@
 <script setup>
 import axios from 'axios'
 import { onBeforeRouteLeave } from 'vue-router'
-import TextEditor from '~/components/TextEditor.vue'
 const props = defineProps({
   movieId: { type: String, required: true },
   postId: { type: String },
