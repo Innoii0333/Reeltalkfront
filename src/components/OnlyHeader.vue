@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const session = useSessionStore()
 const openLogin = () => {
-  const loginWindow = window.open('/login/login', '_blank',
+  const loginWindow = window.open('/login', 'loginWindow',
    `width=900,height=500,left=${window.screen.width / 2 - 450},top=${window.screen.height / 2 - 250}`)
   window.addEventListener('message', async (event) => {
     if (event.origin !== window.location.origin)
