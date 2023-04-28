@@ -3,7 +3,7 @@ const router = useRouter()
 
 onMounted(() => setTimeout(() => {
   router.push('/main')
-}, 3000))
+}, 4000))
 </script>
 
 <template>

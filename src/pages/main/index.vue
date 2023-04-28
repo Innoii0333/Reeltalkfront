@@ -95,7 +95,7 @@ onMounted(async () => await getMainPageData())
             :src="boxOffices.imageLink" alt="item.description"
             style="width: auto; height: auto; max-width: 100%; max-height: 100%;"
             :style="{ 'width': '200px', 'height': '300px', 'object-fit': 'cover' }"
-            @error="boxOffices.imageLink = 'https://reeltalks.p-e.kr/images/noimage.png'"
+            @error="boxOffices.imageLink = 'https://reeltalk.p-e.kr/images/noimage.png'"
           >
         </div>
         <div>
