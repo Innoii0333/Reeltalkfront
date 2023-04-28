@@ -14,7 +14,7 @@ const hotMovieData = ref([])
 
 function openNewWindow() {
   router.push('/chat').then(() => {
-    ElMessage({ type: 'infor', message: '대화방으로 이동합니다' })
+    ElMessage({ type: 'info', message: '대화방으로 이동합니다' })
   }).catch(() => {
     ElMessage({ type: 'error', message: '대화방 입장에 실패했습니다' })
   })
