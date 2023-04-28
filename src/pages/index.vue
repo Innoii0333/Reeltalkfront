@@ -1,10 +1,9 @@
 <script setup lang="ts">
 const router = useRouter()
 
-// 4초 뒤에 '/main' 페이지로 이동하는 함수
-setTimeout(() => {
+onMounted(() => setTimeout(() => {
   router.push('/main')
-}, 4000)
+}, 3000))
 </script>
 
 <template>
