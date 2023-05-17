@@ -4,9 +4,7 @@ https://github.com/socketbear/vue-dev-guide
 
 - Reeltalks Frontend 개발 페이지
 
-- 로그인 포함 개발 환경 통합 테스트 
-- 관리자 계정 설정되지 않음 아직
-- chat에 timestamp 추가 예정
+- master branch : 배포 환경
 
  
 ### Development
